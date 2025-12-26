@@ -1,0 +1,30 @@
+M 0.00786    Panic: Unmatched '}'
+
+ParseError in system/theme/templates/note.tmpl.php:192
+
+┌─
+│            1. index.php:1 e2 ()
+│            2. system/core.php:2 gf ()
+│            3. system/core.php:2 hf ()
+│            4. system/core.php:2 xf ()
+│            5. system/core.php:2 include (
+│              '/var/www/user982873/data/www/weekcrm.com/blog/system/theme/templates/main.tmpl.php'
+│            )
+│            6. system/theme/templates/main.tmpl.php:33 _T ()
+│            7. system/core.php:2 hf ()
+│            8. system/core.php:2 xf ()
+│            9. system/core.php:2 include (
+│              '/var/www/user982873/data/www/weekcrm.com/blog/system/themes/plain/templates/layout.tmpl.php'
+│            )
+│            10. system/themes/plain/templates/layout.tmpl.php:65 _T ()
+│            11. system/core.php:2 hf ()
+│            12. system/core.php:2 xf ()
+│            13. system/core.php:2 include (
+│              '/var/www/user982873/data/www/weekcrm.com/blog/system/theme/templates/notes.tmpl.php'
+│            )
+│            14. system/theme/templates/notes.tmpl.php:20 _T ()
+│            15. system/core.php:2 hf ()
+│            16. system/core.php:2 xf ()
+└─
+M 0.00827    :-(
+M 0.00852    Eat "system/theme/templates/panic.tmpl.php"

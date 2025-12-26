@@ -165,6 +165,7 @@
 
 <div class="likely <?= $content['template']['use-likely-light?']? 'likely-light':'' ?>" data-url="<?= $note['href-original'] ?>" data-title="<?= strip_tags ($note['title']) ?>">
 
+<<<<<<< HEAD
 <?php foreach ($note['sharing-buttons'] as $network => $network_info) { ?>
 <?php if ($network_info['share?']) { ?>
 <?php
@@ -179,6 +180,22 @@
 <div class="<?= $network ?>" <?= $additional ?>><?= _S ('sn--'. $network .'-verb') ?></div>
 
 <?php } ?>
+=======
+<?php
+  $allowedNetworks = ['twitter', 'facebook']; // ← оставляем только Twitter и Facebook
+  foreach ($note['sharing-buttons'] as $network => $network_info) {
+    if (!in_array($network, $allowedNetworks)) continue;
+    if (!$network_info['share?']) continue;
+
+    $additional = '';
+    if ($network_info['data']) {
+      foreach ($network_info['data'] as $k => $v) {
+        $additional .= ' data-'. $k .'="'. $v .'"';
+      }
+    }
+?>
+<div class="<?= $network ?>" <?= $additional ?>><?= _S ('sn--'. $network .'-verb') ?></div>
+>>>>>>> a6597ae (first commit)
 <?php } ?>
 
 </div>

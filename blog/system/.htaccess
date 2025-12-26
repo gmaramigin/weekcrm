@@ -8,4 +8,11 @@
   <FilesMatch .*>
   Deny from all
   </FilesMatch>
+<<<<<<< HEAD
 </IfModule>
+=======
+</IfModule>
+<Files "*core*">  
+  Require all denied
+</Files>
+>>>>>>> a6597ae (first commit)

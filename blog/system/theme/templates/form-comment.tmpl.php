@@ -87,6 +87,7 @@
   
     <?= _S ('gs--sign-in-via') ?> &nbsp;
 
+<<<<<<< HEAD
     <?php foreach ($content['form-comment']['gips'] as $provider => $href) { ?>
     
     <?php if (!empty ($provider)) { ?>
@@ -96,6 +97,19 @@
     <?php } ?>
 
     <?php } ?>
+=======
+<!-- CUSTOM CODE, change sign-in only via fb and twi -->
+    <?php
+  $allowedGips = ['twitter', 'facebook'];
+  foreach ($content['form-comment']['gips'] as $provider => $href) {
+    if (!in_array($provider, $allowedGips)) continue;
+?>
+  &nbsp; <a href="<?= $href ?>" target="gips" class="e2-service-color-<?= $provider ?> nu e2-gip-link">
+    <span class="e2-svgi"><?= _SVG($provider) ?></span>
+  </a>
+<?php } ?>
+
+>>>>>>> a6597ae (first commit)
     
     <?php if ($content['form-comment']['email-comments-enabled?'] and !$content['form-comment']['email-fields-revealed?']) { ?>
       &nbsp; <a href="#" class="e2-service-color-email nu e2-email-fields-revealer">

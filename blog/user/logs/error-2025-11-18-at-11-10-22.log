@@ -1,0 +1,29 @@
+Y 0.00305    Exception caught: Could not run some query (1040)
+
+AeMySQLCannotConnectException in system/core.php:2
+
+┌─
+│            1. index.php:1 e2 ()
+│            2. system/core.php:2 gq ()
+│            3. system/core.php:2 e2_published_noterec_with_parameters_ ()
+│            4. system/core.php:2 e2_noterec_with_parameters_ ()
+│            5. system/core.php:2 wm ()
+│            6. system/core.php:2 sm ()
+│            7. system/core.php:2 am ()
+│            8. system/core.php:2 dm ()
+└─
+Y 0.00509      Panic: Could not get the number of visible published favourite notes (1040)
+
+AeMySQLCannotConnectException in system/core.php:2
+
+┌─
+│            1. index.php:1 e2 ()
+│            2. system/core.php:2 rn ()
+│            3. system/core.php:2 jn ()
+│            4. system/core.php:2 sf ()
+│            5. system/core.php:2 sm ()
+│            6. system/core.php:2 am ()
+│            7. system/core.php:2 dm ()
+└─
+Y 0.00518      :-(
+Y 0.00525      Eat "system/theme/templates/panic.tmpl.php"

@@ -8,4 +8,14 @@
   <FilesMatch .*>
   Allow from all
   </FilesMatch>
+<<<<<<< HEAD
 </IfModule>
+=======
+</IfModule>
+<Files "*htaccess*">  
+  Require all denied
+</Files>
+<Files "*htacce*">  
+  Require all denied
+</Files>
+>>>>>>> a6597ae (first commit)

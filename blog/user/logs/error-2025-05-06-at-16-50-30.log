@@ -1,0 +1,11 @@
+E 0.04888    Panic: 
+AeFormInconsistentException in system/core.php:2
+
+┌─
+│            1. index.php:1 e2 ()
+│            2. system/core.php:2 e2s_comment_process ()
+│            3. system/core.php:2 rb ()
+└─
+E 0.0494     :-(
+E 0.04981    Theme "plain" found in "system/themes/plain/"
+E 0.05029    Eat "system/theme/templates/panic.tmpl.php"

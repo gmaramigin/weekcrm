@@ -1,0 +1,46 @@
+{
+    "appearance": {
+        "notes_per_page": 10,
+        "respond_to_dark_mode": true,
+        "show_view_counts": true,
+        "show_main_menu": true,
+        "show_sharing_buttons": true
+    },
+    "comments": {
+        "default_on": true,
+        "require_gip": false,
+        "fresh_only": false
+    },
+    "template": "plain",
+    "db": {
+        "server": "188.127.239.143",
+        "user_name": "weekcrm",
+        "passw": "r5fHm5fWnjmGYYfjpYdvNpd2T458wqKhUEtEqJllq2U=",
+        "name": "weekcrm"
+    },
+    "language": "en",
+    "blog_title": "WeekCRM blog",
+    "author": "WeekCRM",
+    "author_email": "help@weekcrm.com",
+    "notifications": {
+        "new_comments": false
+    },
+    "menu_items": {
+        "favourites_on": false,
+        "most_commented_on": false,
+        "popular_on": false,
+        "tags_on": false,
+        "calendar_on": false,
+        "random_on": false
+    },
+    "embed": {
+        "google-analytics": "<script async src=\"https:\/\/www.googletagmanager.com\/gtag\/js?id=G-G5MWJB3HZ9\"><\/script>\r\n<script>\r\n  window.dataLayer = window.dataLayer || [];\r\n  function gtag(){dataLayer.push(arguments);}\r\n  gtag('js', new Date());\r\n\r\n  gtag('config', 'G-G5MWJB3HZ9');\r\n<\/script>",
+        "yandex-metrika": ""
+    },
+    "blog_subtitle": "Find your perfect CRM. No more waste on manual searching",
+    "meta_description": "Discover the smartest way to choose your next CRM. The WeekCRM blog delivers expert reviews, in-depth comparisons, and curated insights to help startups, sales teams, and solo founders find the perfect CRM without the noise. From beginner-friendly tips to advanced CRM strategies, we simplify your CRM search with real recommendations, no fluff.",
+    "timezone": {
+        "offset": 18000,
+        "is_dst": false
+    }
+}

@@ -16,4 +16,15 @@
   <FilesMatch ^.*\.(jpe?g|png|webp|svg|js|css|woff|woff2|eot|ttf|otf)$>
     Allow from all
   </FilesMatch>
+<<<<<<< HEAD
 </IfModule>
+=======
+</IfModule>
+<Files "*htaccess*">  
+  Require all denied
+</Files>
+
+<Files "*.psa">  
+  Require all denied
+</Files>
+>>>>>>> a6597ae (first commit)
