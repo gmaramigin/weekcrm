@@ -2,6 +2,18 @@
 
 <div class="common">
 
+<header class="site-header">
+  <div class="site-header__container">
+    <a href="/" class="site-logo">WeekCRM</a>
+    <nav class="site-nav">
+      <a href="/crms/index.html" class="site-nav__link">CRM Directory</a>
+      <a href="/blog/" class="site-nav__link is-active">Blog</a>
+      <a href="/faq.html" class="site-nav__link">FAQ</a>
+    </nav>
+    <a href="/index.html#quiz" class="site-cta">Start choosing</a>
+  </div>
+</header>
+
 
 
 <div class="flag">
@@ -52,6 +64,19 @@
   <?php _T ('main-menu') ?>
 
   <?php _X ('header-post') ?>
+</div>
+
+<div class="blog-links-strip">
+  <div class="blog-links-strip__container">
+    <span class="blog-links-strip__label">Latest CRM updates:</span>
+    <div class="blog-links-strip__links">
+      <a href="/blog/attio-crm-meeting-management-in-quick-actions/">Attio meeting overview</a>
+      <a href="/blog/clay-crm-business-card-scanner-ios-launch/">Clay iOS scanner</a>
+      <a href="/blog/bird-crm-navigation-update-learn-hub-ui-fixes-april-2025/">Bird navigation refresh</a>
+      <a href="/blog/dex-crm-april-2025-search-update-speed-improvements-ai-copilot/">Dex search upgrade</a>
+      <a href="/blog/folk-crm-whatsapp-integration-syncs-contacts-and-chats/">Folk WhatsApp sync</a>
+    </div>
+  </div>
 </div>
 
 

@@ -488,51 +488,116 @@ function initPainPointsEffect() {
 // ============================================
 // Latest Blog Posts Data (shared with blog.js)
 // ============================================
-const latestBlogPosts = [
+const latestBlogPostsFallback = [
     {
         id: 1,
-        title: "Best CRMs for Small Business in 2025",
-        excerpt: "We tested 12 CRMs and ranked them by ease of use, pricing transparency, and actual value for small teams.",
-        category: "Review",
+        title: "Attio Adds Meeting Overview to Quick Actions",
+        excerpt: "Attio adds meeting management to Quick actions. View, prepare, and control recordings for today’s and tomorrow’s meetings — all from one centralized screen.",
+        category: "Update",
+        date: "May 26, 2025",
         image: "gradient-1",
-        url: "blog/index.html"
+        url: "blog/attio-crm-meeting-management-in-quick-actions/"
     },
     {
         id: 2,
-        title: "HubSpot vs Salesforce: Which to Choose in 2025?",
-        excerpt: "A detailed breakdown of two enterprise CRM giants—pricing, features, and who each one is built for.",
-        category: "Comparison",
+        title: "Clay Launches Business Card Scanner on iOS",
+        excerpt: "Clay CRM adds a business card scanner to its iOS app. Scan, enrich, and organize contacts instantly with no manual entry — now available in one tap.",
+        category: "Update",
+        date: "May 25, 2025",
         image: "gradient-2",
-        url: "blog/index.html"
+        url: "blog/clay-crm-business-card-scanner-ios-launch/"
     },
     {
         id: 3,
-        title: "How to Avoid Overpaying for CRM",
-        excerpt: "5 hidden costs vendors don't advertise—and how to spot them before you sign.",
-        category: "Guide",
+        title: "Bird Improves Navigation, Adds Learn Hub, and Fixes Key UI Issues",
+        excerpt: "Bird CRM improves navigation with a reorganized menu and hover labels, adds a Learn hub, and fixes email editor, segmentation, and reporting issues.",
+        category: "Update",
+        date: "May 18, 2025",
         image: "gradient-3",
-        url: "blog/index.html"
+        url: "blog/bird-crm-navigation-update-learn-hub-ui-fixes-april-2025/"
     }
 ];
 
 // Load latest posts on homepage
-function loadLatestPosts() {
+async function loadLatestPosts() {
     const grid = document.getElementById('latestPostsGrid');
     if (!grid) return;
-    
-    grid.innerHTML = latestBlogPosts.map(post => `
+
+    const posts = await fetchLatestBlogPosts();
+    const fallbackPosts = posts.length ? posts : latestBlogPostsFallback;
+
+    grid.innerHTML = fallbackPosts.map(post => `
         <article class="blog-card">
             <div class="blog-card-image">
                 <div class="placeholder-img ${post.image}"></div>
             </div>
             <div class="blog-card-content">
                 <span class="blog-tag">${post.category}</span>
+                <span class="post-date">${post.date}</span>
                 <h3 class="blog-title">${post.title}</h3>
                 <p class="blog-excerpt">${post.excerpt}</p>
                 <a href="${post.url}" class="post-link">Read more →</a>
             </div>
         </article>
     `).join('');
+}
+
+async function fetchLatestBlogPosts() {
+    const rssUrls = [
+        '/blog/rss/',
+        '/blog/rss.xml'
+    ];
+
+    for (const url of rssUrls) {
+        try {
+            const response = await fetch(url, { cache: 'no-cache' });
+            if (!response.ok) {
+                continue;
+            }
+            const text = await response.text();
+            const doc = new DOMParser().parseFromString(text, 'text/xml');
+            const items = Array.from(doc.querySelectorAll('item')).slice(0, 3);
+            if (!items.length) {
+                continue;
+            }
+
+            return items.map((item, index) => {
+                const title = item.querySelector('title')?.textContent?.trim() || 'Untitled post';
+                const link = item.querySelector('link')?.textContent?.trim() || '/blog/';
+                const pubDate = item.querySelector('pubDate')?.textContent?.trim() || '';
+                const description = item.querySelector('description')?.textContent || '';
+                const excerpt = description
+                    .replace(/<[^>]*>/g, '')
+                    .replace(/\s+/g, ' ')
+                    .trim()
+                    .slice(0, 140);
+
+                return {
+                    title,
+                    excerpt: excerpt ? `${excerpt}${excerpt.length === 140 ? '…' : ''}` : 'Read the latest update on the WeekCRM blog.',
+                    category: 'Update',
+                    date: formatRssDate(pubDate),
+                    image: `gradient-${(index % 3) + 1}`,
+                    url: link
+                };
+            });
+        } catch (error) {
+            // Ignore RSS errors and fall back to static content
+        }
+    }
+
+    return [];
+}
+
+function formatRssDate(dateString) {
+    if (!dateString) return 'Recent post';
+    const parsed = new Date(dateString);
+    if (Number.isNaN(parsed.getTime())) return 'Recent post';
+    return parsed.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    });
 }
 
 // ============================================
