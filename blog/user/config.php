@@ -2,8 +2,6 @@
 
 // see system/default/config.php for configurable parameters
 
-<<<<<<< HEAD
-=======
 // Security: Block using RedirectMatch FIRST (processed before RewriteRules)
 // This is added at the very beginning of .htaccess
 $_config['custom_htaccess_directives'] = '
@@ -40,6 +38,4 @@ RewriteCond %{REQUEST_URI} /user/backup/ [NC,OR]
 RewriteCond %{REQUEST_URI} /user/caches/ [NC]
 RewriteRule .* - [F,L]
 ';
-
->>>>>>> a6597ae (first commit)
 ?>
