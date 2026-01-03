@@ -68,8 +68,14 @@
 
 <div class="blog-links-strip">
   <div class="blog-links-strip__container">
-    <span class="blog-links-strip__label">Latest CRM updates live on</span>
-    <a class="blog-links-strip__cta" href="/">weekcrm.com</a>
+    <span class="blog-links-strip__label">Latest CRM updates:</span>
+    <div class="blog-links-strip__links">
+      <a href="/blog/attio-crm-meeting-management-in-quick-actions/">Attio meeting overview</a>
+      <a href="/blog/clay-crm-business-card-scanner-ios-launch/">Clay iOS scanner</a>
+      <a href="/blog/bird-crm-navigation-update-learn-hub-ui-fixes-april-2025/">Bird navigation refresh</a>
+      <a href="/blog/dex-crm-april-2025-search-update-speed-improvements-ai-copilot/">Dex search upgrade</a>
+      <a href="/blog/folk-crm-whatsapp-integration-syncs-contacts-and-chats/">Folk WhatsApp sync</a>
+    </div>
   </div>
 </div>
 

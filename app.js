@@ -496,7 +496,7 @@ const latestBlogPostsFallback = [
         category: "Update",
         date: "May 26, 2025",
         image: "gradient-1",
-        url: "blog/all/attio-crm-meeting-management-in-quick-actions/"
+        url: "blog/attio-crm-meeting-management-in-quick-actions/"
     },
     {
         id: 2,
@@ -505,7 +505,7 @@ const latestBlogPostsFallback = [
         category: "Update",
         date: "May 25, 2025",
         image: "gradient-2",
-        url: "blog/all/clay-crm-business-card-scanner-ios-launch/"
+        url: "blog/clay-crm-business-card-scanner-ios-launch/"
     },
     {
         id: 3,
@@ -514,7 +514,7 @@ const latestBlogPostsFallback = [
         category: "Update",
         date: "May 18, 2025",
         image: "gradient-3",
-        url: "blog/all/bird-crm-navigation-update-learn-hub-ui-fixes-april-2025/"
+        url: "blog/bird-crm-navigation-update-learn-hub-ui-fixes-april-2025/"
     }
 ];
 
