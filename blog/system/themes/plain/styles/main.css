@@ -3409,6 +3409,7 @@ body {
     border-top: 1px solid var(--imageBorderColor);
     border-bottom: 1px solid var(--imageBorderColor);
     background: #f8f8fc;
+    margin-bottom: 24px;
 }
 
 .blog-links-strip__container {
