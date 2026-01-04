@@ -7,7 +7,7 @@
 
     <div class="e2-follow-matrix">
       <div class="e2-follow-element">
-        <a href="" class="e2-service-color-twitter">
+        <a href="https://x.com/weekcrm" class="e2-service-color-twitter">
           <span class="e2-svgi e2-svgi-double"><?= _SVG ('twitter')?></span><br />
           Twitter
         </a>
@@ -31,7 +31,7 @@
         </a>
       </div>
       <div class="e2-follow-element">
-        <a href="" class="e2-service-color-linkedin">
+        <a href="https://www.linkedin.com/company/weekcrm/" class="e2-service-color-linkedin">
           <span class="e2-svgi e2-svgi-double"><?= _SVG ('linkedin')?></span><br />
           LinkedIn
         </a>
@@ -77,11 +77,11 @@
     <p>Sample text.</p>
 
     <p>
-      <a href="" class="e2-service-color-twitter"><span class="e2-svgi"><?= _SVG ('twitter')?></span> Twitter</a>,
+      <a href="https://x.com/weekcrm" class="e2-service-color-twitter"><span class="e2-svgi"><?= _SVG ('twitter')?></span> Twitter</a>,
       <a href="" class="e2-service-color-facebook"><span class="e2-svgi"><?= _SVG ('facebook')?></span> Facebook</a>,
       <a href="" class="e2-service-color-vk"><span class="e2-svgi"><?= _SVG ('vk')?></span> VK</a>,
       <a href="" class="e2-service-color-telegram"><span class="e2-svgi"><?= _SVG ('telegram')?></span> Telegram</a>,
-      <a href="" class="e2-service-color-linkedin"><span class="e2-svgi"><?= _SVG ('linkedin')?></span> LinkedIn</a>,
+      <a href="https://www.linkedin.com/company/weekcrm/" class="e2-service-color-linkedin"><span class="e2-svgi"><?= _SVG ('linkedin')?></span> LinkedIn</a>,
       <a href="" class="e2-service-color-odnoklassniki"><span class="e2-svgi"><?= _SVG ('odnoklassniki')?></span> Odnoklassniki</a>,
       <a href="" class="e2-service-color-pinterest"><span class="e2-svgi"><?= _SVG ('pinterest')?></span> Pinterest</a>,
       <a href="" class="e2-service-color-youtube"><span class="e2-svgi"><?= _SVG ('youtube')?></span> YouTube</a>,
