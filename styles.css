@@ -2482,6 +2482,34 @@ h3 {
     gap: var(--space-md);
 }
 
+/* ============================================
+   Newsletter Embed
+   ============================================ */
+.newsletter-embed-section {
+    padding: var(--space-3xl) var(--space-xl);
+    background: var(--color-bg-alt);
+}
+
+.newsletter-embed-container {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    align-items: center;
+    text-align: center;
+}
+
+.newsletter-embed-frame {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.newsletter-embed-section .beehiiv-embed {
+    border: 0;
+}
+
 /* Blog post thumbnails */
 .blog-thumbnail {
     width: 100%;
