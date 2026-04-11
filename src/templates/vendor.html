@@ -1,0 +1,57 @@
+<section class="vendor-hero">
+  <div class="container">
+    <div class="vendor-hero-inner">
+      <div>
+        <span class="vendor-category">{{category}}</span>
+        <h1 class="vendor-title">{{title}}</h1>
+        <p class="vendor-desc">{{description}}</p>
+        <div class="vendor-meta-row">
+          {{tags}}
+        </div>
+      </div>
+      <div class="vendor-sidebar">
+        <div class="vendor-info-card">
+          <div class="vendor-info-row" data-if="website">
+            <span class="vendor-info-label">Website</span>
+            <a href="{{website}}" target="_blank" rel="noopener nofollow" class="vendor-info-value">{{websiteDisplay}}</a>
+          </div>
+          <div class="vendor-info-row" data-if="pricing">
+            <span class="vendor-info-label">Pricing</span>
+            <span class="vendor-info-value">{{pricing}}</span>
+          </div>
+          <div class="vendor-info-row" data-if="rating">
+            <span class="vendor-info-label">Our rating</span>
+            <span class="vendor-info-value">{{rating}}/5</span>
+          </div>
+          <a href="{{website}}" target="_blank" rel="noopener nofollow" class="btn btn-primary btn-full">Visit website</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container-narrow">
+    <div class="vendor-body">
+      {{content}}
+    </div>
+  </div>
+</section>
+
+<!-- Ad placement -->
+<section class="ad-section">
+  <div class="container">
+    <div class="ad-slot" id="tinyadz-vendor">
+      <span class="ad-label">Sponsor</span>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2>Related articles</h2>
+    <div class="card-grid">
+      {{relatedArticles}}
+    </div>
+  </div>
+</section>

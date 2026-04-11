@@ -1,0 +1,57 @@
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">CRM news,<br>without the noise</h1>
+    <p class="hero-subtitle">Feature updates, pricing changes, new launches, and honest reviews across the CRM world.</p>
+    <div class="hero-actions">
+      <a href="/news" class="btn btn-primary">Read latest</a>
+      <a href="/vendors" class="btn btn-outline">Browse vendors</a>
+    </div>
+    <div class="hero-stats">
+      <span>{{articleCount}} articles</span>
+      <span class="dot"></span>
+      <span>{{vendorCount}} vendors tracked</span>
+    </div>
+  </div>
+</section>
+
+<!-- TinyAdz placement -->
+<section class="ad-section">
+  <div class="container">
+    <div class="ad-slot" id="tinyadz-top">
+      <span class="ad-label">Sponsor</span>
+      <!-- tinyadz.com embed goes here -->
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Latest news</h2>
+      <a href="/news" class="link-arrow">All news &rarr;</a>
+    </div>
+    <div class="card-grid">
+      {{articleCards}}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <h2>Vendors we track</h2>
+      <a href="/vendors" class="link-arrow">Full directory &rarr;</a>
+    </div>
+    <div class="vendor-badges">
+      {{featuredVendors}}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container cta-box">
+    <h2>Stay in the loop</h2>
+    <p>Get CRM news, pricing changes, and vendor updates in your inbox.</p>
+    <a href="https://weekcrm.beehiiv.com" target="_blank" rel="noopener" class="btn btn-primary">Subscribe to newsletter</a>
+  </div>
+</section>
