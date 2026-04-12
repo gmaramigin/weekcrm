@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const matter = require('gray-matter');
 const { marked } = require('marked');
 
@@ -108,6 +109,12 @@ function build() {
   copyDir(path.join(SRC, 'css'), path.join(DIST, 'assets'));
   copyDir(path.join(SRC, 'js'), path.join(DIST, 'assets'));
 
+  // Compute a content hash for the CSS so we can cache-bust on every change
+  const cssPath = path.join(SRC, 'css', 'style.css');
+  const cssHash = fs.existsSync(cssPath)
+    ? crypto.createHash('md5').update(fs.readFileSync(cssPath)).digest('hex').slice(0, 8)
+    : Date.now().toString(36);
+
   // Load templates
   const baseTemplate = readTemplate('base');
   const homeTemplate = readTemplate('home');
@@ -152,7 +159,8 @@ function build() {
     description: 'Stay on top of the CRM world. News, honest reviews, pricing updates, and a growing directory of CRM vendors.',
     url: 'https://weekcrm.com',
     body: homeHtml,
-    bodyClass: 'home'
+    bodyClass: 'home',
+    assetVersion: cssHash
   });
   fs.writeFileSync(path.join(DIST, 'index.html'), homePage);
 
@@ -174,7 +182,8 @@ function build() {
     description: 'Latest news, feature updates, and pricing changes across the CRM industry.',
     url: 'https://weekcrm.com/news',
     body: newsHtml,
-    bodyClass: ''
+    bodyClass: '',
+    assetVersion: cssHash
   });
   ensureDir(path.join(DIST, 'news'));
   fs.writeFileSync(path.join(DIST, 'news', 'index.html'), newsPage);
@@ -196,7 +205,8 @@ function build() {
       description: article.description || excerpt(article.html),
       url: `https://weekcrm.com/news/${article.slug}`,
       body: articleHtml,
-      bodyClass: ''
+      bodyClass: '',
+      assetVersion: cssHash
     });
 
     const articleDir = path.join(DIST, 'news', article.slug);
@@ -228,7 +238,8 @@ function build() {
     description: 'Compare CRM vendors with honest reviews, real pros and cons, and pricing guidance.',
     url: 'https://weekcrm.com/vendors',
     body: directoryHtml,
-    bodyClass: ''
+    bodyClass: '',
+    assetVersion: cssHash
   });
   ensureDir(path.join(DIST, 'vendors'));
   fs.writeFileSync(path.join(DIST, 'vendors', 'index.html'), directoryPage);
@@ -270,7 +281,8 @@ function build() {
       description: vendor.description || `Learn about ${vendor.title} — features, pricing, and honest review.`,
       url: `https://weekcrm.com/vendors/${vendor.slug}`,
       body: vendorHtml,
-      bodyClass: ''
+      bodyClass: '',
+      assetVersion: cssHash
     });
 
     const vendorDir = path.join(DIST, 'vendors', vendor.slug);
