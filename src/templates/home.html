@@ -1,26 +1,44 @@
-<section class="hero">
+<section class="hero hero-home">
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="container">
+    <span class="hero-eyebrow">CRM intelligence, daily</span>
     <h1 class="hero-title">CRM news,<br>without the noise</h1>
-    <p class="hero-subtitle">Feature updates, pricing changes, new launches, and honest reviews across the CRM world.</p>
+    <p class="hero-subtitle">Feature launches, pricing changes, and honest reviews across the CRM world — curated, rewritten, and shipped daily.</p>
     <div class="hero-actions">
       <a href="/news" class="btn btn-primary">Read latest</a>
       <a href="/vendors" class="btn btn-outline">Browse vendors</a>
     </div>
     <div class="hero-stats">
-      <span>{{articleCount}} articles</span>
-      <span class="dot"></span>
-      <span>{{vendorCount}} vendors tracked</span>
+      <div class="hero-stat">
+        <strong>{{articleCount}}</strong>
+        <span>articles published</span>
+      </div>
+      <div class="hero-stat">
+        <strong>{{vendorCount}}</strong>
+        <span>vendors tracked</span>
+      </div>
+      <div class="hero-stat">
+        <strong>Daily</strong>
+        <span>news pipeline</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- TinyAdz placement -->
+<!-- Attio sponsor placement -->
 <section class="ad-section">
-  <div class="container">
-    <div class="ad-slot" id="tinyadz-top">
-      <span class="ad-label">Sponsor</span>
-      <!-- tinyadz.com embed goes here -->
-    </div>
+  <div class="container container-narrow">
+    <a href="https://attio.com?ref=weekcrm" target="_blank" rel="noopener sponsored" class="sponsor-card sponsor-card-hero" id="tinyadz-top">
+      <span class="sponsor-tag">Sponsored</span>
+      <div class="sponsor-body">
+        <span class="sponsor-logo"><img src="/logos/attio.webp" alt="Attio"></span>
+        <div class="sponsor-text">
+          <strong>Attio — the CRM in the AI era</strong>
+          <span>Powerful, customizable, and built for the next generation of teams. Try it free.</span>
+        </div>
+        <span class="sponsor-cta">Try Attio →</span>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -28,7 +46,7 @@
   <div class="container">
     <div class="section-header">
       <h2>Latest news</h2>
-      <a href="/news" class="link-arrow">All news &rarr;</a>
+      <a href="/news" class="link-arrow">All news →</a>
     </div>
     <div class="card-grid">
       {{articleCards}}
@@ -40,7 +58,7 @@
   <div class="container">
     <div class="section-header">
       <h2>Vendors we track</h2>
-      <a href="/vendors" class="link-arrow">Full directory &rarr;</a>
+      <a href="/vendors" class="link-arrow">Full directory →</a>
     </div>
     <div class="vendor-badges">
       {{featuredVendors}}
@@ -49,9 +67,12 @@
 </section>
 
 <section class="section">
-  <div class="container cta-box">
-    <h2>Stay in the loop</h2>
-    <p>Get CRM news, pricing changes, and vendor updates in your inbox.</p>
-    <a href="https://weekcrm.beehiiv.com" target="_blank" rel="noopener" class="btn btn-primary">Subscribe to newsletter</a>
+  <div class="container">
+    <div class="cta-box cta-box-gradient">
+      <span class="cta-eyebrow">Weekly digest</span>
+      <h2>The CRM week in 5 minutes</h2>
+      <p>Every Sunday: the most important launches, price changes, and shifts across the CRM world. No fluff.</p>
+      <a href="https://weekcrm.beehiiv.com" target="_blank" rel="noopener" class="btn btn-primary">Subscribe to newsletter</a>
+    </div>
   </div>
 </section>
