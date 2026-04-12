@@ -1,6 +1,9 @@
 node_modules/
 dist/
 .vercel/
+.vercel
 .DS_Store
 *.log
-.vercel
+.env
+.env.local
+drafts/

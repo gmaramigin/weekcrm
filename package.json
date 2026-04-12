@@ -6,10 +6,16 @@
   "scripts": {
     "build": "node build.js",
     "dev": "node build.js --watch",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "news:daily": "node scripts/news-pipeline/run-daily.js",
+    "news:dry": "node scripts/news-pipeline/run-daily.js --dry-run",
+    "news:publish": "node scripts/news-pipeline/publish-approved.js"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "@notionhq/client": "^2.2.15",
     "gray-matter": "^4.0.3",
-    "marked": "^15.0.0"
+    "marked": "^15.0.0",
+    "rss-parser": "^3.13.0"
   }
 }
