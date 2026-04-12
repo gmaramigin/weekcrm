@@ -1,9 +1,14 @@
 <section class="vendor-hero">
   <div class="container">
     <div class="vendor-hero-inner">
-      <div>
-        <span class="vendor-category">{{category}}</span>
-        <h1 class="vendor-title">{{title}}</h1>
+      <div class="vendor-hero-main">
+        <div class="vendor-hero-heading">
+          {{logo}}
+          <div>
+            <span class="vendor-category">{{category}}</span>
+            <h1 class="vendor-title">{{title}}</h1>
+          </div>
+        </div>
         <p class="vendor-desc">{{description}}</p>
         <div class="vendor-meta-row">
           {{tags}}
@@ -13,9 +18,9 @@
         <div class="vendor-info-card">
           <div class="vendor-info-row" data-if="website">
             <span class="vendor-info-label">Website</span>
-            <a href="{{website}}" target="_blank" rel="noopener nofollow" class="vendor-info-value">{{websiteDisplay}}</a>
+            <a href="{{website}}" target="_blank" rel="noopener nofollow" class="vendor-info-value vendor-info-link">{{websiteDisplay}}</a>
           </div>
-          <div class="vendor-info-row" data-if="pricing">
+          <div class="vendor-info-row vendor-info-row-stack" data-if="pricing">
             <span class="vendor-info-label">Pricing</span>
             <span class="vendor-info-value">{{pricing}}</span>
           </div>
@@ -38,12 +43,20 @@
   </div>
 </section>
 
-<!-- Ad placement -->
+<!-- Sponsor / ad placement -->
 <section class="ad-section">
-  <div class="container">
-    <div class="ad-slot" id="tinyadz-vendor">
-      <span class="ad-label">Sponsor</span>
-    </div>
+  <div class="container container-narrow">
+    <a href="https://attio.com?ref=weekcrm" target="_blank" rel="noopener sponsored" class="sponsor-card" id="tinyadz-vendor">
+      <span class="sponsor-tag">Sponsored</span>
+      <div class="sponsor-body">
+        <span class="sponsor-logo"><img src="/logos/attio.webp" alt="Attio"></span>
+        <div class="sponsor-text">
+          <strong>The CRM in the AI era.</strong>
+          <span>Powerful, customizable, and built for the next generation of teams.</span>
+        </div>
+        <span class="sponsor-cta">Try Attio →</span>
+      </div>
+    </a>
   </div>
 </section>
 

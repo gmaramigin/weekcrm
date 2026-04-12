@@ -2,16 +2,20 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --text: #111;
-  --text-secondary: #555;
-  --text-muted: #888;
+  --text: #0e0f12;
+  --text-secondary: #4b5563;
+  --text-muted: #8b8f99;
   --bg: #fff;
-  --bg-alt: #f8f8f7;
-  --border: #e5e5e5;
-  --accent: #111;
-  --accent-hover: #333;
+  --bg-alt: #f7f7f5;
+  --bg-tint: #f1f1ff;
+  --border: #e6e6e9;
+  --border-strong: #d4d4d8;
+  --accent: #0e0f12;
+  --accent-hover: #2a2b31;
+  --brand: #4f46e5;
+  --brand-soft: #eef0ff;
   --radius: 8px;
-  --radius-lg: 12px;
+  --radius-lg: 14px;
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
@@ -156,17 +160,50 @@ p { color: var(--text-secondary); }
   border-radius: 4px;
 }
 
-/* ── Vendor Badges (homepage) ─────────────────────── */
-.vendor-badges { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
-.vendor-badge {
-  display: inline-flex; align-items: center;
-  padding: 8px 16px;
+/* ── Vendor Logo (shared) ─────────────────────────── */
+.vendor-logo {
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: #fff;
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  font-size: 0.875rem; font-weight: 500;
-  transition: border-color 0.15s, background 0.15s;
+  overflow: hidden;
+  font-weight: 600; color: #fff;
 }
-.vendor-badge:hover { border-color: var(--text); background: var(--bg-alt); }
+.vendor-logo img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  padding: 6px;
+}
+.vendor-logo-fallback img { display: none; }
+.vendor-logo-sm { width: 28px; height: 28px; border-radius: 7px; font-size: 0.8125rem; }
+.vendor-logo-sm img { padding: 4px; }
+.vendor-logo-md { width: 48px; height: 48px; border-radius: 11px; font-size: 1.125rem; }
+.vendor-logo-md img { padding: 7px; }
+.vendor-logo-lg { width: 72px; height: 72px; border-radius: 16px; font-size: 1.75rem; }
+.vendor-logo-lg img { padding: 10px; }
+
+/* ── Vendor Badges (homepage) ─────────────────────── */
+.vendor-badges {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-sm);
+}
+.vendor-badge {
+  display: inline-flex; align-items: center; gap: var(--space-sm);
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  font-size: 0.875rem; font-weight: 500;
+  transition: all 0.15s;
+}
+.vendor-badge:hover {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  transform: translateY(-1px);
+}
 
 /* ── Vendor Grid (directory) ──────────────────────── */
 .vendor-grid {
@@ -175,18 +212,33 @@ p { color: var(--text-secondary); }
   gap: var(--space-md);
 }
 .vendor-card {
-  display: block;
+  display: flex; flex-direction: column;
   padding: var(--space-lg);
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: all 0.18s ease;
 }
 .vendor-card:hover {
-  border-color: #ccc;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  border-color: var(--brand);
+  box-shadow: 0 8px 24px -12px rgba(79, 70, 229, 0.25);
+  transform: translateY(-2px);
 }
-.vendor-card-name { margin-bottom: var(--space-xs); }
-.vendor-card-desc { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: var(--space-md); }
+.vendor-card-header {
+  display: flex; align-items: center; gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+.vendor-card-heading { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.vendor-card-name { margin: 0; font-size: 1.0625rem; }
+.vendor-card-category {
+  font-size: 0.6875rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-muted);
+}
+.vendor-card-desc {
+  font-size: 0.875rem; color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+  flex-grow: 1;
+}
 .vendor-card-tags { display: flex; gap: var(--space-xs); flex-wrap: wrap; }
 
 /* ── Directory Filters ────────────────────────────── */
@@ -204,36 +256,62 @@ p { color: var(--text-secondary); }
 .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
 /* ── Vendor Page ──────────────────────────────────── */
-.vendor-hero { padding: var(--space-xl) 0; border-bottom: 1px solid var(--border); }
+.vendor-hero {
+  padding: var(--space-xl) 0;
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse 800px 400px at 20% 0%, rgba(79, 70, 229, 0.06), transparent 60%),
+    linear-gradient(180deg, #fff, var(--bg-alt));
+}
 .vendor-hero-inner {
   display: grid;
   grid-template-columns: 1fr 320px;
   gap: var(--space-xl);
   align-items: start;
 }
+.vendor-hero-heading {
+  display: flex; align-items: center; gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
 .vendor-category {
   display: inline-block;
   font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.05em; color: var(--text-muted);
-  margin-bottom: var(--space-sm);
+  letter-spacing: 0.05em; color: var(--brand);
+  margin-bottom: var(--space-xs);
 }
-.vendor-title { margin-bottom: var(--space-md); }
+.vendor-title { margin: 0; }
 .vendor-desc { font-size: 1.0625rem; color: var(--text-secondary); margin-bottom: var(--space-md); }
 .vendor-meta-row { display: flex; gap: var(--space-xs); flex-wrap: wrap; }
 .vendor-info-card {
   padding: var(--space-lg);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--bg-alt);
+  background: #fff;
+  box-shadow: 0 2px 16px -8px rgba(0, 0, 0, 0.06);
 }
 .vendor-info-row {
   display: flex; justify-content: space-between; align-items: center;
+  gap: var(--space-md);
   padding: var(--space-sm) 0;
   border-bottom: 1px solid var(--border);
 }
 .vendor-info-row:last-of-type { border-bottom: none; }
-.vendor-info-label { font-size: 0.8125rem; color: var(--text-muted); }
-.vendor-info-value { font-size: 0.875rem; font-weight: 500; }
+.vendor-info-label {
+  font-size: 0.75rem; font-weight: 500; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+.vendor-info-value {
+  font-size: 0.875rem; font-weight: 500;
+  text-align: right; min-width: 0; word-break: break-word;
+}
+.vendor-info-link { color: var(--brand); }
+.vendor-info-link:hover { text-decoration: underline; }
+/* Stack label above value when content is long (e.g. pricing) */
+.vendor-info-row-stack {
+  flex-direction: column; align-items: flex-start; gap: 4px;
+}
+.vendor-info-row-stack .vendor-info-value { text-align: left; }
 .vendor-info-card .btn { margin-top: var(--space-md); }
 
 .vendor-body h2 { margin-top: var(--space-xl); margin-bottom: var(--space-md); }
@@ -293,7 +371,7 @@ p { color: var(--text-secondary); }
 }
 
 /* ── Ad Slots ─────────────────────────────────────── */
-.ad-section { padding: var(--space-md) 0; }
+.ad-section { padding: var(--space-lg) 0; }
 .ad-slot {
   padding: var(--space-md) var(--space-lg);
   border: 1px dashed var(--border);
@@ -305,6 +383,52 @@ p { color: var(--text-secondary); }
 .ad-label {
   font-size: 0.6875rem; font-weight: 500; text-transform: uppercase;
   letter-spacing: 0.08em; color: var(--text-muted);
+}
+
+/* Sponsor card — replaces the old empty "Sponsor" slot */
+.sponsor-card {
+  position: relative;
+  display: block;
+  padding: var(--space-lg);
+  background: linear-gradient(135deg, #fff 0%, var(--brand-soft) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: all 0.18s ease;
+}
+.sponsor-card:hover {
+  border-color: var(--brand);
+  box-shadow: 0 12px 32px -16px rgba(79, 70, 229, 0.35);
+  transform: translateY(-2px);
+}
+.sponsor-tag {
+  position: absolute; top: 12px; right: 14px;
+  font-size: 0.625rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--text-muted);
+}
+.sponsor-body {
+  display: flex; align-items: center; gap: var(--space-md);
+}
+.sponsor-logo {
+  flex-shrink: 0;
+  width: 56px; height: 56px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.sponsor-logo img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+.sponsor-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.sponsor-text strong { font-size: 1rem; font-weight: 600; color: var(--text); }
+.sponsor-text span { font-size: 0.875rem; color: var(--text-secondary); }
+.sponsor-cta {
+  flex-shrink: 0;
+  font-size: 0.875rem; font-weight: 600;
+  color: var(--brand);
+}
+@media (max-width: 600px) {
+  .sponsor-body { flex-wrap: wrap; }
+  .sponsor-cta { width: 100%; margin-top: var(--space-sm); }
 }
 
 /* ── CTA Box ──────────────────────────────────────── */
@@ -360,6 +484,8 @@ p { color: var(--text-secondary); }
   .card-grid { grid-template-columns: 1fr; }
   .vendor-grid { grid-template-columns: 1fr; }
   .vendor-hero-inner { grid-template-columns: 1fr; }
+  .vendor-hero-heading { flex-direction: row; align-items: center; }
+  .vendor-badges { grid-template-columns: repeat(2, 1fr); }
 
   .section-header { flex-direction: column; gap: var(--space-sm); }
   .footer-inner { flex-direction: column; }

@@ -54,6 +54,35 @@ function readMarkdownFiles(dir) {
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
+// Auto-resolve a vendor logo by slug from public/logos/<slug>.<ext>.
+// Returns the public URL (e.g. "/logos/attio.webp") or null if none exists.
+const LOGO_EXTS = ['svg', 'webp', 'png', 'jpg', 'jpeg', 'avif'];
+function resolveLogo(slug) {
+  for (const ext of LOGO_EXTS) {
+    if (fs.existsSync(path.join(PUBLIC, 'logos', `${slug}.${ext}`))) {
+      return `/logos/${slug}.${ext}`;
+    }
+  }
+  return null;
+}
+
+// Deterministic pastel color from a string, for monogram fallbacks.
+function monogramColor(slug) {
+  let h = 0;
+  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
+  return `hsl(${h % 360}, 55%, 55%)`;
+}
+
+// Render a vendor logo: <img> if file exists, otherwise a colored monogram tile.
+function renderLogo(vendor, sizeClass = '') {
+  const logo = vendor.logo || resolveLogo(vendor.slug);
+  if (logo) {
+    return `<span class="vendor-logo ${sizeClass}"><img src="${logo}" alt="${vendor.title} logo" loading="lazy"></span>`;
+  }
+  const initial = (vendor.title || vendor.slug || '?').charAt(0).toUpperCase();
+  return `<span class="vendor-logo vendor-logo-fallback ${sizeClass}" style="background:${monogramColor(vendor.slug)}">${initial}</span>`;
+}
+
 function formatDate(dateStr) {
   const d = new Date(dateStr);
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -106,6 +135,7 @@ function build() {
 
   const featuredVendors = vendors.slice(0, 8).map(v => `
     <a href="/vendors/${v.slug}" class="vendor-badge">
+      ${renderLogo(v, 'vendor-logo-sm')}
       <span class="vendor-badge-name">${v.title}</span>
     </a>
   `).join('');
@@ -179,7 +209,13 @@ function build() {
     const tags = (v.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
     return `
       <a href="/vendors/${v.slug}" class="vendor-card" data-category="${(v.category || '').toLowerCase()}">
-        <h3 class="vendor-card-name">${v.title}</h3>
+        <div class="vendor-card-header">
+          ${renderLogo(v, 'vendor-logo-md')}
+          <div class="vendor-card-heading">
+            <h3 class="vendor-card-name">${v.title}</h3>
+            ${v.category ? `<span class="vendor-card-category">${v.category}</span>` : ''}
+          </div>
+        </div>
         <p class="vendor-card-desc">${v.description || ''}</p>
         <div class="vendor-card-tags">${tags}</div>
       </a>
@@ -219,13 +255,14 @@ function build() {
       title: vendor.title,
       description: vendor.description || '',
       website: vendor.website || '',
-      websiteDisplay: (vendor.website || '').replace(/^https?:\/\//, ''),
+      websiteDisplay: (vendor.website || '').replace(/^https?:\/\//, '').replace(/\/$/, ''),
       tags: tagsHtml,
       content: vendor.html,
       relatedArticles: relatedHtml,
       rating: vendor.rating || '',
       pricing: vendor.pricing || '',
-      category: vendor.category || 'CRM'
+      category: vendor.category || 'CRM',
+      logo: renderLogo(vendor, 'vendor-logo-lg')
     });
 
     const page = render(baseTemplate, {
