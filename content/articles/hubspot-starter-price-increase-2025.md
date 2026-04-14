@@ -1,7 +1,7 @@
 ---
 title: "HubSpot Raises Starter Plan Price by 15%"
 description: HubSpot increased Starter plan pricing by 15%. Here's what changed, what it means for small teams, and whether it's still worth it.
-date: 2025-05-10
+date: 2026-04-04
 tags: [HubSpot, Pricing]
 ---
 

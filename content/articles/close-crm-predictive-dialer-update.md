@@ -1,7 +1,7 @@
 ---
 title: Close Upgrades Predictive Dialer with AI Call Scoring
 description: Close CRM adds AI-powered call scoring to its Predictive Dialer. Calls are automatically rated and flagged for coaching.
-date: 2025-05-18
+date: 2026-04-08
 tags: [Close, AI, Update]
 ---
 

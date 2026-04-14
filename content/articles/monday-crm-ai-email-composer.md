@@ -1,7 +1,7 @@
 ---
 title: Monday CRM Launches AI Email Composer
 description: Monday CRM adds an AI-powered email composer that drafts outreach based on deal context and contact history.
-date: 2025-05-08
+date: 2026-04-02
 tags: [Monday, AI, Update]
 ---
 

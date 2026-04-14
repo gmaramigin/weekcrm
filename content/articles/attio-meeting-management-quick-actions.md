@@ -1,7 +1,7 @@
 ---
 title: Attio Adds Meeting Overview to Quick Actions
 description: Attio adds meeting management to Quick Actions. View, prepare, and control recordings for today's and tomorrow's meetings from one screen.
-date: 2025-05-26
+date: 2026-04-14
 tags: [Attio, Update]
 ---
 

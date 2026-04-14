@@ -1,7 +1,7 @@
 ---
 title: Folk CRM Improves LinkedIn Contact Enrichment
 description: Folk CRM now pulls richer data from LinkedIn profiles including job changes, mutual connections, and recent activity.
-date: 2025-05-15
+date: 2026-04-06
 tags: [Folk, Update]
 ---
 

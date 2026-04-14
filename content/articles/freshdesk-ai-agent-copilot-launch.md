@@ -1,7 +1,7 @@
 ---
 title: Freshdesk Launches AI Agent Copilot
 description: Freshdesk introduces an AI copilot for support agents — suggesting responses, summarizing tickets, and routing complex issues.
-date: 2025-05-22
+date: 2026-04-11
 tags: [Freshdesk, AI, Update]
 ---
 
