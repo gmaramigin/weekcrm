@@ -47,8 +47,15 @@ async function main() {
 
   let fetched = 0;
   let skipped = 0;
+  let staleSkipped = 0;
+  let undatedSkipped = 0;
   let drafted = 0;
   const seenUrls = new Set(); // in-run dedupe, on top of Notion dedupe
+
+  // Freshness window: only items published in the last 24h (UTC).
+  // Items without a publishedAt are skipped — we can't verify freshness.
+  const WINDOW_MS = 24 * 60 * 60 * 1000;
+  const cutoff = Date.now() - WINDOW_MS;
 
   for (const vendor of vendors) {
     if (!vendor.sources || vendor.sources.length === 0) {
@@ -63,6 +70,11 @@ async function main() {
     for (const item of items) {
       if (seenUrls.has(item.url)) { skipped++; continue; }
       seenUrls.add(item.url);
+
+      // Freshness gate: must have a publishedAt within the last 24h.
+      if (!item.publishedAt) { undatedSkipped++; continue; }
+      const ts = Date.parse(item.publishedAt);
+      if (isNaN(ts) || ts < cutoff) { staleSkipped++; continue; }
 
       if (!config.isDryRun) {
         const existing = await notion.findNewsByUrl(item.url);
@@ -108,7 +120,8 @@ async function main() {
   }
 
   const elapsed = ((Date.now() - start) / 1000).toFixed(1);
-  console.log(`\n✓ Done in ${elapsed}s. Fetched ${fetched}, skipped ${skipped}, drafted ${drafted}.\n`);
+  console.log(`\n✓ Done in ${elapsed}s. Fetched ${fetched}, drafted ${drafted}, ` +
+    `skipped ${skipped} (dupes) + ${staleSkipped} (stale) + ${undatedSkipped} (no date).\n`);
 }
 
 function slugify(s) {
