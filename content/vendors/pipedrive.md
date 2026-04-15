@@ -7,6 +7,7 @@ tags:
   - Website
 date: '2026-04-15'
 referralUrl: 'https://www.pipedrive.com/taf/TGR3MD'
+stub: true
 ---
 ## What is Pipedrive?
 

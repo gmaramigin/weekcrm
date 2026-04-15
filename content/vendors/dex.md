@@ -7,6 +7,7 @@ tags:
   - Website
 date: '2026-04-15'
 referralUrl: 'https://getdex.com/?via=weekcrm'
+stub: true
 ---
 ## What is Dex?
 

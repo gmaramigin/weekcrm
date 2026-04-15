@@ -8,6 +8,7 @@ category: CRM
 tags:
   - CRM
 date: '2026-04-15'
+stub: true
 ---
 ## What is ((OTRS)) Community Edition?
 

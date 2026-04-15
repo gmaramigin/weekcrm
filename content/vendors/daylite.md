@@ -7,6 +7,7 @@ tags:
   - Website
 date: '2026-04-15'
 referralUrl: 'https://www.daylite.app/affiliate/'
+stub: true
 ---
 ## What is Daylite?
 

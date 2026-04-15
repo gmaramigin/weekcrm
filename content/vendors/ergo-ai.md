@@ -6,6 +6,7 @@ category: LinkedIn
 tags:
   - LinkedIn
 date: '2026-04-15'
+stub: true
 ---
 ## What is Ergo.ai?
 

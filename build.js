@@ -140,7 +140,9 @@ function build() {
     </article>
   `).join('');
 
-  const featuredVendors = vendors.slice(0, 8).map(v => `
+  // Featured = filled vendors only (no placeholder stubs).
+  const filledVendors = vendors.filter(v => !v.stub);
+  const featuredVendors = filledVendors.slice(0, 8).map(v => `
     <a href="/vendors/${v.slug}" class="vendor-badge">
       ${renderLogo(v, 'vendor-logo-sm')}
       <span class="vendor-badge-name">${v.title}</span>

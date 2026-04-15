@@ -7,6 +7,7 @@ tags:
   - CRM
 date: '2026-04-15'
 referralUrl: 'https://www.wealthbox.com/referral-signup/a40d079e'
+stub: true
 ---
 ## What is Wealthbox?
 

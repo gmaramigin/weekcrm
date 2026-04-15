@@ -8,6 +8,7 @@ tags:
 date: '2026-04-15'
 referralUrl: >-
   https://forms.office.com/Pages/ResponsePage.aspx?id=rYjoBUFA5kyBdRKTbcmd-CJzX7ox7xRNtT55NOsFbUtUNFZIQjBLNVVIUFNaNlpPTDBZRldVUUE3SC4u
+stub: true
 ---
 ## What is eWay-CRM?
 

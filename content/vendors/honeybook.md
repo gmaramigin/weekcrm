@@ -7,6 +7,7 @@ tags:
   - Website
 date: '2026-04-15'
 referralUrl: 'https://www.honeybook.com/partnerships/referrals'
+stub: true
 ---
 ## What is Honeybook?
 

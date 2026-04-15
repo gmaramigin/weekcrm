@@ -84,7 +84,8 @@ function buildFrontmatter(v, slug, perk) {
     website: v.link || '',
     category: v.category || 'CRM',
     tags: [v.category || 'CRM'],
-    date: new Date().toISOString().slice(0, 10)
+    date: new Date().toISOString().slice(0, 10),
+    stub: true
   };
   if (v.refLink) fm.referralUrl = v.refLink;
   if (perk) fm.referralPerk = perk;

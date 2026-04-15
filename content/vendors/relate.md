@@ -6,6 +6,7 @@ category: Website
 tags:
   - Website
 date: '2026-04-15'
+stub: true
 ---
 ## What is Relate?
 
