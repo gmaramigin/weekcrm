@@ -1,12 +1,19 @@
 ---
 title: Capsule CRM
-description: Clean, lightweight CRM for small businesses. Contact management, sales tracking, and integrations without the clutter.
-website: https://capsulecrm.com
+description: >-
+  Clean, lightweight CRM for small businesses. Contact management, sales
+  tracking, and integrations without the clutter.
+website: 'https://capsulecrm.com'
 category: CRM
-pricing: Free plan, paid from $18/mo
-rating: "4"
-tags: [CRM, Small Business, Simple, Contacts]
-date: 2025-05-01
+pricing: 'Free plan, paid from $18/mo'
+rating: '4'
+tags:
+  - CRM
+  - Small Business
+  - Simple
+  - Contacts
+date: 2025-05-01T00:00:00.000Z
+referralUrl: 'https://get.capsulenow.io/vskc4qgrpx58'
 ---
 
 ## What is Capsule CRM?

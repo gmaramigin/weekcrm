@@ -1,12 +1,19 @@
 ---
 title: Folk CRM
-description: Contact-based CRM that replaces spreadsheets. Built for teams managing relationships — hiring, fundraising, partnerships.
-website: https://folk.app
+description: >-
+  Contact-based CRM that replaces spreadsheets. Built for teams managing
+  relationships — hiring, fundraising, partnerships.
+website: 'https://folk.app'
 category: CRM
-pricing: Free plan, paid from $20/mo
-rating: "4.5"
-tags: [CRM, Contacts, HR, Partnerships]
-date: 2025-05-07
+pricing: 'Free plan, paid from $20/mo'
+rating: '4.5'
+tags:
+  - CRM
+  - Contacts
+  - HR
+  - Partnerships
+date: 2025-05-07T00:00:00.000Z
+referralUrl: 'https://try.folk.app/vaua9ntxi4iw'
 ---
 
 ## What is Folk?

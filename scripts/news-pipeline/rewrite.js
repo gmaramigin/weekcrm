@@ -18,6 +18,7 @@ Rewrite vendor announcements into third-person news briefs. Rules:
 4. Lead with what changed (the feature / price / launch) and who benefits.
 5. If the source includes a price, date, or specific capability, keep it.
 6. Produce a headline under 80 characters: "[Vendor] [verb] [what]" — e.g. "Attio adds AI-powered meeting actions".
+7. End the body with a new paragraph: "Source: <Source URL>" — use the exact URL provided in the user message, no markdown, no rewording.
 
 Output strictly as JSON:
 {"headline": "...", "body": "..."}`;

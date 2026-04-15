@@ -262,11 +262,30 @@ function build() {
     `).join('') : '<p class="empty-state">No articles yet.</p>';
 
     const tagsHtml = (vendor.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+
+    // Referral-aware CTA: referralUrl (if set) replaces the "Visit website" link.
+    // When a referralPerk is also set, we render a highlighted callout above the body.
+    const hasReferral = !!vendor.referralUrl;
+    const visitUrl = hasReferral ? vendor.referralUrl : (vendor.website || '');
+    const visitLabel = vendor.referralPerk ? 'Claim offer' : 'Visit website';
+    const visitRel = hasReferral ? 'noopener sponsored' : 'noopener nofollow';
+    const perkBlock = vendor.referralPerk
+      ? `<div class="vendor-perk">
+           <span class="vendor-perk-tag">Exclusive offer</span>
+           <strong class="vendor-perk-text">${vendor.referralPerk}</strong>
+           <a href="${vendor.referralUrl}" target="_blank" rel="noopener sponsored" class="vendor-perk-cta">Claim via WeekCRM →</a>
+         </div>`
+      : '';
+
     const vendorHtml = render(vendorTemplate, {
       title: vendor.title,
       description: vendor.description || '',
       website: vendor.website || '',
       websiteDisplay: (vendor.website || '').replace(/^https?:\/\//, '').replace(/\/$/, ''),
+      visitUrl,
+      visitLabel,
+      visitRel,
+      perkBlock,
       tags: tagsHtml,
       content: vendor.html,
       relatedArticles: relatedHtml,

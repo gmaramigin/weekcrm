@@ -41,6 +41,7 @@ const GENERIC_TITLE = new RegExp(
 );
 
 function isProductNews(item) {
+  if (item._bypassProductFilter) return true;
   const url = (item.url || '').toLowerCase();
   if (PRODUCT_NEWS_URL.some(r => r.test(url))) return true;
   const title = item.title || '';

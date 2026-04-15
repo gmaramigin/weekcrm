@@ -13,6 +13,7 @@
         <div class="vendor-meta-row">
           {{tags}}
         </div>
+        {{perkBlock}}
       </div>
       <div class="vendor-sidebar">
         <div class="vendor-info-card">
@@ -28,7 +29,7 @@
             <span class="vendor-info-label">Our rating</span>
             <span class="vendor-info-value">{{rating}}/5</span>
           </div>
-          <a href="{{website}}" target="_blank" rel="noopener nofollow" class="btn btn-primary btn-full">Visit website</a>
+          <a href="{{visitUrl}}" target="_blank" rel="{{visitRel}}" class="btn btn-primary btn-full">{{visitLabel}}</a>
         </div>
       </div>
     </div>

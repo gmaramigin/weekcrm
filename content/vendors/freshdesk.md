@@ -1,12 +1,19 @@
 ---
 title: Freshdesk
-description: Customer support CRM with multi-channel ticketing, automation, and self-service tools. Built for support teams that scale.
-website: https://freshdesk.com
+description: >-
+  Customer support CRM with multi-channel ticketing, automation, and
+  self-service tools. Built for support teams that scale.
+website: 'https://freshdesk.com'
 category: Helpdesk
-pricing: Free plan, paid from $15/agent/mo
-rating: "4.2"
-tags: [Helpdesk, Support, Ticketing, Automation]
-date: 2025-05-20
+pricing: 'Free plan, paid from $15/agent/mo'
+rating: '4.2'
+tags:
+  - Helpdesk
+  - Support
+  - Ticketing
+  - Automation
+date: 2025-05-20T00:00:00.000Z
+referralUrl: 'https://affiliatepartner.freshdesk.com/a17bofvtu7t5'
 ---
 
 ## What is Freshdesk?

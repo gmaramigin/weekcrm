@@ -1,12 +1,20 @@
 ---
 title: Attio
-description: Next-gen CRM with AI, built for fast-growing teams. Real-time collaboration, automatic data enrichment, and deep customization.
-website: https://attio.com
+description: >-
+  Next-gen CRM with AI, built for fast-growing teams. Real-time collaboration,
+  automatic data enrichment, and deep customization.
+website: 'https://attio.com'
 category: CRM
-pricing: Free plan available, paid from $29/mo
-rating: "5"
-tags: [CRM, AI, Startups, Sales]
-date: 2025-05-05
+pricing: 'Free plan available, paid from $29/mo'
+rating: '5'
+tags:
+  - CRM
+  - AI
+  - Startups
+  - Sales
+date: 2025-05-05T00:00:00.000Z
+referralUrl: 'https://attio.com?r=y3j7Pq3xmq0brxsU'
+referralPerk: 10% discount on any plan
 ---
 
 ## What is Attio?

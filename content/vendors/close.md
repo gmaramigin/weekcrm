@@ -1,12 +1,19 @@
 ---
 title: Close
-description: CRM purpose-built for outbound sales. Built-in calling, email sequences, and automation for reps who close deals fast.
-website: https://close.com
+description: >-
+  CRM purpose-built for outbound sales. Built-in calling, email sequences, and
+  automation for reps who close deals fast.
+website: 'https://close.com'
 category: CRM
 pricing: From $49/mo
-rating: "4.7"
-tags: [CRM, Sales, Outbound, Calling]
-date: 2025-05-13
+rating: '4.7'
+tags:
+  - CRM
+  - Sales
+  - Outbound
+  - Calling
+date: 2025-05-13T00:00:00.000Z
+referralUrl: 'https://refer.close.com/fqkicmjr1y54'
 ---
 
 ## What is Close?
