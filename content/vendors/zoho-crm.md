@@ -1,17 +1,43 @@
 ---
 title: Zoho CRM
-description: 'Zoho CRM — overview, features, and pricing in the WeekCRM directory.'
-website: 'https://zoho.com'
+description: >-
+  Feature-rich sales CRM covering lead management, workflow automation, AI
+  forecasting, and multi-pipeline support — all at a price point well below
+  Salesforce. Free for up to 3 users.
+website: 'https://www.zoho.com/crm/'
 category: CRM
+pricing: 'Free (up to 3 users); from $14/user/mo (Standard) to $52/user/mo (Ultimate), billed annually'
+rating: '4.2'
 tags:
   - CRM
-date: '2026-04-15'
-stub: true
+  - Sales
+  - Automation
+  - SMB
+date: 2026-04-15
 ---
+
 ## What is Zoho CRM?
 
-Zoho CRM is a CRM tool in the WeekCRM directory. We're still writing a full review — check back soon for honest pros, cons, and pricing analysis.
+Zoho CRM is a full-featured sales CRM designed for businesses of all sizes. It handles lead and contact management, deal tracking across multiple pipelines, workflow automation, email campaigns, and sales forecasting — with Zia, Zoho's AI assistant, layered throughout for predictions, scoring, and smart suggestions. The platform sits within the broader Zoho ecosystem of 50+ business apps.
 
-## Useful links
+## Who is it for?
 
-Visit the vendor site via the link on the right to learn more about features, pricing, and plans.
+Zoho CRM is a strong fit for SMBs and mid-market teams that want serious CRM capability without Salesforce pricing. It's also well-suited to companies already using other Zoho products like Zoho Desk, Zoho Books, or Zoho Campaigns, where the ecosystem integrations add meaningful value over standalone tools.
+
+## Strengths
+
+- **Affordable depth** — Enterprise plan at $40/user/month includes features like multi-pipeline management and advanced automation that cost significantly more in competing products.
+- **Zia AI** — built-in AI predicts deal outcomes, suggests best contact times, and flags anomalies in your sales data.
+- **Blueprint process management** — standardize and enforce sales workflows at the team level without custom development.
+- **Zoho ecosystem** — native integrations with 50+ Zoho apps (Desk, Books, Campaigns, Sign) reduce tool sprawl.
+- **Free tier** — core CRM features free for up to 3 users with no time limit, useful for very small teams.
+
+## What to consider
+
+- The breadth of features and configuration options can make initial setup feel complex.
+- UI, while improved, still lags behind more modern CRMs like Attio or HubSpot in terms of feel and speed.
+- Deep automation and AI features are locked to Enterprise and Ultimate tiers.
+
+## Bottom line
+
+Zoho CRM delivers enterprise-grade CRM capability at mid-market prices. If you're comparison-shopping against Salesforce or HubSpot and cost is a factor, Zoho CRM belongs on the shortlist — particularly if you're open to adopting other Zoho tools alongside it.
