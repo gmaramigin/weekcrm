@@ -69,6 +69,9 @@ function extractArticleLinks(html, listingUrl) {
 
     if (!u.pathname.startsWith(basePath + '/')) continue;
     if (u.pathname === basePath || u.pathname === basePath + '/') continue;
+    // Skip listing loopbacks like /blog/default.aspx, /blog/index.html, /blog/
+    const tail = u.pathname.slice(basePath.length + 1);
+    if (/^(default\.(aspx|htm|html|php)|index\.(htm|html|php|aspx))$/i.test(tail)) continue;
 
     if (/\.(xml|rss|json|pdf|jpg|png|webp|svg|ico)$/i.test(u.pathname)) continue;
     if (/\b(page|tag|category|author|feed|rss|sitemap)\b/i.test(u.pathname)) continue;
@@ -81,6 +84,48 @@ function extractArticleLinks(html, listingUrl) {
     if (links.length >= MAX_ITEMS * 3) break;
   }
   return links.slice(0, MAX_ITEMS);
+}
+
+// Infer a publishedAt ISO date from the URL path or article title when the
+// source doesn't expose a proper <meta article:published_time>. Handles the
+// common patterns used by vendor blogs and forums (Telligent, WordPress, etc.).
+const MONTHS = {
+  jan: 0, january: 0, feb: 1, february: 1, mar: 2, march: 2, apr: 3, april: 3,
+  may: 4, jun: 5, june: 5, jul: 6, july: 6, aug: 7, august: 7,
+  sep: 8, sept: 8, september: 8, oct: 9, october: 9, nov: 10, november: 10, dec: 11, december: 11
+};
+
+function inferPublishedAt(url, title) {
+  // 1. URL path: /YYYY/MM/DD/
+  let m = url.match(/\/(\d{4})\/(\d{2})\/(\d{2})(?:\/|\b)/);
+  if (m) return isoDate(m[1], m[2], m[3]);
+
+  // 2. URL path: /YYYY-MM-DD-   (common in slugs)
+  m = url.match(/\/(\d{4})-(\d{2})-(\d{2})[-/]/);
+  if (m) return isoDate(m[1], m[2], m[3]);
+
+  // 3. URL path: /YYYY/MM/  → day 01
+  m = url.match(/\/(\d{4})\/(\d{2})\//);
+  if (m) return isoDate(m[1], m[2], '01');
+
+  // 4. Title: "April 15, 2026" or "April 15th, 2026" (case-insensitive)
+  if (title) {
+    m = title.match(/([A-Za-z]+)\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(\d{4})/);
+    if (m) {
+      const mon = MONTHS[m[1].toLowerCase()];
+      if (mon !== undefined) return isoDate(m[3], String(mon + 1).padStart(2, '0'), m[2].padStart(2, '0'));
+    }
+    // 5. Title: "2026-04-15"
+    m = title.match(/(\d{4})-(\d{2})-(\d{2})/);
+    if (m) return isoDate(m[1], m[2], m[3]);
+  }
+
+  return null;
+}
+
+function isoDate(y, mo, d) {
+  const dt = new Date(Date.UTC(+y, +mo - 1, +d, 12, 0, 0)); // noon UTC — avoid TZ edge
+  return isNaN(dt.getTime()) ? null : dt.toISOString();
 }
 
 function extractMeta(html) {
@@ -160,11 +205,12 @@ async function fetchAndExtract(url, getDynamic) {
 
   if (!article || article.content.length < MIN_CONTENT_LEN) return null;
 
+  const title = article.title || meta.title || '';
   return {
-    title: article.title || meta.title || '',
+    title,
     content: article.content,
     summary: meta.summary || article.excerpt || '',
-    publishedAt: meta.publishedAt || null
+    publishedAt: meta.publishedAt || inferPublishedAt(url, title)
   };
 }
 
