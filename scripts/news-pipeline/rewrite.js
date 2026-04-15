@@ -1,5 +1,6 @@
 // Calls Claude to rewrite a vendor announcement into a third-person news brief.
-// Returns { headline, body }. Gracefully degrades in dry-run.
+// Returns { headline, body }. An empty headline signals the rewriter refused —
+// the caller should skip the item rather than publish it.
 
 const Anthropic = require('@anthropic-ai/sdk');
 const config = require('./config');
@@ -20,23 +21,36 @@ Rewrite vendor announcements into third-person news briefs. Rules:
 6. Produce a headline under 80 characters: "[Vendor] [verb] [what]" — e.g. "Attio adds AI-powered meeting actions".
 7. End the body with a new paragraph: "Source: <Source URL>" — use the exact URL provided in the user message, no markdown, no rewording.
 
+REFUSAL RULE:
+If the source content is too thin, too promotional, or lacks any concrete facts
+(feature details, numbers, prices, dates, capabilities) to produce a factual brief,
+respond with exactly: {"headline": "", "body": ""}
+Do NOT pad, infer, or invent details. It is better to return empty than to fabricate.
+
 Output strictly as JSON:
 {"headline": "...", "body": "..."}`;
 
-async function rewriteItem({ vendorName, title, summary, url }) {
+async function rewriteItem({ vendorName, title, summary, content, url }) {
   if (!client) {
     // Dry-run fallback: produce a plausible rewrite locally so devs can see the format.
+    const body = (content || summary || title || '').slice(0, 600);
     return {
       headline: `${vendorName} ${title.toLowerCase().replace(/^(we('re| are)|introducing)\s*/i, '')}`.slice(0, 80),
-      body: `${vendorName} ${summary || title}`.slice(0, 600) + ' [DRY RUN — no API call made]'
+      body: `${vendorName} ${body} [DRY RUN — no API call made]`
     };
   }
+
+  // Prefer the richer article body; fall back to meta summary, then title.
+  const sourceBody = (content && content.trim())
+    || (summary && summary.trim())
+    || title
+    || '';
 
   const userContent = `Vendor: ${vendorName}
 Source URL: ${url}
 Source title: ${title}
-Source summary:
-${summary}`;
+Source content:
+${sourceBody}`;
 
   const res = await client.messages.create({
     model: config.anthropic.model,
@@ -53,18 +67,18 @@ function parseRewriteJson(text, vendorName, fallbackTitle) {
   // Be forgiving: find the first {...} block.
   const match = text.match(/\{[\s\S]*\}/);
   if (!match) {
-    console.warn('  ⚠ rewriter returned non-JSON, using raw text as body');
-    return { headline: fallbackTitle, body: text };
+    console.warn('  ⚠ rewriter returned non-JSON, treating as refusal');
+    return { headline: '', body: '' };
   }
   try {
     const parsed = JSON.parse(match[0]);
     return {
-      headline: (parsed.headline || fallbackTitle).trim(),
+      headline: (parsed.headline || '').trim(),
       body: (parsed.body || '').trim()
     };
   } catch {
-    console.warn('  ⚠ rewriter JSON parse failed, using raw text');
-    return { headline: fallbackTitle, body: text };
+    console.warn('  ⚠ rewriter JSON parse failed, treating as refusal');
+    return { headline: '', body: '' };
   }
 }
 

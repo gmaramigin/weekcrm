@@ -88,10 +88,16 @@ async function main() {
           vendorName: vendor.name,
           title: item.title,
           summary: item.summary,
+          content: item.content,
           url: item.url
         });
       } catch (err) {
         console.warn(`      ⚠ rewrite failed: ${err.message}`);
+        continue;
+      }
+
+      if (!rewritten.headline || !rewritten.body) {
+        console.warn(`      ⚠ rewriter refused (thin or promotional source), skipping`);
         continue;
       }
 
