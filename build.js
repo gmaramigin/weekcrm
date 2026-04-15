@@ -140,9 +140,13 @@ function build() {
     </article>
   `).join('');
 
-  // Featured = filled vendors only (no placeholder stubs).
-  const filledVendors = vendors.filter(v => !v.stub);
-  const featuredVendors = filledVendors.slice(0, 8).map(v => `
+  // Featured = fixed curated list by slug (order preserved).
+  const FEATURED_SLUGS = ['hubspot', 'attio', 'pipedrive', 'monday', 'folk', 'capsule', 'close', 'breakcold'];
+  const vendorBySlug = Object.fromEntries(vendors.map(v => [v.slug, v]));
+  const featuredVendors = FEATURED_SLUGS
+    .map(slug => vendorBySlug[slug])
+    .filter(Boolean)
+    .map(v => `
     <a href="/vendors/${v.slug}" class="vendor-badge">
       ${renderLogo(v, 'vendor-logo-sm')}
       <span class="vendor-badge-name">${v.title}</span>

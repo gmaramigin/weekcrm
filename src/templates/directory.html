@@ -16,13 +16,17 @@
 
 <section class="section">
   <div class="container">
+    <div class="directory-search">
+      <input type="search" id="vendorSearch" class="vendor-search-input" placeholder="Search vendors by name, category, or description…" autocomplete="off">
+      <span class="vendor-search-count" id="vendorSearchCount"></span>
+    </div>
     <div class="directory-filters">
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="crm">CRM</button>
       <button class="filter-btn" data-filter="helpdesk">Helpdesk</button>
       <button class="filter-btn" data-filter="integration">Integration</button>
     </div>
-    <div class="vendor-grid">
+    <div class="vendor-grid" id="vendorGrid">
       {{vendorCards}}
     </div>
   </div>
