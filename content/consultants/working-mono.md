@@ -1,34 +1,11 @@
 ---
-name: Working Mono
-tagline: Focused Attio implementations with an emphasis on calm, maintainable systems.
+name: "Working Mono"
+tagline: "The ability to find signal in the noise is the most critical advantage a modern GTM team has."
 vendor: attio
-location: Remote
-tier: Core
-website: https://workingmono.com
-profileUrl: https://attio.com/experts/working-mono
-services:
-  - Implementation
-  - Workspace audit
-  - Process design
-solo: true
-industries:
-  - Small Business
-  - Agencies
-  - Consulting
+location: "Manchester"
+website: "https://www.workingmono.com"
+profileUrl: "https://attio.com/experts/working-mono"
+discoveryUrl: "https://cal.com/team/working-mono/gtm-noise-reduction"
 date: 2026-04-17
 ---
-
-## About Working Mono
-
-Working Mono is a small, craft-shop Attio practice that favors simple, maintainable implementations over heavy automation. They are a good fit for teams that have been burned by over-engineered CRM builds and want a quieter setup they can actually live with.
-
-## What they do
-
-- **Opinionated Attio setups** with a bias toward fewer, better-used fields.
-- **Workspace audits** — finding what to remove, not only what to add.
-- **Process design** for client-service businesses.
-- **Lightweight training** for small teams.
-
-## Best for
-
-Teams that are tired of "more tools, more automation, more dashboards" and want a CRM that feels like it helps rather than demands attention.
+The ability to find signal in the noise is the most critical advantage a modern GTM team has. But the endless feed of new tactics and playbooks only creates more noise. GTM engineering is a powerful start, but without a coherent framework, it just creates more sophisticated noise. We help you cut through it by installing a GTM framework that filters out the chaos and amplifies the signals that actually drive your growth, delivering the clarity and accountability investors demand. Start with a GTM Noise Reduction Workshop (Free) A focused working session designed to solve your most pressing Attio GTM challenge. 1 - Bring your most pressing blocker. 2 - Leave with actionable insights to solve it. 3 - Receive our Field Guide to Attio GTM after we talk. Fits • Fast-growing sales teams, where we help remove process debt so they can focus on selling. • PLG companies, where we help turn usage data into qualified pipeline. • Teams looking to build a defensible GTM motion, a system so unique to their product that it becomes a competitive moat. How it works Our entire framework is built around Attio. After extensive in-field work, it’s the only tool that acts as a clean enough lens across an entire business. It becomes the single window and actionable interface into your GTM motion, delivering the kind of clarity that stands up to investor due diligence. No matter how complex or confusing your existing stack is, we make it coherent. Developed across more than a dozen funded startups, our modules are foundational yet fluid—built to time compress your GTM motion and adapt to an ever-changing landscape. • Signal Lens // Your single source of revenue truth in Attio. • Flux Engine // Real-time sourcing, enrichment and routing with Clay. • Motion Grid // Workflow automation that removes human latency. • Interaction Schema // The map from first signal to closed-won. • Signal Projection // Positioning that makes you the only logical choice. • Stack Index & Field Guides // The human guide to the machines. The Process Workshop → Field Guide. You can use the guide to build internally, or we can architect and install the full framework. You own the system completely. For teams seeking continuous refinement, Fractal Loops offer an ongoing strategic partnership to keep your GTM motion sharp. We only propose a 1-1 engagement if the path to clear ROI is obvious. Our principle is to provide value first. You'll leave with actionable insights and access to our ongoing Field Guides—no matter the next step.

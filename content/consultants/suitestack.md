@@ -1,38 +1,10 @@
 ---
-name: SuiteStack
-tagline: Attio partner for the Nordics — services in English, Swedish, and Finnish.
+name: "SuiteStack"
+tagline: "SuiteStack helps growth-driven B2B teams unlock more predictable sales and marketing outcomes through strong CRM processes, connected tech ecosystems with integrations, and ongoing strategic support."
 vendor: attio
-location: Sweden / Nordics
-tier: Advanced
-website: https://suitestack.se
-profileUrl: https://attio.com/experts/suitestack
-services:
-  - Implementation
-  - Migration
-  - Integration
-  - Ongoing support
-industries:
-  - B2B Growth
-  - SaaS
-  - Nordic Businesses
-languages:
-  - English
-  - Swedish
-  - Finnish
+location: "Helsinki"
+website: "https://suitestack.se/en"
+profileUrl: "https://attio.com/experts/suitestack"
 date: 2026-04-17
 ---
-
-## About SuiteStack
-
-SuiteStack is a Nordic Attio partner supporting teams across Sweden and Finland. They are bilingual by design — implementations, training, and documentation can all be delivered in English, Swedish, or Finnish — which matters more than most non-Nordic teams realise when rolling out a CRM locally.
-
-## What they do
-
-- **Setup, migration, and custom integrations** with both strategic and technical depth.
-- **CRM-centric process engineering** — lead capture, scoring, nurturing, and pipeline design.
-- **Integrations** that connect Attio to the rest of the stack, not just sit beside it.
-- **Ongoing strategic support** for Nordic growth-stage B2B teams.
-
-## Best for
-
-Growth-driven B2B teams headquartered in the Nordics, or international teams expanding into the Nordics that want a local implementation partner.
+SuiteStack helps growth-driven B2B teams unlock more predictable sales and marketing outcomes through strong CRM processes, connected tech ecosystems with integrations, and ongoing strategic support. Our core strength lies in CRM-centric process engineering: we refine how your teams capture, score, and nurture leads, streamline your sales pipeline for predictable conversion velocity, and align marketing execution with measurable business outcomes. By standardising data models and workflows, we ensure your CRM becomes a central source of truth that fuels both tactical execution and strategic decision-making. We provide Attio implementation services and ongoing support that keep your CRM and associated processes healthy, scalable, and aligned with changing business goals. From strategic road-mapping and monthly optimisation to training, performance monitoring, and custom integrations, we’re here to help your teams get more value out of every touch point. We work in the Nordics and offer our services in English, Swedish and Finnish.

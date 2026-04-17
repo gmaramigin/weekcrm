@@ -1,34 +1,11 @@
 ---
-name: Alaiso
-tagline: Attio systems wired to outbound, enrichment, and tooling as one connected revenue system.
+name: "Alaiso"
+tagline: "If you're scaling a B2B tech company with 15+ people, you've probably got reps that hate the CRM, leads that go cold before they hit the pipeline, and tools that don't connect."
 vendor: attio
-location: Remote
-tier: Advanced
-website: https://alaiso.com
-profileUrl: https://attio.com/experts/alaiso
-services:
-  - Implementation
-  - Outbound
-  - Enrichment
-  - Integration
-industries:
-  - SaaS
-  - Services
-  - Agencies
+location: "Manchester"
+website: "https://alaiso.ai"
+profileUrl: "https://attio.com/experts/alaiso"
+discoveryUrl: "https://cal.com/alaiso/attio-intro-call"
 date: 2026-04-17
 ---
-
-## About Alaiso
-
-Alaiso designs Attio as the backbone of a full revenue system — CRM, outbound tooling, enrichment, and reporting connected together rather than left as separate tools. Good fit for teams who are buying Attio not to replace a spreadsheet, but to finally pull a messy outbound operation into one place.
-
-## What they do
-
-- **Attio + outbound stack builds** — Smartlead, Instantly, Clay, and similar tools wired into Attio.
-- **Enrichment pipelines** — both waterfall enrichment and event-triggered enrichment.
-- **Reporting and pipeline visibility** across outbound, inbound, and partner motions.
-- **Attio workspace hygiene** — dedupe, merges, and maintenance playbooks.
-
-## Best for
-
-Outbound-heavy teams and agencies running multi-channel motions who want Attio to sit at the center of the whole operation.
+If you're scaling a B2B tech company with 15+ people, you've probably got reps that hate the CRM, leads that go cold before they hit the pipeline, and tools that don't connect. We build Attio systems reps actually use - with outbound, enrichment, and every tool in your stack wired in as one connected revenue system. Why reps hate your CRM: It adds friction. Wrong fields, wrong pipelines, activity logging that serves dashboards not deals. We've carried a quota - we know what makes reps stop using a CRM. We build Attio workspaces that work for them. The system handles the admin. Reps handle the selling. Why leads go cold: They come in (outbound replies, form fills, referrals) and don't reach the right rep fast enough. Different tools, no routing, manual handoffs. We wire every source into Attio. Leads land in pipeline scored, assigned, and ready to work. Why your stack doesn't connect: It wasn't designed to. Tool by tool, it grew. Now your team is the integration layer, copying data between tabs, running manual exports, bridging gaps that should be automated. We connect everything to Attio. One system. One source of truth. What we build: * CRM Architecture: Attio built for how your team sells. Makes reps faster, not busier. * Outbound Infrastructure: Enrichment, sequencing, scoring, routing wired into Attio. Replies land as real pipeline. * Integration Engineering: n8n, Clay, Make, Zapier, custom API. Every tool connected. How we work: Discovery → Architecture → Build → Launch → Grow We find what's broken, design the fix, build it, and train your team. Optional monthly sprints and ongoing support to keep evolving. What changes: ↳ Reps sell from the CRM (because it was designed for selling) ↳ Leads get routed while they're still warm ↳ Your tools work as one system ↳ It scales without starting over 10+ years in sales and CRMs. We've been the rep and the architect. Book a call to get started.

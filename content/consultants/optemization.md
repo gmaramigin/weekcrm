@@ -1,34 +1,9 @@
 ---
-name: Optemization
-tagline: 100+ projects delivered for 80+ clients across modern GTM tooling.
+name: "Optemization"
+tagline: "Our team helps high-growth companies stop the chaos of scattered knowledge and doc dumps — so your company can get work done efficiently and adopt modern tech tools like Attio."
 vendor: attio
-location: Remote
-tier: Elite
-website: https://optemization.com
-profileUrl: https://attio.com/experts/optemization
-services:
-  - Implementation
-  - Optimization
-  - Integration
-  - RevOps advisory
-industries:
-  - SaaS
-  - Consumer
-  - Marketplaces
+website: "https://optemization.com"
+profileUrl: "https://attio.com/experts/optemization"
 date: 2026-04-17
 ---
-
-## About Optemization
-
-Optemization is a RevOps and systems consultancy with a track record of 100+ completed projects across 80+ clients. They started in the broader modern-work tooling space (Notion, Airtable, Slack) and now run a significant Attio practice, which makes them strong at the messy "how does CRM fit with the rest of our stack" question.
-
-## What they do
-
-- **Full Attio implementation** with a strong documentation and SOP layer.
-- **Systems audits** across Attio, Notion, Linear, Slack, and data warehouses.
-- **Integration and automation** between Attio and the rest of the modern-work stack.
-- **Ongoing RevOps retainers** for scaling GTM teams.
-
-## Best for
-
-Teams that do not want to silo CRM from the rest of their systems — companies where the line between ops, product, and go-to-market has blurred.
+Our team helps high-growth companies stop the chaos of scattered knowledge and doc dumps — so your company can get work done efficiently and adopt modern tech tools like Attio. Get access to a team of automation engineers, workspace designers, and developers. We’ll help you organize, streamline, and automate processes — tailored to how you want your company to work going forward. With a track record of successfully completing over 100 projects with more than 80 clients, we can help you get everyone’s nuanced workflows into a trusted workspace. Work faster and more efficiently as a team — with less manual work, fewer mistakes, and a much better employee experience across teams. We can help you with the following: * Workspace development * Workspace design * Workspace automation and integrations * Workspace documentation * Migrations / integrations / automations with other tools * Workspace monitoring and maintenance * Attio training for teams Need help with something else that’s not listed above? Reach out to us! We’d be happy to discuss what you had in mind.

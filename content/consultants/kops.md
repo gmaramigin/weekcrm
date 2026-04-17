@@ -1,34 +1,17 @@
 ---
-name: Kops
-tagline: Turning Attio into a real sales machine for SaaS and B2B agencies.
+name: "Kops"
+tagline: "We help SaaS companies and B2B agencies build GTM systems that actually drive revenue with Attio as the backbone of your sales operations."
 vendor: attio
-location: Europe / Remote
-tier: Advanced
-website: https://kopsagency.com
-profileUrl: https://attio.com/experts/kops
-services:
-  - Implementation
-  - Optimization
-  - Migration
-  - Sales enablement
-industries:
-  - SaaS
-  - B2B Agencies
-  - Startups
+location: "Paris"
+website: "https://kops-agency.com"
+profileUrl: "https://attio.com/experts/kops"
+discoveryUrl: "https://cal.com/maxime-lunari/30min"
 date: 2026-04-17
 ---
+We help SaaS companies and B2B agencies build GTM systems that actually drive revenue with Attio as the backbone of your sales operations. With 8+ years of experience in CRM implementation and optimization, we’v helped 50+ clients turn their CRM into a real sales machine. Your setups are scalable, simple to use, and designed for your team to stay autonomous. ⭐️
 
-## About Kops
+## What we do
 
-Kops is a CRM-focused agency with 8+ years of experience implementing and optimizing sales stacks for SaaS and B2B services companies. They have worked with 50+ clients on Attio, HubSpot, and Pipedrive builds — and now focus a large share of their practice on Attio specifically.
-
-## What they do
-
-- **Greenfield Attio setups** — from zero to a clean, opinionated workspace the sales team actually uses.
-- **Existing-workspace optimization** — cleanup, dedupe, reporting rebuilds.
-- **Premium migrations** — from HubSpot, Pipedrive, Zoho, and Notion into Attio, preserving history.
-- **Sales process design** — pipelines, stages, playbooks, and adoption training.
-
-## Best for
-
-Teams that know they want Attio but do not want to burn two months learning its idioms — Kops brings a prescriptive, sales-first point of view.
+best 1. Full implementation (from 0 to 100) : Structure design, best-practice consulting, and complete Attio setup. 2. Existing CRM optimization : Make your CRM cleaner, faster, and directly increase your revenue. 3. Premium & fast migrations : From HubSpot, Pipedrive, Zoho, Notion, GIL, and more — with zero data loss. 🔥 Going further (if you need it) * Advanced lead scoring to prioritize your pipeline * Simple or complex automations (sales, marketing, nurturing) * Smart integrations (outbound, calling tools, marketing stack, internal tools) * Enrichment & intent data to target better and sell faster * Reporting & forecasting to track your sales activity precisely 💟 Why work with us? 💼 8+ years of CRM experience
+- **🚀 50+ SaaS & B2B agency clients 📚 Clear documentation & training included 💬 Dedicated WhatsApp support (Mon–Fri) during the project** — ⚡ Fast onboarding — first results in just a few days
+- **✅ How we work (our Roadmap) 1. Audit & scoping** — We map your goals and processes 2. Structure design – Clean, business-oriented architecture 3. Technical implementation – Solid, scalable, and ready to use 4. Documentation & training – So your team stays autonomous 5. Optimization & ongoing support (optional) – Continuous improvements as you grow

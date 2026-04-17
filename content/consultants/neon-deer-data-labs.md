@@ -1,34 +1,11 @@
 ---
-name: Neon Deer Data Labs
-tagline: Data engineering for complex CRM configurations and GTM data pipelines.
+name: "Neon Deer Data Labs"
+tagline: "We're a data engineering consultancy specializing in complex CRM configurations."
 vendor: attio
-location: Remote
-tier: Advanced
-website: https://neondeerdatalabs.com
-profileUrl: https://attio.com/experts/neon-deer-data-labs
-services:
-  - Data engineering
-  - Implementation
-  - Integration
-  - Analytics
-industries:
-  - SaaS
-  - Marketplaces
-  - B2B
+location: "Seattle"
+website: "https://neondeerdata.com"
+profileUrl: "https://attio.com/experts/neon-deer-data-labs"
+discoveryUrl: "https://cal.com/neon-deer-data-labs/discovery-call"
 date: 2026-04-17
 ---
-
-## About Neon Deer Data Labs
-
-Neon Deer is a data engineering consultancy that sits closer to Marketing, Sales, and Success teams than a typical systems integrator. They specialize in Attio deployments where the real work is upstream — reconciling duplicate records, stitching together product telemetry, and building reporting that operators actually trust.
-
-## What they do
-
-- **Complex Attio implementations** with custom objects and relationships.
-- **Data pipelines** — Segment, Snowflake, BigQuery, and reverse-ETL into Attio.
-- **Deduplication and migration cleanup** — turning legacy CRM data into something usable.
-- **Analytics and reporting** — dashboards that map back to real business questions.
-
-## Best for
-
-Teams who already have real data (product events, warehouse tables, existing CRM history) and need Attio to be the clean, reliable front end to all of it.
+We're a data engineering consultancy specializing in complex CRM configurations. We partner closely with Marketing, Sales, and Success teams to implement scalable tools and data processes. Our top priority is helping you realize value from Attio as quickly as possible. In the first week of our engagement, we'll tackle your biggest challenges and identify quick wins to help you see immediate progress. 👉 HOW TO GET YOUR PROJECT STARTED: Here's how we work with new clients: 1. Discovery Call: Use the link in the "Resources" section to book your free 30 minute session. We'll use this time to understand your goals and determine if we're the right fit for your needs. 2. Workshop [optional]: Following the Discovery Call, we'll schedule a free 60 minute workshop to build a custom roadmap for your specific Attio needs. If you have a simple project, we'll skip this and get started right away. 3. Proposal: Following the workshop, we'll provide a detailed quote within hours. 4. Project kick-off. As soon as you're ready to start, so are we. 👉 ONLY NEED A ONE-OFF CONSULTATION? Sometimes you just need focused, expert time to unblock, align, or accelerate your work. Book 45-60 minutes with us to get targeted help with your Attio CRM: build from scratch, or optimize what’s live. These sessions exist because small, well-guided interventions often unlock disproportionate progress. 👉 OUR SERVICES: We specialize in assisting clients with complex CRM migration requirements, and those with existing Attio configurations who are seeking more advanced setups (especially with third party integrations.) * CRM Migrations: Move your data and processes from HubSpot, Salesforce, or any other CRM into Attio with minimal disruption. * Automations: Leverage AI, reduce manual tasks, streamline operations, and keep important work from slipping through the cracks. * External Integrations: Keep your CRM connected to any external tool. We configure data pipelines, ETL, AI platforms, and other custom setups using solutions that can be maintained and easily built upon in the future. * Audits: Evaluate the health of your Attio setup with a comprehensive audit. We'll assess data structure, automation efficiency, and integrations to identify gaps and opportunities for improvement. * Ongoing Support: Our commitment doesn't end after the initial project completes. We're here to ensure long-term success with expert guidance and hands-on support. Se habla español Nós falamos português
