@@ -11,16 +11,18 @@ const https = require('https');
 const { execSync } = require('child_process');
 
 const CONTENT = path.join(__dirname, '..', 'content', 'consultants');
+const LOGOS = path.join(__dirname, '..', 'public', 'logos', 'consultants');
 fs.mkdirSync(CONTENT, { recursive: true });
+fs.mkdirSync(LOGOS, { recursive: true });
 
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36';
 
-function fetchHtml(url) {
+function fetch(url, { binary = false } = {}) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, { headers: { 'User-Agent': UA, 'Accept': 'text/html' } }, res => {
+    const req = https.get(url, { headers: { 'User-Agent': UA, 'Accept': binary ? 'image/*' : 'text/html' } }, res => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         res.resume();
-        return resolve(fetchHtml(new URL(res.headers.location, url).toString()));
+        return resolve(fetch(new URL(res.headers.location, url).toString(), { binary }));
       }
       if (res.statusCode !== 200) {
         res.resume();
@@ -28,12 +30,17 @@ function fetchHtml(url) {
       }
       const chunks = [];
       res.on('data', c => chunks.push(c));
-      res.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+      res.on('end', () => {
+        const buf = Buffer.concat(chunks);
+        resolve(binary ? { buf, contentType: res.headers['content-type'] || '' } : buf.toString('utf8'));
+      });
     });
     req.on('error', reject);
-    req.setTimeout(20000, () => { req.destroy(new Error('timeout')); });
+    req.setTimeout(30000, () => { req.destroy(new Error('timeout')); });
   });
 }
+
+const fetchHtml = url => fetch(url).catch(err => { throw err; });
 
 function decodeEntities(s) {
   if (!s) return s;
@@ -127,6 +134,135 @@ function parseDescription(html) {
   return m ? decodeEntities(m[1]).trim() : '';
 }
 
+// The partner's rendered bio lives inside <div class="prose break-words">...</div>.
+// Returns the raw inner HTML (first occurrence) or '' if not present.
+function parseProseHtml(html) {
+  const m = html.match(/<div class="prose[^"]*">([\s\S]*?)<\/div>/);
+  return m ? m[1] : '';
+}
+
+// Partnerpage.io serves the partner logo via a base64-encoded image-proxy URL
+// referenced in og:image / twitter:image. Decode it, extract the S3 key, then
+// rebuild a clean square request at 256px.
+function parseLogoKey(html) {
+  const m = html.match(/<meta[^>]+(?:og:image|twitter:image)[^>]+content="(https:\/\/content\.partnerpage\.io\/[^"?]+)"/i);
+  if (!m) return null;
+  const b64 = m[1].split('/').pop();
+  try {
+    const raw = Buffer.from(b64, 'base64').toString('utf8');
+    const obj = JSON.parse(raw);
+    return obj && obj.key ? { bucket: obj.bucket || 'partnerpage.prod', key: obj.key } : null;
+  } catch {
+    return null;
+  }
+}
+
+function buildSquareLogoUrl({ bucket, key }, size = 256) {
+  const req = {
+    bucket, key,
+    edits: {
+      toFormat: 'webp',
+      resize: { width: size, height: size, fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 0 } }
+    }
+  };
+  return `https://content.partnerpage.io/${Buffer.from(JSON.stringify(req)).toString('base64')}`;
+}
+
+async function downloadLogo(slug, keyObj) {
+  if (!keyObj) return false;
+  try {
+    const url = buildSquareLogoUrl(keyObj, 256);
+    const { buf } = await fetch(url, { binary: true });
+    // Clear any older monogram SVG for this slug so the real logo wins.
+    for (const ext of ['svg', 'png', 'jpg', 'jpeg', 'avif', 'webp']) {
+      const p = path.join(LOGOS, `${slug}.${ext}`);
+      if (fs.existsSync(p)) fs.unlinkSync(p);
+    }
+    fs.writeFileSync(path.join(LOGOS, `${slug}.webp`), buf);
+    return true;
+  } catch (e) {
+    console.warn(`  logo download failed for ${slug}: ${e.message}`);
+    return false;
+  }
+}
+
+// Very small HTML → markdown converter for the prose-body shapes partnerpage.io
+// emits. Handles <p>, <strong>, <em>, <a>, <br>, <ul>/<ol>, <li>, and
+// promotes standalone "<p><strong>Heading</strong></p>" blocks to ## headings.
+function htmlToMarkdown(html) {
+  if (!html) return '';
+  let s = html.trim();
+
+  // Normalise self-closing and voids.
+  s = s.replace(/<br\s*\/?>/gi, '\n');
+
+  // Lists: preserve order by walking.
+  s = s.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi, (_, inner) => {
+    let i = 0;
+    return '\n' + inner.replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, (_, item) => {
+      i++;
+      return `${i}. ${item.trim()}\n`;
+    }) + '\n';
+  });
+  s = s.replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gi, (_, inner) => {
+    return '\n' + inner.replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, (_, item) => {
+      return `- ${item.trim()}\n`;
+    }) + '\n';
+  });
+
+  // Promote <p><strong>X</strong></p> (heading-only paragraphs) to ## X.
+  s = s.replace(/<p[^>]*>\s*<strong>([^<]{1,80})<\/strong>\s*<\/p>/gi, '\n\n## $1\n\n');
+
+  // Inline marks.
+  s = s.replace(/<strong[^>]*>([\s\S]*?)<\/strong>/gi, '**$1**');
+  s = s.replace(/<b[^>]*>([\s\S]*?)<\/b>/gi, '**$1**');
+  s = s.replace(/<em[^>]*>([\s\S]*?)<\/em>/gi, '*$1*');
+  s = s.replace(/<i[^>]*>([\s\S]*?)<\/i>/gi, '*$1*');
+  s = s.replace(/<a[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi, (_, href, txt) => `[${txt.trim()}](${href})`);
+
+  // Paragraphs.
+  s = s.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, (_, inner) => `${inner.trim()}\n\n`);
+
+  // Strip any remaining tags.
+  s = s.replace(/<[^>]+>/g, '');
+
+  s = decodeEntities(s);
+
+  // Linkify bare URLs that end up on their own line.
+  s = s.replace(/^(\s*)(https?:\/\/\S+)\s*$/gm, (_, pre, url) => `${pre}<${url}>`);
+
+  // Collapse whitespace.
+  s = s.replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+  return s;
+}
+
+function firstProseParagraph(proseHtml) {
+  const m = proseHtml.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+  if (!m) return '';
+  const txt = decodeEntities(m[1].replace(/<[^>]+>/g, '').trim());
+  return txt;
+}
+
+function pickTagline(proseHtml, fallback) {
+  // Scan paragraphs; skip testimonial quotes and bylines until we find a real
+  // sentence.
+  const re = /<p[^>]*>([\s\S]*?)<\/p>/gi;
+  const paras = [];
+  let m;
+  while ((m = re.exec(proseHtml))) {
+    const txt = decodeEntities(m[1].replace(/<[^>]+>/g, '').trim());
+    if (txt) paras.push(txt);
+  }
+  for (const p of paras) {
+    // Skip quote-only paragraphs or "-- Name, Title" bylines or single-word headings.
+    if (/^["“]/.test(p) && /["”]\s*$/.test(p)) continue;
+    if (/^--\s+/.test(p)) continue;
+    if (p.split(/\s+/).length < 6) continue;
+    return p.length > 220 ? p.slice(0, 217).replace(/\s+\S*$/, '') + '…' : p;
+  }
+  return fallback ? (fallback.length > 220 ? fallback.slice(0, 217).replace(/\s+\S*$/, '') + '…' : fallback) : '';
+}
+
 function firstSentence(desc) {
   if (!desc) return '';
   // Split on ". " or "! " or "? " — also bail after ~200 chars.
@@ -187,11 +323,19 @@ async function importOne(url) {
   const html = await fetchHtml(url);
   const name = parseName(html);
   const desc = parseDescription(html);
+  const proseHtml = parseProseHtml(html);
   const website = pickWebsite(html);
   const location = pickLocation(html);
   const discoveryUrl = pickDiscoveryLink(html);
-  const tagline = firstSentence(desc);
-  const bodyMd = descriptionToMarkdown(desc);
+
+  // Prefer the structured prose body; fall back to the flat meta description.
+  let bodyMd = htmlToMarkdown(proseHtml);
+  if (!bodyMd) bodyMd = descriptionToMarkdown(desc);
+
+  const tagline = pickTagline(proseHtml, firstSentence(desc));
+
+  const logoKey = parseLogoKey(html);
+  const logoOk = await downloadLogo(slug, logoKey);
 
   const md = buildMarkdown({
     slug, name, tagline, website, location,
@@ -202,7 +346,7 @@ async function importOne(url) {
 
   const file = path.join(CONTENT, `${slug}.md`);
   fs.writeFileSync(file, md);
-  return { slug, name, website, location, file };
+  return { slug, name, website, location, logoOk, file };
 }
 
 function loadUrls(argv) {
@@ -228,7 +372,8 @@ function loadUrls(argv) {
       const r = await importOne(url);
       results.push(r);
       const loc = r.location ? ` · ${r.location}` : '';
-      console.log(`✓ ${r.slug}  ${r.name}${loc}  ${r.website || '(no website)'}`);
+      const logo = r.logoOk ? ' 🖼' : '';
+      console.log(`✓ ${r.slug}${logo}  ${r.name}${loc}  ${r.website || '(no website)'}`);
     } catch (e) {
       failures.push({ url, error: e.message });
       console.error(`✗ ${url}  ${e.message}`);

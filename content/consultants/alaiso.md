@@ -8,4 +8,48 @@ profileUrl: "https://attio.com/experts/alaiso"
 discoveryUrl: "https://cal.com/alaiso/attio-intro-call"
 date: 2026-04-17
 ---
-If you're scaling a B2B tech company with 15+ people, you've probably got reps that hate the CRM, leads that go cold before they hit the pipeline, and tools that don't connect. We build Attio systems reps actually use - with outbound, enrichment, and every tool in your stack wired in as one connected revenue system. Why reps hate your CRM: It adds friction. Wrong fields, wrong pipelines, activity logging that serves dashboards not deals. We've carried a quota - we know what makes reps stop using a CRM. We build Attio workspaces that work for them. The system handles the admin. Reps handle the selling. Why leads go cold: They come in (outbound replies, form fills, referrals) and don't reach the right rep fast enough. Different tools, no routing, manual handoffs. We wire every source into Attio. Leads land in pipeline scored, assigned, and ready to work. Why your stack doesn't connect: It wasn't designed to. Tool by tool, it grew. Now your team is the integration layer, copying data between tabs, running manual exports, bridging gaps that should be automated. We connect everything to Attio. One system. One source of truth. What we build: * CRM Architecture: Attio built for how your team sells. Makes reps faster, not busier. * Outbound Infrastructure: Enrichment, sequencing, scoring, routing wired into Attio. Replies land as real pipeline. * Integration Engineering: n8n, Clay, Make, Zapier, custom API. Every tool connected. How we work: Discovery → Architecture → Build → Launch → Grow We find what's broken, design the fix, build it, and train your team. Optional monthly sprints and ongoing support to keep evolving. What changes: ↳ Reps sell from the CRM (because it was designed for selling) ↳ Leads get routed while they're still warm ↳ Your tools work as one system ↳ It scales without starting over 10+ years in sales and CRMs. We've been the rep and the architect. Book a call to get started.
+If you're scaling a B2B tech company with 15+ people, you've probably got reps that hate the CRM, leads that go cold before they hit the pipeline, and tools that don't connect.
+
+We build Attio systems reps actually use - with outbound, enrichment, and every tool in your stack wired in as one connected revenue system.
+
+## Why reps hate your CRM:
+
+It adds friction. Wrong fields, wrong pipelines, activity logging that serves dashboards not deals. We've carried a quota - we know what makes reps stop using a CRM.
+
+We build Attio workspaces that work for them. The system handles the admin. Reps handle the selling.
+
+## Why leads go cold:
+
+They come in (outbound replies, form fills, referrals) and don't reach the right rep fast enough. Different tools, no routing, manual handoffs.
+
+We wire every source into Attio. Leads land in pipeline scored, assigned, and ready to work.
+
+## Why your stack doesn't connect:
+
+It wasn't designed to. Tool by tool, it grew. Now your team is the integration layer, copying data between tabs, running manual exports, bridging gaps that should be automated.
+
+We connect everything to Attio. One system. One source of truth.
+
+## What we build:
+
+- **CRM Architecture:** Attio built for how your team sells. Makes reps faster, not busier.
+- **Outbound Infrastructure**: Enrichment, sequencing, scoring, routing wired into Attio. Replies land as real pipeline.
+- **Integration Engineering:** n8n, Clay, Make, Zapier, custom API. Every tool connected.
+
+**How we work:** Discovery → Architecture → Build → Launch → Grow
+
+We find what's broken, design the fix, build it, and train your team. Optional monthly sprints and ongoing support to keep evolving.
+
+## What changes:
+
+↳ Reps sell from the CRM (because it was designed for selling)
+
+↳ Leads get routed while they're still warm
+
+↳ Your tools work as one system
+
+↳ It scales without starting over
+
+10+ years in sales and CRMs. We've been the rep and the architect.
+
+## Book a call to get started.

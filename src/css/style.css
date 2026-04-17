@@ -653,6 +653,11 @@ p { color: var(--text-secondary); }
   font-size: 0.875rem; color: var(--text-secondary);
   margin-bottom: var(--space-md);
   flex-grow: 1;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .consultant-card-tags { display: flex; gap: var(--space-xs); flex-wrap: wrap; }
 
@@ -664,7 +669,10 @@ p { color: var(--text-secondary); }
 
 .consultant-hero .vendor-logo-fallback { font-size: 1.5rem; }
 
-/* Consultant avatars are full-bleed SVG tiles — skip the image padding vendors use. */
-.consultant-avatar { background: transparent; border: none; }
-.consultant-avatar img { padding: 0; }
+/* Full-bleed SVG monograms: the gradient fills the tile, no white frame. */
+.consultant-avatar-monogram { background: transparent; border: none; }
+.consultant-avatar-monogram img { padding: 0; }
+/* Downloaded raster logos: keep the vendor-style white card + border. */
+.consultant-avatar-logo { background: #fff; }
+.consultant-avatar-logo img { padding: 4px; object-fit: contain; }
 

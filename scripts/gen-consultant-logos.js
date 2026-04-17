@@ -43,13 +43,20 @@ function svgFor(slug, name) {
 </svg>`;
 }
 
+const LOGO_EXTS = ['webp', 'png', 'jpg', 'jpeg', 'avif', 'svg'];
+function hasLogo(slug) {
+  return LOGO_EXTS.some(ext => fs.existsSync(path.join(OUT, `${slug}.${ext}`)));
+}
+
 const files = fs.readdirSync(CONSULTANTS).filter(f => f.endsWith('.md'));
 let wrote = 0;
+let skipped = 0;
 for (const f of files) {
   const slug = f.replace(/\.md$/, '');
+  if (hasLogo(slug)) { skipped++; continue; }
   const { data } = matter(fs.readFileSync(path.join(CONSULTANTS, f), 'utf8'));
   const svg = svgFor(slug, data.name || slug);
   fs.writeFileSync(path.join(OUT, `${slug}.svg`), svg);
   wrote++;
 }
-console.log(`Wrote ${wrote} consultant logos to ${OUT}`);
+console.log(`Consultant logos: wrote ${wrote} monograms, kept ${skipped} existing.`);

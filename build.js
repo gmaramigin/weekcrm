@@ -57,9 +57,12 @@ function readMarkdownFiles(dir) {
 
 // Avatar for a consultant: prefers a real logo from public/logos/consultants/<slug>.<ext>,
 // falls back to a monogram tile.
+// Consultants use downloaded raster logos when available (webp/png), falling
+// back to a generated monogram SVG — so prefer raster extensions first.
+const CONSULTANT_LOGO_EXTS = ['webp', 'png', 'jpg', 'jpeg', 'avif', 'svg'];
 const CONSULTANT_LOGO_DIR = path.join(PUBLIC, 'logos', 'consultants');
 function resolveConsultantLogo(slug) {
-  for (const ext of LOGO_EXTS) {
+  for (const ext of CONSULTANT_LOGO_EXTS) {
     if (fs.existsSync(path.join(CONSULTANT_LOGO_DIR, `${slug}.${ext}`))) {
       return `/logos/consultants/${slug}.${ext}`;
     }
@@ -69,7 +72,10 @@ function resolveConsultantLogo(slug) {
 function renderConsultantAvatar(consultant, sizeClass = '') {
   const logo = resolveConsultantLogo(consultant.slug);
   if (logo) {
-    return `<span class="vendor-logo consultant-avatar ${sizeClass}"><img src="${logo}" alt="${consultant.name} logo" loading="lazy"></span>`;
+    // Full-bleed SVG monograms use a different class from padded raster logos.
+    const isMonogramSvg = logo.endsWith('.svg');
+    const extraClass = isMonogramSvg ? 'consultant-avatar-monogram' : 'consultant-avatar-logo';
+    return `<span class="vendor-logo ${extraClass} ${sizeClass}"><img src="${logo}" alt="${consultant.name} logo" loading="lazy"></span>`;
   }
   const name = consultant.name || consultant.slug || '?';
   const initials = name.replace(/[®™©]/g, '').split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
@@ -393,11 +399,43 @@ function build() {
     const serviceTags = (consultant.services || [])
       .map(s => `<span class="tag">${s}</span>`).join('');
     const website = consultant.website || '';
+    const websiteDisplay = website.replace(/^https?:\/\//, '').replace(/\/$/, '');
     const related = consultants
       .filter(c => c.slug !== consultant.slug && c.vendor === vendorSlug)
       .slice(0, 3)
       .map(consultantCard).join('')
       || '<p class="empty-state">More coming soon.</p>';
+
+    // Build sidebar rows only for fields that actually have values.
+    const rows = [];
+    if (consultant.location) rows.push(`
+      <div class="vendor-info-row">
+        <span class="vendor-info-label">Location</span>
+        <span class="vendor-info-value">${consultant.location}</span>
+      </div>`);
+    if (consultant.tier) rows.push(`
+      <div class="vendor-info-row">
+        <span class="vendor-info-label">Partner tier</span>
+        <span class="vendor-info-value">${consultant.tier}</span>
+      </div>`);
+    if (vendorSlug) rows.push(`
+      <div class="vendor-info-row">
+        <span class="vendor-info-label">Works with</span>
+        <a href="/vendors/${vendorSlug}" class="vendor-info-value vendor-info-link">${vendorLabel}</a>
+      </div>`);
+    if (website) rows.push(`
+      <div class="vendor-info-row">
+        <span class="vendor-info-label">Website</span>
+        <a href="${website}" target="_blank" rel="noopener nofollow" class="vendor-info-value vendor-info-link">${websiteDisplay}</a>
+      </div>`);
+    const sidebarRows = rows.join('');
+
+    // Prefer a native booking link as the primary CTA; otherwise link back to
+    // the official vendor profile.
+    const ctaHref = consultant.discoveryUrl || consultant.profileUrl || website || '#';
+    const ctaLabel = consultant.discoveryUrl ? 'Book discovery call →'
+                    : `View on ${vendorLabel} →`;
+    const ctaBlock = `<a href="${ctaHref}" target="_blank" rel="noopener" class="btn btn-primary btn-full">${ctaLabel}</a>`;
 
     const consultantHtml = render(consultantTemplate, {
       name: consultant.name,
@@ -405,13 +443,10 @@ function build() {
       avatar: renderConsultantAvatar(consultant, 'vendor-logo-lg'),
       vendorSlug,
       vendorLabel: vendorLabel || 'CRM',
-      tier: consultant.tier || '',
       tierBadgeInline: consultant.tier ? ` · ${consultant.tier}` : '',
-      location: consultant.location || '',
-      website,
-      websiteDisplay: website.replace(/^https?:\/\//, '').replace(/\/$/, ''),
-      profileUrl: consultant.profileUrl || website || '#',
       serviceTags,
+      sidebarRows,
+      ctaBlock,
       content: consultant.html,
       relatedConsultants: related
     });

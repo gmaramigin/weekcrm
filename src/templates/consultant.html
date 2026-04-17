@@ -17,23 +17,8 @@
       </div>
       <div class="vendor-sidebar">
         <div class="vendor-info-card">
-          <div class="vendor-info-row" data-if="location">
-            <span class="vendor-info-label">Location</span>
-            <span class="vendor-info-value">{{location}}</span>
-          </div>
-          <div class="vendor-info-row" data-if="tier">
-            <span class="vendor-info-label">Partner tier</span>
-            <span class="vendor-info-value">{{tier}}</span>
-          </div>
-          <div class="vendor-info-row" data-if="vendor">
-            <span class="vendor-info-label">Works with</span>
-            <a href="/vendors/{{vendorSlug}}" class="vendor-info-value vendor-info-link">{{vendorLabel}}</a>
-          </div>
-          <div class="vendor-info-row" data-if="website">
-            <span class="vendor-info-label">Website</span>
-            <a href="{{website}}" target="_blank" rel="noopener nofollow" class="vendor-info-value vendor-info-link">{{websiteDisplay}}</a>
-          </div>
-          <a href="{{profileUrl}}" target="_blank" rel="noopener" class="btn btn-primary btn-full">View on {{vendorLabel}} →</a>
+          {{sidebarRows}}
+          {{ctaBlock}}
         </div>
       </div>
     </div>
@@ -42,7 +27,7 @@
 
 <section class="section">
   <div class="container container-narrow">
-    <div class="vendor-body">
+    <div class="vendor-body consultant-body">
       {{content}}
     </div>
   </div>
