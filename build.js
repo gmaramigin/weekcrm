@@ -55,10 +55,24 @@ function readMarkdownFiles(dir) {
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
-// Deterministic avatar for a consultant: monogram tile sized like a vendor logo.
+// Avatar for a consultant: prefers a real logo from public/logos/consultants/<slug>.<ext>,
+// falls back to a monogram tile.
+const CONSULTANT_LOGO_DIR = path.join(PUBLIC, 'logos', 'consultants');
+function resolveConsultantLogo(slug) {
+  for (const ext of LOGO_EXTS) {
+    if (fs.existsSync(path.join(CONSULTANT_LOGO_DIR, `${slug}.${ext}`))) {
+      return `/logos/consultants/${slug}.${ext}`;
+    }
+  }
+  return null;
+}
 function renderConsultantAvatar(consultant, sizeClass = '') {
+  const logo = resolveConsultantLogo(consultant.slug);
+  if (logo) {
+    return `<span class="vendor-logo consultant-avatar ${sizeClass}"><img src="${logo}" alt="${consultant.name} logo" loading="lazy"></span>`;
+  }
   const name = consultant.name || consultant.slug || '?';
-  const initials = name.split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+  const initials = name.replace(/[®™©]/g, '').split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
   return `<span class="vendor-logo vendor-logo-fallback ${sizeClass}" style="background:${monogramColor(consultant.slug)}">${initials}</span>`;
 }
 

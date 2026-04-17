@@ -664,3 +664,7 @@ p { color: var(--text-secondary); }
 
 .consultant-hero .vendor-logo-fallback { font-size: 1.5rem; }
 
+/* Consultant avatars are full-bleed SVG tiles — skip the image padding vendors use. */
+.consultant-avatar { background: transparent; border: none; }
+.consultant-avatar img { padding: 0; }
+
