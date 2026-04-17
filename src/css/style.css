@@ -605,6 +605,7 @@ p { color: var(--text-secondary); }
 
   .card-grid { grid-template-columns: 1fr; }
   .vendor-grid { grid-template-columns: 1fr; }
+  .consultant-grid { grid-template-columns: 1fr; }
   .vendor-hero-inner { grid-template-columns: 1fr; }
   .vendor-hero-heading { flex-direction: row; align-items: center; }
   .vendor-badges { grid-template-columns: repeat(2, 1fr); }
@@ -618,3 +619,48 @@ p { color: var(--text-secondary); }
   .container { padding: 0 var(--space-md); }
   h1 { font-size: 1.75rem; }
 }
+
+/* ── Consultants ─────────────────────────────────── */
+.consultant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-md);
+}
+.consultant-card {
+  display: flex; flex-direction: column;
+  padding: var(--space-lg);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: all 0.18s ease;
+}
+.consultant-card:hover {
+  border-color: var(--brand);
+  box-shadow: 0 8px 24px -12px rgba(79, 70, 229, 0.25);
+  transform: translateY(-2px);
+}
+.consultant-card-header {
+  display: flex; align-items: center; gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+.consultant-card-heading { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.consultant-card-name { margin: 0; font-size: 1.0625rem; }
+.consultant-card-vendor {
+  font-size: 0.6875rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-muted);
+}
+.consultant-card-desc {
+  font-size: 0.875rem; color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+  flex-grow: 1;
+}
+.consultant-card-tags { display: flex; gap: var(--space-xs); flex-wrap: wrap; }
+
+.back-link {
+  display: inline-block; margin-bottom: var(--space-md);
+  font-size: 0.875rem; color: var(--text-secondary);
+}
+.back-link:hover { color: var(--brand); }
+
+.consultant-hero .vendor-logo-fallback { font-size: 1.5rem; }
+

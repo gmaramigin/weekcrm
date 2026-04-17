@@ -52,3 +52,68 @@ if (toggle && nav) {
     });
   }
 })();
+
+// ── Consultants filters + search ─────────────────────
+(() => {
+  const grid = document.getElementById('consultantGrid');
+  if (!grid) return;
+  const cards = Array.from(grid.querySelectorAll('.consultant-card'));
+  const searchInput = document.getElementById('consultantSearch');
+  const countEl = document.getElementById('consultantSearchCount');
+  const vendorBar = document.getElementById('consultantVendorFilters');
+  const tierBar = document.getElementById('consultantTierFilters');
+  let activeVendor = 'all';
+  let activeTier = 'all';
+  let query = '';
+
+  cards.forEach(card => {
+    card.dataset.search = card.textContent.toLowerCase().replace(/\s+/g, ' ').trim();
+  });
+
+  function apply() {
+    let visible = 0;
+    cards.forEach(card => {
+      const vendorMatch = activeVendor === 'all' || card.dataset.vendor === activeVendor;
+      const tierMatch = activeTier === 'all' || card.dataset.tier === activeTier;
+      const searchMatch = !query || card.dataset.search.includes(query);
+      const show = vendorMatch && tierMatch && searchMatch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (countEl) {
+      countEl.textContent = (query || activeVendor !== 'all' || activeTier !== 'all')
+        ? `${visible} of ${cards.length} consultants`
+        : '';
+    }
+  }
+
+  function wireFilterBar(bar, attr, setter) {
+    if (!bar) return;
+    bar.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setter(btn.dataset[attr]);
+        bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        apply();
+      });
+    });
+  }
+
+  wireFilterBar(vendorBar, 'vendor', v => { activeVendor = v; });
+  wireFilterBar(tierBar, 'tier', t => { activeTier = t; });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', e => {
+      query = e.target.value.toLowerCase().trim();
+      apply();
+    });
+  }
+
+  // Deep-link: /consultants?vendor=attio pre-selects that vendor filter.
+  const params = new URLSearchParams(window.location.search);
+  const preVendor = params.get('vendor');
+  if (preVendor && vendorBar) {
+    const btn = vendorBar.querySelector(`.filter-btn[data-vendor="${preVendor}"]`);
+    if (btn) btn.click();
+  }
+})();

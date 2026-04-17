@@ -1,0 +1,58 @@
+<section class="vendor-hero consultant-hero">
+  <div class="container">
+    <div class="vendor-hero-inner">
+      <div class="vendor-hero-main">
+        <a href="/consultants" class="back-link">← All consultants</a>
+        <div class="vendor-hero-heading">
+          {{avatar}}
+          <div>
+            <span class="vendor-category">{{vendorLabel}} Expert{{tierBadgeInline}}</span>
+            <h1 class="vendor-title">{{name}}</h1>
+          </div>
+        </div>
+        <p class="vendor-desc">{{tagline}}</p>
+        <div class="vendor-meta-row">
+          {{serviceTags}}
+        </div>
+      </div>
+      <div class="vendor-sidebar">
+        <div class="vendor-info-card">
+          <div class="vendor-info-row" data-if="location">
+            <span class="vendor-info-label">Location</span>
+            <span class="vendor-info-value">{{location}}</span>
+          </div>
+          <div class="vendor-info-row" data-if="tier">
+            <span class="vendor-info-label">Partner tier</span>
+            <span class="vendor-info-value">{{tier}}</span>
+          </div>
+          <div class="vendor-info-row" data-if="vendor">
+            <span class="vendor-info-label">Works with</span>
+            <a href="/vendors/{{vendorSlug}}" class="vendor-info-value vendor-info-link">{{vendorLabel}}</a>
+          </div>
+          <div class="vendor-info-row" data-if="website">
+            <span class="vendor-info-label">Website</span>
+            <a href="{{website}}" target="_blank" rel="noopener nofollow" class="vendor-info-value vendor-info-link">{{websiteDisplay}}</a>
+          </div>
+          <a href="{{profileUrl}}" target="_blank" rel="noopener" class="btn btn-primary btn-full">View on {{vendorLabel}} →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container-narrow">
+    <div class="vendor-body">
+      {{content}}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2>Other {{vendorLabel}} Experts</h2>
+    <div class="consultant-grid">
+      {{relatedConsultants}}
+    </div>
+  </div>
+</section>

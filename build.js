@@ -55,6 +55,13 @@ function readMarkdownFiles(dir) {
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
+// Deterministic avatar for a consultant: monogram tile sized like a vendor logo.
+function renderConsultantAvatar(consultant, sizeClass = '') {
+  const name = consultant.name || consultant.slug || '?';
+  const initials = name.split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+  return `<span class="vendor-logo vendor-logo-fallback ${sizeClass}" style="background:${monogramColor(consultant.slug)}">${initials}</span>`;
+}
+
 // Auto-resolve a vendor logo by slug from public/logos/<slug>.<ext>.
 // Returns the public URL (e.g. "/logos/attio.webp") or null if none exists.
 const LOGO_EXTS = ['svg', 'webp', 'png', 'jpg', 'jpeg', 'avif'];
@@ -122,10 +129,13 @@ function build() {
   const newsTemplate = readTemplate('news');
   const vendorTemplate = readTemplate('vendor');
   const directoryTemplate = readTemplate('directory');
+  const consultantsTemplate = readTemplate('consultants');
+  const consultantTemplate = readTemplate('consultant');
 
   // Load content
   const articles = readMarkdownFiles(path.join(CONTENT, 'articles'));
   const vendors = readMarkdownFiles(path.join(CONTENT, 'vendors'));
+  const consultants = readMarkdownFiles(path.join(CONTENT, 'consultants'));
 
   // ── Homepage ────────────────────────────────────────
   const latestArticles = articles.slice(0, 6);
@@ -315,6 +325,97 @@ function build() {
     fs.writeFileSync(path.join(vendorDir, 'index.html'), page);
   }
 
+  // ── Consultants directory ───────────────────────────
+  const consultantCard = c => {
+    const serviceTags = (c.services || []).slice(0, 3)
+      .map(s => `<span class="tag">${s}</span>`).join('');
+    const vendorSlug = c.vendor || '';
+    const vendorLabel = vendorBySlug[vendorSlug]?.title || vendorSlug;
+    const tier = (c.tier || '').toLowerCase();
+    return `
+      <a href="/consultants/${c.slug}" class="consultant-card"
+         data-vendor="${vendorSlug}"
+         data-tier="${tier}">
+        <div class="consultant-card-header">
+          ${renderConsultantAvatar(c, 'vendor-logo-md')}
+          <div class="consultant-card-heading">
+            <h3 class="consultant-card-name">${c.name}</h3>
+            <span class="consultant-card-vendor">
+              ${vendorLabel ? `${vendorLabel} Expert` : 'CRM Expert'}${c.tier ? ` · ${c.tier}` : ''}
+            </span>
+          </div>
+        </div>
+        <p class="consultant-card-desc">${c.tagline || ''}</p>
+        <div class="consultant-card-tags">${serviceTags}</div>
+      </a>
+    `;
+  };
+
+  const consultantCards = consultants.map(consultantCard).join('');
+
+  // Vendor filter buttons: only vendors with at least one consultant.
+  const vendorsWithConsultants = [...new Set(consultants.map(c => c.vendor).filter(Boolean))];
+  const vendorFilters = vendorsWithConsultants.map(slug => {
+    const label = vendorBySlug[slug]?.title || slug;
+    return `<button class="filter-btn" data-vendor="${slug}">${label}</button>`;
+  }).join('');
+
+  const consultantsHtml = render(consultantsTemplate, { consultantCards, vendorFilters });
+  const consultantsPage = render(baseTemplate, {
+    title: 'CRM Consultants & Experts — WeekCRM',
+    description: 'Find vetted CRM consultants, implementation partners, and migration specialists. Browse Attio Experts and more.',
+    url: 'https://weekcrm.com/consultants',
+    body: consultantsHtml,
+    bodyClass: '',
+    assetVersion: cssHash
+  });
+  ensureDir(path.join(DIST, 'consultants'));
+  fs.writeFileSync(path.join(DIST, 'consultants', 'index.html'), consultantsPage);
+
+  // ── Individual consultant pages ─────────────────────
+  for (const consultant of consultants) {
+    const vendorSlug = consultant.vendor || '';
+    const vendorLabel = vendorBySlug[vendorSlug]?.title || vendorSlug;
+    const serviceTags = (consultant.services || [])
+      .map(s => `<span class="tag">${s}</span>`).join('');
+    const website = consultant.website || '';
+    const related = consultants
+      .filter(c => c.slug !== consultant.slug && c.vendor === vendorSlug)
+      .slice(0, 3)
+      .map(consultantCard).join('')
+      || '<p class="empty-state">More coming soon.</p>';
+
+    const consultantHtml = render(consultantTemplate, {
+      name: consultant.name,
+      tagline: consultant.tagline || '',
+      avatar: renderConsultantAvatar(consultant, 'vendor-logo-lg'),
+      vendorSlug,
+      vendorLabel: vendorLabel || 'CRM',
+      tier: consultant.tier || '',
+      tierBadgeInline: consultant.tier ? ` · ${consultant.tier}` : '',
+      location: consultant.location || '',
+      website,
+      websiteDisplay: website.replace(/^https?:\/\//, '').replace(/\/$/, ''),
+      profileUrl: consultant.profileUrl || website || '#',
+      serviceTags,
+      content: consultant.html,
+      relatedConsultants: related
+    });
+
+    const page = render(baseTemplate, {
+      title: `${consultant.name} — ${vendorLabel} Expert — WeekCRM`,
+      description: consultant.tagline || `${consultant.name} is a ${vendorLabel} implementation partner.`,
+      url: `https://weekcrm.com/consultants/${consultant.slug}`,
+      body: consultantHtml,
+      bodyClass: '',
+      assetVersion: cssHash
+    });
+
+    const consultantDir = path.join(DIST, 'consultants', consultant.slug);
+    ensureDir(consultantDir);
+    fs.writeFileSync(path.join(consultantDir, 'index.html'), page);
+  }
+
   // ── RSS Feed ────────────────────────────────────────
   const rssItems = articles.slice(0, 20).map(a => `
     <item>
@@ -339,7 +440,7 @@ function build() {
   fs.writeFileSync(path.join(DIST, 'rss.xml'), rss);
 
   const elapsed = Date.now() - start;
-  console.log(`Done. ${articles.length} articles, ${vendors.length} vendors. ${elapsed}ms`);
+  console.log(`Done. ${articles.length} articles, ${vendors.length} vendors, ${consultants.length} consultants. ${elapsed}ms`);
 }
 
 // ── Watch mode ──────────────────────────────────────────

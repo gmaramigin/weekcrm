@@ -1,0 +1,28 @@
+<section class="page-header">
+  <div class="container">
+    <h1>CRM Consultants & Experts</h1>
+    <p class="page-subtitle">Vetted implementation partners, migration specialists, and RevOps agencies. Start with Attio Experts — more vendors coming.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="directory-search">
+      <input type="search" id="consultantSearch" class="vendor-search-input" placeholder="Search consultants by name, service, industry…" autocomplete="off">
+      <span class="vendor-search-count" id="consultantSearchCount"></span>
+    </div>
+    <div class="directory-filters" id="consultantVendorFilters">
+      <button class="filter-btn active" data-vendor="all">All vendors</button>
+      {{vendorFilters}}
+    </div>
+    <div class="directory-filters" id="consultantTierFilters">
+      <button class="filter-btn active" data-tier="all">All tiers</button>
+      <button class="filter-btn" data-tier="elite">Elite</button>
+      <button class="filter-btn" data-tier="advanced">Advanced</button>
+      <button class="filter-btn" data-tier="core">Core</button>
+    </div>
+    <div class="consultant-grid" id="consultantGrid">
+      {{consultantCards}}
+    </div>
+  </div>
+</section>
