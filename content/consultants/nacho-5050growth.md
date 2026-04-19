@@ -23,7 +23,7 @@ We start with a diagnostic of your current architecture and design a custom inte
 ## ⚡ How we are different:
 
 - **Obsessive Data Hygiene:** We love the dirty work you hate. We ensure your data is clean, standardized, and usable before we build the fancy automation.
-- **Speed as a Feature:** We work in rapid 1**-week sprints**. We scope it, we ship it, and you see immediate value.
+- **Speed as a Feature:** We work in rapid **1-week sprints**. We scope it, we ship it, and you see immediate value.
 
 ## 🛠 What we build:
 

@@ -213,12 +213,26 @@ function htmlToMarkdown(html) {
   // Promote <p><strong>X</strong></p> (heading-only paragraphs) to ## X.
   s = s.replace(/<p[^>]*>\s*<strong>([^<]{1,80})<\/strong>\s*<\/p>/gi, '\n\n## $1\n\n');
 
-  // Inline marks.
-  s = s.replace(/<strong[^>]*>([\s\S]*?)<\/strong>/gi, '**$1**');
-  s = s.replace(/<b[^>]*>([\s\S]*?)<\/b>/gi, '**$1**');
-  s = s.replace(/<em[^>]*>([\s\S]*?)<\/em>/gi, '*$1*');
-  s = s.replace(/<i[^>]*>([\s\S]*?)<\/i>/gi, '*$1*');
-  s = s.replace(/<a[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi, (_, href, txt) => `[${txt.trim()}](${href})`);
+  // Inline marks. Markdown requires the delimiter to hug non-whitespace on
+  // both sides, so move any leading/trailing whitespace outside the markers.
+  // (Partnerpage.io often emits things like "<strong>Label: </strong>" which
+  // would otherwise produce invalid `**Label: **` and render literally.)
+  const wrapMark = mark => (_, inner) => {
+    const content = inner.replace(/\s+/g, ' ');
+    const trimmed = content.trim();
+    if (!trimmed) return '';
+    const left = /^\s/.test(content) ? ' ' : '';
+    const right = /\s$/.test(content) ? ' ' : '';
+    return `${left}${mark}${trimmed}${mark}${right}`;
+  };
+  s = s.replace(/<strong[^>]*>([\s\S]*?)<\/strong>/gi, wrapMark('**'));
+  s = s.replace(/<b[^>]*>([\s\S]*?)<\/b>/gi, wrapMark('**'));
+  s = s.replace(/<em[^>]*>([\s\S]*?)<\/em>/gi, wrapMark('*'));
+  s = s.replace(/<i[^>]*>([\s\S]*?)<\/i>/gi, wrapMark('*'));
+  s = s.replace(/<a[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi, (_, href, txt) => {
+    const label = txt.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    return label ? `[${label}](${href})` : href;
+  });
 
   // Paragraphs.
   s = s.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, (_, inner) => `${inner.trim()}\n\n`);

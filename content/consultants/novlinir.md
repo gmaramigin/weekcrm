@@ -18,10 +18,10 @@ Attio is the CRM foundation. Around it, we design modular GTM stacks that are st
 
 **What we deliver**
 
-- **CRM Migrations: **Clean, controlled transitions to a scalable Attio foundation.
-- **GTM Systems: **Modular workflows, automation and best-in-class tools (Clay, Lemlist, Customer.io) connected around Attio.
-- **Optimization & RevOps: **Dashboards, automation, reporting and process redesign to improve clarity and performance.
-- **App & API Integrations: **Structured integrations via API or native Attio App SDK when required.
+- **CRM Migrations:** Clean, controlled transitions to a scalable Attio foundation.
+- **GTM Systems:** Modular workflows, automation and best-in-class tools (Clay, Lemlist, Customer.io) connected around Attio.
+- **Optimization & RevOps:** Dashboards, automation, reporting and process redesign to improve clarity and performance.
+- **App & API Integrations:** Structured integrations via API or native Attio App SDK when required.
 
 **We’re one of the most experienced Attio-focused teams worldwide:**
 
@@ -41,11 +41,11 @@ Founded by Giacomo Caranese, one of the earliest Attio Experts, the team combine
 
 **Our typical missions**
 
-- **Implement Attio from scratch - ***For teams adopting their first structured CRM*. Data model, pipelines, automation and clean imports.
-- **Migrate from a legacy CRM - ***For companies moving from Salesforce, HubSpot, Pipedrive, Affinity or Zoho*. End-to-end migration with data restructuring and controlled rollout.
-- **Improve an existing setup - ***For teams already using Attio*. Audit, dashboard redesign and workflow optimization.
-- **Connect your GTM stack - ***For sales and growth teams*. Integration of Clay, Lemlist, Customer.io via API or native SDK.
-- **Build an outbound engine - ***For teams generating qualified leads*. ICP sourcing, enrichment and automated outreach fully integrated.
+- **Implement Attio from scratch -** *For teams adopting their first structured CRM*. Data model, pipelines, automation and clean imports.
+- **Migrate from a legacy CRM -** *For companies moving from Salesforce, HubSpot, Pipedrive, Affinity or Zoho*. End-to-end migration with data restructuring and controlled rollout.
+- **Improve an existing setup -** *For teams already using Attio*. Audit, dashboard redesign and workflow optimization.
+- **Connect your GTM stack -** *For sales and growth teams*. Integration of Clay, Lemlist, Customer.io via API or native SDK.
+- **Build an outbound engine -** *For teams generating qualified leads*. ICP sourcing, enrichment and automated outreach fully integrated.
 
 **Next steps**
 

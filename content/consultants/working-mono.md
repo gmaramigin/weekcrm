@@ -32,7 +32,7 @@ A focused working session designed to solve your most pressing Attio GTM challen
 
 • **PLG companies**, where we help turn usage data into qualified pipeline.
 
-•** Teams looking to build a defensible GTM motion, **a system so unique to their product that it becomes a competitive moat.
+• **Teams looking to build a defensible GTM motion,** a system so unique to their product that it becomes a competitive moat.
 
 ***How it works***
 

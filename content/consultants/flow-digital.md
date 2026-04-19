@@ -36,7 +36,7 @@ We're 25 people across CRM, automation, and development. You get a project manag
 
 We work project-based or on monthly retainers. Most Attio projects fall between $1,000 and $10,000 depending on complexity.
 
-**CERTIFICATIONS: **Airtable Gold Services Partner • Zapier • HubSpot • Pipedrive • Softr • Monday.com • Salesforce • Keragon + more
+**CERTIFICATIONS:** Airtable Gold Services Partner • Zapier • HubSpot • Pipedrive • Softr • Monday.com • Salesforce • Keragon + more
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━
 

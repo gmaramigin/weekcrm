@@ -15,13 +15,13 @@ We're a data engineering consultancy specializing in complex CRM configurations.
 Here's how we work with new clients:
 
 1. **Discovery Call**: Use the link in the "Resources" section to book your free 30 minute session. We'll use this time to understand your goals and determine if we're the right fit for your needs.
-2. **Workshop** [optional]:** **Following the Discovery Call, we'll schedule a free 60 minute workshop to build a custom roadmap for your specific Attio needs. If you have a simple project, we'll skip this and get started right away.
+2. **Workshop** [optional]:Following the Discovery Call, we'll schedule a free 60 minute workshop to build a custom roadmap for your specific Attio needs. If you have a simple project, we'll skip this and get started right away.
 3. **Proposal**: Following the workshop, we'll provide a detailed quote within hours.
 4. **Project kick-off**. As soon as you're ready to start, so are we.
 
 ## 👉 ONLY NEED A ONE-OFF CONSULTATION?
 
-Sometimes you just need focused, expert time to unblock, align, or accelerate your work. **Book 45-60 minutes with us to get targeted help **with your Attio CRM: build from scratch, or optimize what’s live. These sessions exist because small, well-guided interventions often unlock disproportionate progress.
+Sometimes you just need focused, expert time to unblock, align, or accelerate your work. **Book 45-60 minutes with us to get targeted help** with your Attio CRM: build from scratch, or optimize what’s live. These sessions exist because small, well-guided interventions often unlock disproportionate progress.
 
 👉 **OUR SERVICES**:
 

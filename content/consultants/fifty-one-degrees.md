@@ -11,7 +11,7 @@ date: 2026-04-17
 
 Most CRMs are static graveyards for data. We turn Attio into the high-velocity central nervous system of your business.
 
-Based in London (Great Portland St) and New York (Broadway), **Fifty One Degrees** serves UK & US businesses with turnovers between £5m and £250m.* *We practice Radical Candour, and we don't care about billable hours; we care about tangible, measurable impact.
+Based in London (Great Portland St) and New York (Broadway), **Fifty One Degrees** serves UK & US businesses with turnovers between £5m and £250m.We practice Radical Candour, and we don't care about billable hours; we care about tangible, measurable impact.
 
 Founded by tech veterans who have scaled companies to process millions of customers and built 300-person analytics powerhouses, we understand the Legacy CRM Tax that kills growth.
 
@@ -31,7 +31,7 @@ We move at the speed of your business using our Ship, Learn, Iterate framework:
 We specialise in high-stakes environments where data integrity and automation are non-negotiable:
 
 - **Complex Migrations:** Seamless transitions from Salesforce, HubSpot, Dynamics or Pipedrive without data loss or downtime.
-- **AI Workforce Integration:** We are implementation partners for **ElevenLabs**, **Bland AI **and **Relevance AI**. We deploy AI agents and voice AI that handle triage and outreach directly within Attio.
+- **AI Workforce Integration:** We are implementation partners for **ElevenLabs**, **Bland AI** and **Relevance AI**. We deploy AI agents and voice AI that handle triage and outreach directly within Attio.
 - **Predictive Modelling:** We build custom ML models for **Targeting, Lead Scoring** and **Churn Prediction** that live inside your Attio attributes.
 - **Vertical Specialisation:** Deep experience in **Financial Services** (FCA/PRA compliance), **Home Improvement/Construction**, and **VC/Private Equity** deal flow.
 
