@@ -5,6 +5,7 @@ description: >-
   complexity, focusing sales reps on next actions rather than data entry to keep
   leads from falling through the cracks.
 website: 'https://www.nocrm.io'
+referralUrl: 'https://nocrm.io?fpr=george54'
 category: CRM
 pricing: 'From €12/user/mo (Starter); Expert from €19/user/mo'
 rating: '4.5'

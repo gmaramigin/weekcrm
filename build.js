@@ -121,6 +121,86 @@ function excerpt(html, len = 160) {
   return text.length > len ? text.slice(0, len) + '...' : text;
 }
 
+function escapeRegex(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Replace the FIRST plain-text mention of each known vendor title (and slug variants)
+// with a link to /vendors/<slug>. Skips text already inside <a>...</a> blocks and
+// inside headings/code so we don't over-link or break anchor text.
+function autoLinkVendors(html, vendors, currentSlug = null) {
+  // Build a list of [pattern, slug] tuples. Longest titles first to avoid e.g.
+  // "HubSpot CRM" being eaten by a "HubSpot" match.
+  const targets = vendors
+    .filter(v => v.slug && v.slug !== currentSlug)
+    .map(v => ({ slug: v.slug, label: v.title }))
+    .filter(t => t.label && t.label.length >= 3)
+    .sort((a, b) => b.label.length - a.label.length);
+
+  // Split on <a>…</a>, <h*>…</h*>, <code>…</code>, <pre>…</pre> so we can rewrite
+  // only the safe segments.
+  const SKIP_RE = /(<(?:a|h[1-6]|code|pre)\b[^>]*>[\s\S]*?<\/(?:a|h[1-6]|code|pre)>)/gi;
+  const parts = html.split(SKIP_RE);
+  const linked = new Set();
+
+  for (let i = 0; i < parts.length; i++) {
+    const part = parts[i];
+    if (SKIP_RE.test(part)) continue; // Skip blocks
+    let segment = part;
+    for (const t of targets) {
+      if (linked.has(t.slug)) continue;
+      // Word-bounded, case-insensitive, only the FIRST match in the whole article.
+      const re = new RegExp(`\\b(${escapeRegex(t.label)})\\b`, 'i');
+      if (re.test(segment)) {
+        segment = segment.replace(re, `<a href="/vendors/${t.slug}">$1</a>`);
+        linked.add(t.slug);
+      }
+    }
+    parts[i] = segment;
+  }
+  return parts.join('');
+}
+
+// JSON-LD Product/Review schema for a vendor — gives Google star snippets.
+function vendorJsonLd(vendor) {
+  const obj = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: vendor.title,
+    description: vendor.description || '',
+    category: vendor.category || 'CRM Software',
+    url: `https://weekcrm.com/vendors/${vendor.slug}`
+  };
+  const logo = vendor.logo || resolveLogo(vendor.slug);
+  if (logo) obj.image = `https://weekcrm.com${logo}`;
+  if (vendor.website) obj.brand = { '@type': 'Brand', name: vendor.title };
+  if (vendor.rating) {
+    const ratingValue = parseFloat(vendor.rating);
+    if (!isNaN(ratingValue)) {
+      obj.aggregateRating = {
+        '@type': 'AggregateRating',
+        ratingValue: ratingValue.toFixed(1),
+        bestRating: '5',
+        worstRating: '1',
+        reviewCount: '1'
+      };
+      obj.review = {
+        '@type': 'Review',
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: ratingValue.toFixed(1),
+          bestRating: '5',
+          worstRating: '1'
+        },
+        author: { '@type': 'Organization', name: 'WeekCRM' },
+        publisher: { '@type': 'Organization', name: 'WeekCRM' }
+      };
+    }
+  }
+  // JSON in HTML must escape </script
+  return JSON.stringify(obj).replace(/<\/script/gi, '<\\/script');
+}
+
 // ── Build ───────────────────────────────────────────────
 function build() {
   const start = Date.now();
@@ -227,12 +307,13 @@ function build() {
   // ── Individual articles ─────────────────────────────
   for (const article of articles) {
     const tagsHtml = (article.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+    const linkedContent = autoLinkVendors(article.html, vendors);
     const articleHtml = render(articleTemplate, {
       title: article.title,
       date: formatDate(article.date),
       dateISO: article.date,
       tags: tagsHtml,
-      content: article.html,
+      content: linkedContent,
       description: article.description || excerpt(article.html)
     });
 
@@ -323,12 +404,13 @@ function build() {
       visitRel,
       perkBlock,
       tags: tagsHtml,
-      content: vendor.html,
+      content: autoLinkVendors(vendor.html, vendors, vendor.slug),
       relatedArticles: relatedHtml,
       rating: vendor.rating || '',
       pricing: vendor.pricing || '',
       category: vendor.category || 'CRM',
-      logo: renderLogo(vendor, 'vendor-logo-lg')
+      logo: renderLogo(vendor, 'vendor-logo-lg'),
+      jsonLd: vendorJsonLd(vendor)
     });
 
     const page = render(baseTemplate, {
@@ -463,6 +545,307 @@ function build() {
     const consultantDir = path.join(DIST, 'consultants', consultant.slug);
     ensureDir(consultantDir);
     fs.writeFileSync(path.join(consultantDir, 'index.html'), page);
+  }
+
+  // ── Comparison pages (/compare/<a>-vs-<b>) ──────────
+  const compareTemplate = fs.existsSync(path.join(TEMPLATES, 'compare.html'))
+    ? readTemplate('compare') : null;
+  const compareEntries = readMarkdownFiles(path.join(CONTENT, 'compare'));
+  if (compareTemplate && compareEntries.length) {
+    ensureDir(path.join(DIST, 'compare'));
+    const compareIndexCards = [];
+    for (const entry of compareEntries) {
+      const a = vendorBySlug[entry.a];
+      const b = vendorBySlug[entry.b];
+      if (!a || !b) {
+        console.warn(`compare: skipping ${entry.slug} — vendor "${entry.a}" or "${entry.b}" not found`);
+        continue;
+      }
+      const ctaForVendor = (v) => ({
+        url: v.referralUrl || v.website || '#',
+        rel: v.referralUrl ? 'noopener sponsored' : 'noopener nofollow',
+        label: v.referralUrl ? `Try ${v.title}` : `Visit ${v.title}`
+      });
+      const ctaA = ctaForVendor(a);
+      const ctaB = ctaForVendor(b);
+
+      const jsonLd = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: entry.title,
+        description: entry.description || '',
+        datePublished: entry.date,
+        author: { '@type': 'Organization', name: 'WeekCRM' },
+        publisher: { '@type': 'Organization', name: 'WeekCRM' },
+        about: [
+          { '@type': 'Product', name: a.title, url: `https://weekcrm.com/vendors/${a.slug}` },
+          { '@type': 'Product', name: b.title, url: `https://weekcrm.com/vendors/${b.slug}` }
+        ]
+      }).replace(/<\/script/gi, '<\\/script');
+
+      const compareHtml = render(compareTemplate, {
+        title: entry.title,
+        description: entry.description || '',
+        content: autoLinkVendors(entry.html, vendors),
+        slugA: a.slug, titleA: a.title, descA: a.description || '',
+        pricingA: a.pricing || '—', ratingA: a.rating || '—',
+        logoA: renderLogo(a, 'vendor-logo-lg'),
+        ctaUrlA: ctaA.url, ctaRelA: ctaA.rel, ctaLabelA: ctaA.label,
+        slugB: b.slug, titleB: b.title, descB: b.description || '',
+        pricingB: b.pricing || '—', ratingB: b.rating || '—',
+        logoB: renderLogo(b, 'vendor-logo-lg'),
+        ctaUrlB: ctaB.url, ctaRelB: ctaB.rel, ctaLabelB: ctaB.label,
+        jsonLd
+      });
+
+      const page = render(baseTemplate, {
+        title: `${entry.title} — WeekCRM`,
+        description: entry.description || `${a.title} vs ${b.title} — feature comparison, pricing, and verdict.`,
+        url: `https://weekcrm.com/compare/${entry.slug}`,
+        body: compareHtml,
+        bodyClass: '',
+        assetVersion: cssHash
+      });
+
+      const outDir = path.join(DIST, 'compare', entry.slug);
+      ensureDir(outDir);
+      fs.writeFileSync(path.join(outDir, 'index.html'), page);
+
+      compareIndexCards.push(`
+        <a href="/compare/${entry.slug}" class="card">
+          <div class="card-meta"><time datetime="${entry.date}">${formatDate(entry.date)}</time></div>
+          <h3 class="card-title">${entry.title}</h3>
+          <p class="card-excerpt">${entry.description || ''}</p>
+        </a>
+      `);
+    }
+
+    // /compare/ index
+    const compareIndexBody = `
+      <section class="section">
+        <div class="container">
+          <h1>CRM Comparisons</h1>
+          <p class="vendor-desc">Side-by-side breakdowns of the most-asked CRM matchups.</p>
+          <div class="card-grid">${compareIndexCards.join('')}</div>
+        </div>
+      </section>`;
+    const compareIndex = render(baseTemplate, {
+      title: 'CRM Comparisons — WeekCRM',
+      description: 'Honest, side-by-side comparisons of the most popular CRMs.',
+      url: 'https://weekcrm.com/compare',
+      body: compareIndexBody, bodyClass: '', assetVersion: cssHash
+    });
+    fs.writeFileSync(path.join(DIST, 'compare', 'index.html'), compareIndex);
+  }
+
+  // ── "Best CRM for X" listicles (/best/<slug>) ───────
+  const bestEntries = readMarkdownFiles(path.join(CONTENT, 'best'));
+  if (bestEntries.length) {
+    ensureDir(path.join(DIST, 'best'));
+    const bestIndexCards = [];
+    for (const entry of bestEntries) {
+      const picks = (entry.vendors || [])
+        .map(slug => vendorBySlug[slug])
+        .filter(Boolean);
+      if (!picks.length) {
+        console.warn(`best: skipping ${entry.slug} — no valid vendor slugs`);
+        continue;
+      }
+
+      const pickBlocks = picks.map((v, i) => {
+        const ctaUrl = v.referralUrl || v.website || '#';
+        const ctaRel = v.referralUrl ? 'noopener sponsored' : 'noopener nofollow';
+        const ctaLabel = v.referralUrl ? `Try ${v.title} →` : `Visit ${v.title} →`;
+        return `
+          <article class="best-pick">
+            <div class="best-pick-rank">#${i + 1}</div>
+            <div class="best-pick-body">
+              <div class="best-pick-head">
+                ${renderLogo(v, 'vendor-logo-md')}
+                <div>
+                  <h3><a href="/vendors/${v.slug}">${v.title}</a></h3>
+                  <span class="vendor-card-category">${v.category || 'CRM'} · ${v.pricing || ''}</span>
+                </div>
+              </div>
+              <p>${v.description || ''}</p>
+              <a href="${ctaUrl}" target="_blank" rel="${ctaRel}" class="btn btn-primary">${ctaLabel}</a>
+            </div>
+          </article>`;
+      }).join('');
+
+      const itemListLd = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: entry.title,
+        itemListElement: picks.map((v, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          url: `https://weekcrm.com/vendors/${v.slug}`,
+          name: v.title
+        }))
+      }).replace(/<\/script/gi, '<\\/script');
+
+      const bodyHtml = `
+        <script type="application/ld+json">${itemListLd}</script>
+        <section class="compare-hero">
+          <div class="container container-narrow">
+            <span class="compare-eyebrow">CRM Picks</span>
+            <h1 class="compare-title">${entry.title}</h1>
+            <p class="compare-desc">${entry.description || ''}</p>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container container-narrow">
+            <div class="best-list">${pickBlocks}</div>
+            <div class="compare-body">${autoLinkVendors(entry.html, vendors)}</div>
+          </div>
+        </section>`;
+
+      const page = render(baseTemplate, {
+        title: `${entry.title} — WeekCRM`,
+        description: entry.description || entry.title,
+        url: `https://weekcrm.com/best/${entry.slug}`,
+        body: bodyHtml, bodyClass: '', assetVersion: cssHash
+      });
+
+      const outDir = path.join(DIST, 'best', entry.slug);
+      ensureDir(outDir);
+      fs.writeFileSync(path.join(outDir, 'index.html'), page);
+
+      bestIndexCards.push(`
+        <a href="/best/${entry.slug}" class="card">
+          <div class="card-meta"><time datetime="${entry.date}">${formatDate(entry.date)}</time></div>
+          <h3 class="card-title">${entry.title}</h3>
+          <p class="card-excerpt">${entry.description || ''}</p>
+        </a>
+      `);
+    }
+
+    const bestIndexBody = `
+      <section class="section">
+        <div class="container">
+          <h1>Best CRM Picks</h1>
+          <p class="vendor-desc">Curated CRM shortlists by use case, industry, and budget.</p>
+          <div class="card-grid">${bestIndexCards.join('')}</div>
+        </div>
+      </section>`;
+    const bestIndex = render(baseTemplate, {
+      title: 'Best CRM Picks — WeekCRM',
+      description: 'Curated CRM shortlists for every use case.',
+      url: 'https://weekcrm.com/best',
+      body: bestIndexBody, bodyClass: '', assetVersion: cssHash
+    });
+    fs.writeFileSync(path.join(DIST, 'best', 'index.html'), bestIndex);
+  }
+
+  // ── Programmatic landing pages (/industry/, /integrations/) ──────
+  // For each entry, frontmatter `tag` selects vendors whose tags include it
+  // (case-insensitive). The body Markdown becomes the intro copy.
+  const renderProgrammatic = (entries, urlPrefix, fallbackEyebrow) => {
+    if (!entries.length) return [];
+    ensureDir(path.join(DIST, urlPrefix));
+    const cards = [];
+    for (const entry of entries) {
+      const wanted = (entry.tag || '').toLowerCase();
+      const matches = vendors.filter(v =>
+        (v.tags || []).some(t => t.toLowerCase() === wanted) ||
+        (v.category || '').toLowerCase() === wanted
+      );
+      if (!matches.length) {
+        console.warn(`${urlPrefix}: skipping ${entry.slug} — no vendors with tag "${entry.tag}"`);
+        continue;
+      }
+
+      const grid = matches.map(v => `
+        <a href="/vendors/${v.slug}" class="vendor-card">
+          <div class="vendor-card-header">
+            ${renderLogo(v, 'vendor-logo-md')}
+            <div class="vendor-card-heading">
+              <h3 class="vendor-card-name">${v.title}</h3>
+              ${v.category ? `<span class="vendor-card-category">${v.category}</span>` : ''}
+            </div>
+          </div>
+          <p class="vendor-card-desc">${v.description || ''}</p>
+        </a>`).join('');
+
+      const bodyHtml = `
+        <section class="compare-hero">
+          <div class="container container-narrow">
+            <span class="compare-eyebrow">${entry.eyebrow || fallbackEyebrow}</span>
+            <h1 class="compare-title">${entry.title}</h1>
+            <p class="compare-desc">${entry.description || ''}</p>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container">
+            <div class="compare-body">${autoLinkVendors(entry.html, vendors)}</div>
+            <div class="vendor-grid">${grid}</div>
+          </div>
+        </section>`;
+
+      const page = render(baseTemplate, {
+        title: `${entry.title} — WeekCRM`,
+        description: entry.description || entry.title,
+        url: `https://weekcrm.com/${urlPrefix}/${entry.slug}`,
+        body: bodyHtml, bodyClass: '', assetVersion: cssHash
+      });
+
+      const outDir = path.join(DIST, urlPrefix, entry.slug);
+      ensureDir(outDir);
+      fs.writeFileSync(path.join(outDir, 'index.html'), page);
+
+      cards.push(`
+        <a href="/${urlPrefix}/${entry.slug}" class="card">
+          <h3 class="card-title">${entry.title}</h3>
+          <p class="card-excerpt">${entry.description || ''}</p>
+        </a>
+      `);
+    }
+    return cards;
+  };
+
+  const industryCards = renderProgrammatic(
+    readMarkdownFiles(path.join(CONTENT, 'industry')),
+    'industry',
+    'CRM by Industry'
+  );
+  if (industryCards.length) {
+    const indexBody = `
+      <section class="section">
+        <div class="container">
+          <h1>CRM by Industry</h1>
+          <p class="vendor-desc">CRMs grouped by the industries they serve best.</p>
+          <div class="card-grid">${industryCards.join('')}</div>
+        </div>
+      </section>`;
+    fs.writeFileSync(path.join(DIST, 'industry', 'index.html'), render(baseTemplate, {
+      title: 'CRM by Industry — WeekCRM',
+      description: 'Find the right CRM for your industry.',
+      url: 'https://weekcrm.com/industry',
+      body: indexBody, bodyClass: '', assetVersion: cssHash
+    }));
+  }
+
+  const integrationCards = renderProgrammatic(
+    readMarkdownFiles(path.join(CONTENT, 'integrations')),
+    'integrations',
+    'CRM Integrations'
+  );
+  if (integrationCards.length) {
+    const indexBody = `
+      <section class="section">
+        <div class="container">
+          <h1>CRM Integrations</h1>
+          <p class="vendor-desc">CRMs grouped by the tools they integrate with.</p>
+          <div class="card-grid">${integrationCards.join('')}</div>
+        </div>
+      </section>`;
+    fs.writeFileSync(path.join(DIST, 'integrations', 'index.html'), render(baseTemplate, {
+      title: 'CRM Integrations — WeekCRM',
+      description: 'Find the right CRM for your stack.',
+      url: 'https://weekcrm.com/integrations',
+      body: indexBody, bodyClass: '', assetVersion: cssHash
+    }));
   }
 
   // ── RSS Feed ────────────────────────────────────────

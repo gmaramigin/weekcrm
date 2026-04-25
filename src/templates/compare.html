@@ -1,0 +1,66 @@
+<script type="application/ld+json">{{jsonLd}}</script>
+<section class="compare-hero">
+  <div class="container container-narrow">
+    <span class="compare-eyebrow">CRM Comparison</span>
+    <h1 class="compare-title">{{title}}</h1>
+    <p class="compare-desc">{{description}}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container-narrow">
+    <div class="compare-versus">
+      <a href="/vendors/{{slugA}}" class="compare-card">
+        {{logoA}}
+        <div class="compare-card-body">
+          <h2>{{titleA}}</h2>
+          <p>{{descA}}</p>
+          <div class="compare-meta-row">
+            <span class="compare-meta-label">Pricing</span>
+            <span class="compare-meta-value">{{pricingA}}</span>
+          </div>
+          <div class="compare-meta-row">
+            <span class="compare-meta-label">Our rating</span>
+            <span class="compare-meta-value">{{ratingA}}/5</span>
+          </div>
+        </div>
+        <a href="{{ctaUrlA}}" target="_blank" rel="{{ctaRelA}}" class="btn btn-primary btn-full">{{ctaLabelA}}</a>
+      </a>
+      <span class="compare-vs">vs</span>
+      <a href="/vendors/{{slugB}}" class="compare-card">
+        {{logoB}}
+        <div class="compare-card-body">
+          <h2>{{titleB}}</h2>
+          <p>{{descB}}</p>
+          <div class="compare-meta-row">
+            <span class="compare-meta-label">Pricing</span>
+            <span class="compare-meta-value">{{pricingB}}</span>
+          </div>
+          <div class="compare-meta-row">
+            <span class="compare-meta-label">Our rating</span>
+            <span class="compare-meta-value">{{ratingB}}/5</span>
+          </div>
+        </div>
+        <a href="{{ctaUrlB}}" target="_blank" rel="{{ctaRelB}}" class="btn btn-primary btn-full">{{ctaLabelB}}</a>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container-narrow">
+    <div class="compare-body">
+      {{content}}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container container-narrow">
+    <h2>Try them yourself</h2>
+    <div class="compare-cta-row">
+      <a href="{{ctaUrlA}}" target="_blank" rel="{{ctaRelA}}" class="btn btn-primary">{{ctaLabelA}}</a>
+      <a href="{{ctaUrlB}}" target="_blank" rel="{{ctaRelB}}" class="btn btn-primary">{{ctaLabelB}}</a>
+    </div>
+  </div>
+</section>

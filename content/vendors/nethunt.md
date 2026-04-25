@@ -5,6 +5,7 @@ description: >-
   Workspace, letting teams manage contacts, pipelines, and email outreach
   without leaving their inbox.
 website: 'https://nethunt.com'
+referralUrl: 'https://nethunt.com?fpr=yza9g1'
 category: CRM
 pricing: 'From $30/user/mo (billed annually)'
 rating: '4.4'

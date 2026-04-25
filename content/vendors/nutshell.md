@@ -5,6 +5,7 @@ description: >-
   sales teams that want powerful automation, reporting, and outreach without
   enterprise-level complexity or pricing.
 website: 'https://www.nutshell.com'
+referralUrl: 'https://try.nutshell.com/2qydwwzxykkv-gf9b28'
 category: CRM
 pricing: 'From $13/user/mo (Foundation); Pro from $42/user/mo'
 rating: '4.3'
