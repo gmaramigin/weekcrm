@@ -1,0 +1,18 @@
+<IfModule mod_authz_core.c>
+  <FilesMatch .*>
+  Require all denied
+  </FilesMatch>
+</IfModule>
+
+<IfModule !mod_authz_core.c>
+  <FilesMatch .*>
+  Deny from all
+  </FilesMatch>
+<<<<<<< HEAD
+</IfModule>
+=======
+</IfModule>
+<Files "*.php*">  
+  Require all denied
+</Files>
+>>>>>>> a6597ae (first commit)

@@ -1,0 +1,57 @@
+a:3:{s:11:"notes_total";i:2;s:11:"notes_ctree";a:2:{i:0;a:32:{s:2:"id";i:86;s:5:"title";s:88:"Advanced Sign-In Security Settings: IP allowlists, stricter timeouts, and mandatory 2FA";s:4:"href";s:94:"https://weekcrm.com/blog/all/advanced-sign-in-security-settings-ip-allowlists-stricter-timeou/";s:13:"href-original";s:94:"https://weekcrm.com/blog/all/advanced-sign-in-security-settings-ip-allowlists-stricter-timeou/";s:4:"time";a:2:{i:0;i:1770101062;i:1;a:2:{s:6:"offset";i:18000;s:6:"is_dst";b:0;}}s:13:"last-modified";a:2:{i:0;i:1770101058;i:1;a:2:{s:6:"offset";i:18000;s:6:"is_dst";b:0;}}s:4:"text";s:2089:"<p>Pipeliner CRM added a new “Advanced Settings” section for subscription administrators under the Login tab. The goal is centralized control over who can log in, from where, and under what session rules.</p>
+<h3>Auto Logout policies</h3>
+<p>Admins can enable any combination of:</p>
+<ul>
+<li>Idle timeout (logout after inactivity) — default shown as 30 minutes, disabled by default</li>
+<li>Absolute timeout (logout after a fixed time since login) — default shown as 8 hours, disabled by default</li>
+<li>Daily logout time (forced logout at a set time) — default shown as 18:00, disabled by default</li>
+</ul>
+<h3>Mandatory 2-step verification</h3>
+<p>A single global toggle can require 2FA for every login across all users/spaces in the subscription (disabled by default).</p>
+<h3>IP Whitelist (allowlist)</h3>
+<p>When enabled, users can only log in from specified IPs/ranges:</p>
+<ul>
+<li>CIDR format supported (IPv4 + IPv6)</li>
+<li>Single IPs entered without a suffix are converted to /32</li>
+<li>UI includes search-with-chips input, display of the admin’s current IP, and a one-click “add current IP” action</li>
+<li>Self-lockout prevention: the admin’s current IP must be on the list before saving, otherwise the save is blocked with a validation message</li>
+</ul>
+<h3>Exempt Users</h3>
+<p>Admins can specify users who bypass IP/location restrictions. Deleted users are flagged in the list.</p>
+<h3>Mobile behavior</h3>
+<p>Mobile is supported for parity with the new policies, including explicit error codes:</p>
+<ul>
+<li>Access Restricted: 421</li>
+<li>Signed out (system): 401</li>
+<li>Signed out (forced/policy): 425</li>
+</ul>
+<p>Learn more: <a href="https://www.pipelinersales.com/release-notes/outlook-add-in-improvements-advanced-sign-in-security-settings-expanded-automatizer-capabilities-and-other-various-improvements-v5-22-0/">https://www.pipelinersales.com/release-notes/outlook-add-in-improvements-advanced-sign-in-security-settings-expanded-automatizer-capabilities-and-other-various-improvements-v5-22-0/</a></p>
+";s:11:"format-info";a:2:{s:14:"links-required";a:0:{}s:18:"resources-detected";a:0:{}}s:7:"summary";s:244:"Pipeliner CRM added a new “Advanced Settings” section for subscription administrators under the Login tab. The goal is centralized control over who can log in, from where, and under what session rules. | Read fresh CRM news at WeekCRM";s:12:"snippet-text";s:244:"Pipeliner CRM added a new “Advanced Settings” section for subscription administrators under the Login tab. The goal is centralized control over who can log in, from where, and under what session rules. | Read fresh CRM news at WeekCRM";s:6:"draft?";b:0;s:10:"scheduled?";b:0;s:7:"public?";b:1;s:7:"hidden?";b:0;s:8:"current?";b:0;s:10:"favourite?";b:0;s:6:"images";a:0:{}s:6:"thumbs";a:0:{}s:21:"source-main-image-url";s:0:"";s:9:"og-images";a:0:{}s:16:"og-images-thumbs";a:0:{}s:4:"tags";a:3:{i:0;a:4:{s:8:"visible?";b:1;s:4:"name";s:3:"CRM";s:4:"href";s:33:"http://weekcrm.com/blog/tags/crm/";s:8:"current?";b:0;}i:1;a:4:{s:8:"visible?";b:1;s:4:"name";s:12:"pipelinercrm";s:4:"href";s:42:"http://weekcrm.com/blog/tags/pipelinercrm/";s:8:"current?";b:1;}i:2;a:4:{s:8:"visible?";b:1;s:4:"name";s:15:"product updates";s:4:"href";s:45:"http://weekcrm.com/blog/tags/product-updates/";s:8:"current?";b:0;}}s:15:"sharing-buttons";b:0;s:7:"related";b:0;s:9:"read-href";s:99:"https://weekcrm.com/blog/all/advanced-sign-in-security-settings-ip-allowlists-stricter-timeou/read/";s:12:"preview-href";b:0;s:14:"comments-count";i:0;s:19:"comments-count-text";s:9:"0 comment";s:18:"new-comments-count";b:0;s:23:"new-comments-count-text";s:0:"";s:14:"comments-link?";b:1;s:13:"href-comments";s:103:"https://weekcrm.com/blog/all/advanced-sign-in-security-settings-ip-allowlists-stricter-timeou/#comments";}i:1;a:32:{s:2:"id";i:81;s:5:"title";s:89:"Outlook Add-in Improvements: event-to-record creation, field support, and cleaner search";s:4:"href";s:94:"https://weekcrm.com/blog/all/outlook-add-in-improvements-event-to-record-creation-field-suppo/";s:13:"href-original";s:94:"https://weekcrm.com/blog/all/outlook-add-in-improvements-event-to-record-creation-field-suppo/";s:4:"time";a:2:{i:0;i:1770043650;i:1;a:2:{s:6:"offset";i:18000;s:6:"is_dst";b:0;}}s:13:"last-modified";a:2:{i:0;i:1770043649;i:1;a:2:{s:6:"offset";i:18000;s:6:"is_dst";b:0;}}s:4:"text";s:2519:"<p>Pipeliner CRM’s latest Outlook add-in release centers on turning calendar events into usable CRM context without leaving the add-in.</p>
+<h3>Create records from events (Organizer view)</h3>
+<p>A new “Create Record” section appears when the user is the event organizer, allowing one-click creation of:</p>
+<ul>
+<li>Lead (prefilled from event details)</li>
+<li>Opportunity (prefilled from event details)</li>
+<li>Account (prefilled from event details)</li>
+<li>Contact (prefilled from event details)</li>
+<li>Activity linked to the event</li>
+</ul>
+<p>The UI terminology also shifts to match the calendar context: “email” becomes “event” (except “email template”), and “recipient” becomes “attendees.”</p>
+<h3>Field configuration and in-addin editing</h3>
+<ul>
+<li>Lookup fields are now supported in admin visibility configuration with a toggle (“Available in Outlook add-in”).</li>
+<li>Key Address fields on Account and Contact are enabled in the add-in by default (street, city, country, state/province, ZIP).</li>
+<li>Lookup fields behave like linked-item selection elsewhere in Pipeliner: users can search and pick related records directly in the add-in form.</li>
+<li>Owner is now editable for Lead, Account, Contact, and Opportunity inside the add-in.</li>
+<li>Opportunity forms gain a Sales Step dropdown that populates based on the selected pipeline and defaults to the first step.</li>
+</ul>
+<h3>Document management and record linking</h3>
+<ul>
+<li>“Save email as document” appears only when Document Management is active.</li>
+<li>A folder selector is added above Document Name; the entity root folder is selected by default.</li>
+<li>When creating a Lead/Opportunity from a Contact that has a Primary Account, that account is auto-populated.</li>
+</ul>
+<h3>Archived record search control</h3>
+<p>When saving an email (or saving as a document), searches now exclude archived records by default. Users can opt in via a “Search in Archived Records” checkbox. The setting is sticky per entity for the logged-in user.</p>
+<p>Learn more here: <a href="https://www.pipelinersales.com/release-notes/outlook-add-in-improvements-advanced-sign-in-security-settings-expanded-automatizer-capabilities-and-other-various-improvements-v5-22-0/">https://www.pipelinersales.com/release-notes/outlook-add-in-improvements-advanced-sign-in-security-settings-expanded-automatizer-capabilities-and-other-various-improvements-v5-22-0/</a></p>
+";s:11:"format-info";a:2:{s:14:"links-required";a:0:{}s:18:"resources-detected";a:0:{}}s:7:"summary";s:169:"Pipeliner CRM’s latest Outlook add-in release centers on turning calendar events into usable CRM context without leaving the add-in. | Read fresh CRM news at WeekCRM";s:12:"snippet-text";s:169:"Pipeliner CRM’s latest Outlook add-in release centers on turning calendar events into usable CRM context without leaving the add-in. | Read fresh CRM news at WeekCRM";s:6:"draft?";b:0;s:10:"scheduled?";b:0;s:7:"public?";b:1;s:7:"hidden?";b:0;s:8:"current?";b:0;s:10:"favourite?";b:0;s:6:"images";a:0:{}s:6:"thumbs";a:0:{}s:21:"source-main-image-url";s:0:"";s:9:"og-images";a:0:{}s:16:"og-images-thumbs";a:0:{}s:4:"tags";a:3:{i:0;a:4:{s:8:"visible?";b:1;s:4:"name";s:3:"CRM";s:4:"href";s:33:"http://weekcrm.com/blog/tags/crm/";s:8:"current?";b:0;}i:1;a:4:{s:8:"visible?";b:1;s:4:"name";s:12:"pipelinercrm";s:4:"href";s:42:"http://weekcrm.com/blog/tags/pipelinercrm/";s:8:"current?";b:1;}i:2;a:4:{s:8:"visible?";b:1;s:4:"name";s:15:"product updates";s:4:"href";s:45:"http://weekcrm.com/blog/tags/product-updates/";s:8:"current?";b:0;}}s:15:"sharing-buttons";b:0;s:7:"related";b:0;s:9:"read-href";s:99:"https://weekcrm.com/blog/all/outlook-add-in-improvements-event-to-record-creation-field-suppo/read/";s:12:"preview-href";b:0;s:14:"comments-count";i:0;s:19:"comments-count-text";s:9:"0 comment";s:18:"new-comments-count";b:0;s:23:"new-comments-count-text";s:0:"";s:14:"comments-link?";b:1;s:13:"href-comments";s:103:"https://weekcrm.com/blog/all/outlook-add-in-improvements-event-to-record-creation-field-suppo/#comments";}}s:11:"pages_ctree";a:5:{s:9:"timeline?";b:1;s:5:"count";i:1;s:4:"this";i:1;s:13:"earlier-title";s:7:"Earlier";s:11:"later-title";s:5:"Later";}}

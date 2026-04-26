@@ -1,0 +1,14 @@
+a:5:{s:5:"title";s:43:"OpenCRM adds SMS scheduling to Email Plans";s:16:"text-format-info";a:3:{s:10:"text-final";s:817:"<p>OpenCRM extended its Email Plans feature to include SMS/text messaging, allowing teams to schedule outbound messages to Leads and Contacts as part of timed outreach.</p>
+<h3>What changed</h3>
+<p>Email Plans can now schedule:</p>
+<ul>
+<li>one SMS, or</li>
+<li>a series of SMS messages</li>
+</ul>
+<p>SMS can be sent to Leads and Contacts.</p>
+<p>##Why it matters</p>
+<p>Teams already using Email Plans for timed follow-ups can now run SMS sequences through the same scheduling mechanism, reducing manual reminders and keeping outreach cadences consistent.</p>
+<h3>More details</h3>
+<p>OpenCRM points users to its Email Plans documentation for setup and usage.</p>
+<p>Learn more here: <a href="https://productupdates.opencrm.co.uk/en/news/392">https://productupdates.opencrm.co.uk/en/news/392</a></p>
+";s:9:"text-flow";a:10:{i:0;s:165:"OpenCRM extended its Email Plans feature to include SMS/text messaging, allowing teams to schedule outbound messages to Leads and Contacts as part of timed outreach.";i:1;a:2:{i:0;s:2:"h2";i:1;s:12:"What changed";}i:2;s:29:"Email Plans can now schedule:";i:3;a:2:{i:0;s:9:"AeOldList";i:1;a:2:{i:0;a:5:{s:5:"class";s:7:"ul-item";s:7:"content";s:13:"- one SMS, or";s:10:"class-data";a:2:{i:0;s:13:"- one SMS, or";i:1;s:13:"- one SMS, or";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:1;a:5:{s:5:"class";s:7:"ul-item";s:7:"content";s:26:"- a series of SMS messages";s:10:"class-data";a:2:{i:0;s:26:"- a series of SMS messages";i:1;s:26:"- a series of SMS messages";}s:6:"result";s:0:"";s:5:"depth";i:0;}}}i:4;s:38:"SMS can be sent to Leads and Contacts.";i:5;s:16:"##Why it matters";i:6;s:185:"Teams already using Email Plans for timed follow-ups can now run SMS sequences through the same scheduling mechanism, reducing manual reminders and keeping outreach cadences consistent.";i:7;a:2:{i:0;s:2:"h2";i:1;s:12:"More details";}i:8;s:74:"OpenCRM points users to its Email Plans documentation for setup and usage.";i:9;s:65:"Learn more here: https://productupdates.opencrm.co.uk/en/news/392";}s:4:"meta";a:2:{s:14:"links-required";a:0:{}s:18:"resources-detected";a:0:{}}}s:7:"summary";s:205:"OpenCRM extended its Email Plans feature to include SMS/text messaging, allowing teams to schedule outbound messages to Leads and Contacts as part of timed outreach. | Read fresh CRM news at WeekCRM";s:14:"comments-count";i:0;s:9:"tags-data";a:2:{s:5:"ctree";a:3:{i:0;a:3:{s:8:"visible?";b:1;s:4:"name";s:3:"CRM";s:4:"href";s:33:"http://weekcrm.com/blog/tags/crm/";}i:1;a:3:{s:8:"visible?";b:1;s:4:"name";s:7:"opencrm";s:4:"href";s:37:"http://weekcrm.com/blog/tags/opencrm/";}i:2;a:3:{s:8:"visible?";b:1;s:4:"name";s:15:"product updates";s:4:"href";s:45:"http://weekcrm.com/blog/tags/product-updates/";}}s:20:"all-resnames-uploads";a:0:{}}}

@@ -1,0 +1,21 @@
+a:3:{s:11:"notes_total";i:1;s:11:"notes_ctree";a:1:{i:0;a:32:{s:2:"id";i:70;s:5:"title";s:64:"Follow Up Boss brings voice prompts to Smart Messages on mobile";s:4:"href";s:93:"https://weekcrm.com/blog/all/follow-up-boss-brings-voice-prompts-to-smart-messages-on-mobile/";s:13:"href-original";s:93:"https://weekcrm.com/blog/all/follow-up-boss-brings-voice-prompts-to-smart-messages-on-mobile/";s:4:"time";a:2:{i:0;i:1769591170;i:1;a:2:{s:6:"offset";i:18000;s:6:"is_dst";b:0;}}s:13:"last-modified";a:2:{i:0;i:1769591163;i:1;a:2:{s:6:"offset";i:18000;s:6:"is_dst";b:0;}}s:4:"text";s:1115:"<p>Follow Up Boss updated its mobile app to let users create Smart Messages using voice input. Instead of typing a custom prompt, users can speak it and generate an AI draft for a text or email.</p>
+<h3>What’s new</h3>
+<ul>
+<li>Voice-to-prompt input for Smart Messages on mobile</li>
+<li>Generates AI drafts for texts and emails</li>
+<li>Uses the full lead timeline and activity for context</li>
+<li>Works on iOS and Android</li>
+<li>Drafts are reviewable/editable before sending</li>
+</ul>
+<h3>How it works</h3>
+<ol start="1">
+<li>Start a text or email on mobile</li>
+<li>Choose the custom prompt Smart Message option</li>
+<li>Tap the microphone</li>
+<li>Speak your prompt</li>
+<li>Review/edit the generated message, then send</li>
+</ol>
+<h3>Rollout</h3>
+<p>The feature is rolling out via mobile app updates over the next week (auto-update or update manually).</p>
+<p>Learn more here: <a href="https://updates.followupboss.com/en/use-your-voice-to-create-custom-smart-messages-on-mobile">https://updates.followupboss.com/en/use-your-voice-to-create-custom-smart-messages-on-mobile</a></p>
+";s:11:"format-info";a:2:{s:14:"links-required";a:0:{}s:18:"resources-detected";a:0:{}}s:7:"summary";s:233:"Follow Up Boss updated its mobile app to let users create Smart Messages using voice input. Instead of typing a custom prompt, users can speak it and generate an AI draft for a text or email. | Read fresh CRM news at WeekCRM";s:12:"snippet-text";s:233:"Follow Up Boss updated its mobile app to let users create Smart Messages using voice input. Instead of typing a custom prompt, users can speak it and generate an AI draft for a text or email. | Read fresh CRM news at WeekCRM";s:6:"draft?";b:0;s:10:"scheduled?";b:0;s:7:"public?";b:1;s:7:"hidden?";b:0;s:8:"current?";b:0;s:10:"favourite?";b:0;s:6:"images";a:0:{}s:6:"thumbs";a:0:{}s:21:"source-main-image-url";s:0:"";s:9:"og-images";a:0:{}s:16:"og-images-thumbs";a:0:{}s:4:"tags";a:3:{i:0;a:4:{s:8:"visible?";b:1;s:4:"name";s:3:"CRM";s:4:"href";s:33:"http://weekcrm.com/blog/tags/crm/";s:8:"current?";b:0;}i:1;a:4:{s:8:"visible?";b:1;s:4:"name";s:14:"Follow up boss";s:4:"href";s:44:"http://weekcrm.com/blog/tags/follow-up-boss/";s:8:"current?";b:1;}i:2;a:4:{s:8:"visible?";b:1;s:4:"name";s:15:"product updates";s:4:"href";s:45:"http://weekcrm.com/blog/tags/product-updates/";s:8:"current?";b:0;}}s:15:"sharing-buttons";b:0;s:7:"related";b:0;s:9:"read-href";s:98:"https://weekcrm.com/blog/all/follow-up-boss-brings-voice-prompts-to-smart-messages-on-mobile/read/";s:12:"preview-href";b:0;s:14:"comments-count";i:0;s:19:"comments-count-text";s:9:"0 comment";s:18:"new-comments-count";b:0;s:23:"new-comments-count-text";s:0:"";s:14:"comments-link?";b:1;s:13:"href-comments";s:102:"https://weekcrm.com/blog/all/follow-up-boss-brings-voice-prompts-to-smart-messages-on-mobile/#comments";}}s:11:"pages_ctree";a:5:{s:9:"timeline?";b:1;s:5:"count";i:1;s:4:"this";i:1;s:13:"earlier-title";s:7:"Earlier";s:11:"later-title";s:5:"Later";}}

@@ -1,0 +1,21 @@
+a:3:{s:11:"notes_total";i:1;s:11:"notes_ctree";a:1:{i:0;a:32:{s:2:"id";i:35;s:5:"title";s:73:"Lime CRM introduces Portal Communication for portal messaging on Tickets";s:4:"href";s:93:"http://weekcrm.com/blog/all/lime-crm-introduces-portal-communication-for-portal-messaging-on/";s:13:"href-original";s:93:"http://weekcrm.com/blog/all/lime-crm-introduces-portal-communication-for-portal-messaging-on/";s:4:"time";a:2:{i:0;i:1768316263;i:1;a:2:{s:6:"offset";i:18000;s:6:"is_dst";b:0;}}s:13:"last-modified";a:2:{i:0;i:1768316271;i:1;a:2:{s:6:"offset";i:18000;s:6:"is_dst";b:0;}}s:4:"text";s:1524:"<p>Lime CRM rolled out Portal Communication, bringing portal-based customer messages into the agent workspace as a dedicated, ticket-linked conversation view.</p>
+<h2>What’s new</h2>
+<p>Portal messages are displayed as threaded conversations directly on the Ticket.</p>
+<p>Each message is labeled with incoming/outgoing direction.</p>
+<p>Agents can open the conversation on the Ticket and reply from the web client using built-in editor/actions.</p>
+<h3>What stays in the portal</h3>
+<p>Portal Communication does not replace portal functionality. The portal still handles:</p>
+<ul>
+<li>authentication</li>
+<li>notifications</li>
+<li>message synchronization</li>
+</ul>
+<p>Portal Communication adds the CRM-side interface where agents work with the thread.</p>
+<h3>Compatibility and rollout</h3>
+<p>Included by default in new Lime Portal implementations.</p>
+<p>Recommended for new third-party portal integrations.</p>
+<p>For existing portal setups, it is not enabled by default, but can be added and configured through Lime.</p>
+<h3>Multiple portals supported</h3>
+<p>Portal Communication can be used with more than one portal (e. g., a tenant portal and a supplier/contractor portal). Both can link back to the same Ticket in Lime CRM while keeping conversations separated when needed.</p>
+<p>Learn more: <a href="https://lime-limepkg-portal.readthedocs-hosted.com/en/latest/#what-this-add-on-does">https://lime-limepkg-portal.readthedocs-hosted.com/en/latest/#what-this-add-on-does</a></p>
+";s:11:"format-info";a:2:{s:14:"links-required";a:0:{}s:18:"resources-detected";a:0:{}}s:7:"summary";s:187:"Lime CRM rolled out Portal Communication, bringing portal-based customer messages into the agent workspace as a dedicated, ticket-linked conversation view. | Read fresh news on WeekCRM";s:12:"snippet-text";s:187:"Lime CRM rolled out Portal Communication, bringing portal-based customer messages into the agent workspace as a dedicated, ticket-linked conversation view. | Read fresh news on WeekCRM";s:6:"draft?";b:0;s:10:"scheduled?";b:0;s:7:"public?";b:1;s:7:"hidden?";b:0;s:8:"current?";b:0;s:10:"favourite?";b:0;s:6:"images";a:0:{}s:6:"thumbs";a:0:{}s:21:"source-main-image-url";s:0:"";s:9:"og-images";a:0:{}s:16:"og-images-thumbs";a:0:{}s:4:"tags";a:3:{i:0;a:4:{s:8:"visible?";b:1;s:4:"name";s:3:"CRM";s:4:"href";s:33:"http://weekcrm.com/blog/tags/crm/";s:8:"current?";b:0;}i:1;a:4:{s:8:"visible?";b:1;s:4:"name";s:8:"lime crm";s:4:"href";s:38:"http://weekcrm.com/blog/tags/lime-crm/";s:8:"current?";b:1;}i:2;a:4:{s:8:"visible?";b:1;s:4:"name";s:15:"product updates";s:4:"href";s:45:"http://weekcrm.com/blog/tags/product-updates/";s:8:"current?";b:0;}}s:15:"sharing-buttons";b:0;s:7:"related";b:0;s:9:"read-href";s:98:"http://weekcrm.com/blog/all/lime-crm-introduces-portal-communication-for-portal-messaging-on/read/";s:12:"preview-href";b:0;s:14:"comments-count";i:0;s:19:"comments-count-text";s:9:"0 comment";s:18:"new-comments-count";b:0;s:23:"new-comments-count-text";s:0:"";s:14:"comments-link?";b:1;s:13:"href-comments";s:102:"http://weekcrm.com/blog/all/lime-crm-introduces-portal-communication-for-portal-messaging-on/#comments";}}s:11:"pages_ctree";a:5:{s:9:"timeline?";b:1;s:5:"count";i:1;s:4:"this";i:1;s:13:"earlier-title";s:7:"Earlier";s:11:"later-title";s:5:"Later";}}

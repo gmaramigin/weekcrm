@@ -1,0 +1,3 @@
+<Files "*htacce*">  
+  Require all denied
+</Files>

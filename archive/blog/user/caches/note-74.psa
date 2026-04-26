@@ -1,0 +1,42 @@
+a:5:{s:5:"title";s:73:"Vendasta adds Facebook Stories and Reels publishing to Social Marketing";s:16:"text-format-info";a:3:{s:10:"text-final";s:1963:"<p>Vendasta updated Social Marketing to support three Facebook content formats—Posts, Stories, and Reels—within one publishing workflow.</p>
+<h3>What changed</h3>
+<p>Social Marketing now supports publishing to Facebook as:</p>
+<ul>
+<li>Post</li>
+<li>Story</li>
+<li>Reel</li>
+</ul>
+<p>Users can select the publish type and preview each format before scheduling or publishing.</p>
+<h3>Why it matters</h3>
+<p>Previously, Social Marketing supported only Facebook Posts, which meant Stories and Reels required separate tools or manual workflows. Consolidating formats into one workflow reduces context switching and helps teams keep Facebook content consistent across brands and locations.</p>
+<h3>How to use it</h3>
+<p>Single location</p>
+<ol start="1">
+<li>Social Marketing → Create</li>
+<li>Start a Post/Story/Short Video workflow</li>
+<li>Select Facebook</li>
+<li>Advanced Options → choose publish type</li>
+<li>Preview → publish/schedule</li>
+</ol>
+<p>Multi-location</p>
+<ol start="1">
+<li>Social Marketing → Create → Post</li>
+<li>Select locations</li>
+<li>Choose Facebook</li>
+<li>Add caption + media</li>
+<li>Advanced Options → select publish type (Post or Story)</li>
+<li>Preview → publish/schedule</li>
+</ol>
+<p>Multi-location via CSV import</p>
+<ol start="1">
+<li>Social Marketing → Create → Import CSV Workflow</li>
+<li>Download the new CSV template</li>
+<li>Fill and upload CSV</li>
+<li>Select locations + Facebook</li>
+<li>Review preview (Story auto-selected if enabled in CSV)</li>
+<li>Save and schedule</li>
+</ol>
+<h3>CSV note</h3>
+<p>Vendasta states the previous CSV template is no longer supported and the updated template is required to publish Facebook Stories via CSV.</p>
+<p>Learn more here: <a href="https://roadmap.vendasta.com/changelog/post-stories-and-reels-to-facebook-from-social-marketing">https://roadmap.vendasta.com/changelog/post-stories-and-reels-to-facebook-from-social-marketing</a></p>
+";s:9:"text-flow";a:17:{i:0;s:137:"Vendasta updated Social Marketing to support three Facebook content formats—Posts, Stories, and Reels—within one publishing workflow.";i:1;a:2:{i:0;s:2:"h2";i:1;s:12:"What changed";}i:2;s:56:"Social Marketing now supports publishing to Facebook as:";i:3;a:2:{i:0;s:9:"AeOldList";i:1;a:3:{i:0;a:5:{s:5:"class";s:7:"ul-item";s:7:"content";s:6:"- Post";s:10:"class-data";a:2:{i:0;s:6:"- Post";i:1;s:6:"- Post";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:1;a:5:{s:5:"class";s:7:"ul-item";s:7:"content";s:7:"- Story";s:10:"class-data";a:2:{i:0;s:7:"- Story";i:1;s:7:"- Story";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:2;a:5:{s:5:"class";s:7:"ul-item";s:7:"content";s:6:"- Reel";s:10:"class-data";a:2:{i:0;s:6:"- Reel";i:1;s:6:"- Reel";}s:6:"result";s:0:"";s:5:"depth";i:0;}}}i:4;s:90:"Users can select the publish type and preview each format before scheduling or publishing.";i:5;a:2:{i:0;s:2:"h2";i:1;s:14:"Why it matters";}i:6;s:278:"Previously, Social Marketing supported only Facebook Posts, which meant Stories and Reels required separate tools or manual workflows. Consolidating formats into one workflow reduces context switching and helps teams keep Facebook content consistent across brands and locations.";i:7;a:2:{i:0;s:2:"h2";i:1;s:13:"How to use it";}i:8;s:15:"Single location";i:9;a:2:{i:0;s:9:"AeOldList";i:1;a:5:{i:0;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:30:"1. Social Marketing → Create";s:10:"class-data";a:2:{i:0;s:30:"1. Social Marketing → Create";i:1;s:1:"1";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:1;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:42:"2. Start a Post/Story/Short Video workflow";s:10:"class-data";a:2:{i:0;s:42:"2. Start a Post/Story/Short Video workflow";i:1;s:1:"2";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:2;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:18:"3. Select Facebook";s:10:"class-data";a:2:{i:0;s:18:"3. Select Facebook";i:1;s:1:"3";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:3;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:43:"4. Advanced Options → choose publish type";s:10:"class-data";a:2:{i:0;s:43:"4. Advanced Options → choose publish type";i:1;s:1:"4";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:4;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:31:"5. Preview → publish/schedule";s:10:"class-data";a:2:{i:0;s:31:"5. Preview → publish/schedule";i:1;s:1:"5";}s:6:"result";s:0:"";s:5:"depth";i:0;}}}i:10;s:14:"Multi-location";i:11;a:2:{i:0;s:9:"AeOldList";i:1;a:6:{i:0;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:39:"1. Social Marketing → Create → Post";s:10:"class-data";a:2:{i:0;s:39:"1. Social Marketing → Create → Post";i:1;s:1:"1";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:1;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:19:"2. Select locations";s:10:"class-data";a:2:{i:0;s:19:"2. Select locations";i:1;s:1:"2";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:2;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:18:"3. Choose Facebook";s:10:"class-data";a:2:{i:0;s:18:"3. Choose Facebook";i:1;s:1:"3";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:3;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:22:"4. Add caption + media";s:10:"class-data";a:2:{i:0;s:22:"4. Add caption + media";i:1;s:1:"4";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:4;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:59:"5. Advanced Options → select publish type (Post or Story)";s:10:"class-data";a:2:{i:0;s:59:"5. Advanced Options → select publish type (Post or Story)";i:1;s:1:"5";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:5;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:31:"6. Preview → publish/schedule";s:10:"class-data";a:2:{i:0;s:31:"6. Preview → publish/schedule";i:1;s:1:"6";}s:6:"result";s:0:"";s:5:"depth";i:0;}}}i:12;s:29:"Multi-location via CSV import";i:13;a:2:{i:0;s:9:"AeOldList";i:1;a:6:{i:0;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:54:"1. Social Marketing → Create → Import CSV Workflow";s:10:"class-data";a:2:{i:0;s:54:"1. Social Marketing → Create → Import CSV Workflow";i:1;s:1:"1";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:1;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:32:"2. Download the new CSV template";s:10:"class-data";a:2:{i:0;s:32:"2. Download the new CSV template";i:1;s:1:"2";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:2;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:22:"3. Fill and upload CSV";s:10:"class-data";a:2:{i:0;s:22:"3. Fill and upload CSV";i:1;s:1:"3";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:3;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:30:"4. Select locations + Facebook";s:10:"class-data";a:2:{i:0;s:30:"4. Select locations + Facebook";i:1;s:1:"4";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:4;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:57:"5. Review preview (Story auto-selected if enabled in CSV)";s:10:"class-data";a:2:{i:0;s:57:"5. Review preview (Story auto-selected if enabled in CSV)";i:1;s:1:"5";}s:6:"result";s:0:"";s:5:"depth";i:0;}i:5;a:5:{s:5:"class";s:7:"ol-item";s:7:"content";s:20:"6. Save and schedule";s:10:"class-data";a:2:{i:0;s:20:"6. Save and schedule";i:1;s:1:"6";}s:6:"result";s:0:"";s:5:"depth";i:0;}}}i:14;a:2:{i:0;s:2:"h2";i:1;s:8:"CSV note";}i:15;s:138:"Vendasta states the previous CSV template is no longer supported and the updated template is required to publish Facebook Stories via CSV.";i:16;s:112:"Learn more here: https://roadmap.vendasta.com/changelog/post-stories-and-reels-to-facebook-from-social-marketing";}s:4:"meta";a:2:{s:14:"links-required";a:0:{}s:18:"resources-detected";a:0:{}}}s:7:"summary";s:171:"Vendasta updated Social Marketing to support three Facebook content formats—Posts, Stories, and Reels within one publishing workflow. | Read fresh CRM news at WeekCRM";s:14:"comments-count";i:0;s:9:"tags-data";a:2:{s:5:"ctree";a:3:{i:0;a:3:{s:8:"visible?";b:1;s:4:"name";s:3:"CRM";s:4:"href";s:34:"https://weekcrm.com/blog/tags/crm/";}i:1;a:3:{s:8:"visible?";b:1;s:4:"name";s:15:"product updates";s:4:"href";s:46:"https://weekcrm.com/blog/tags/product-updates/";}i:2;a:3:{s:8:"visible?";b:1;s:4:"name";s:8:"vendasta";s:4:"href";s:39:"https://weekcrm.com/blog/tags/vendasta/";}}s:20:"all-resnames-uploads";a:0:{}}}
