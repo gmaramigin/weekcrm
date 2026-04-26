@@ -29,30 +29,43 @@ weekcrm.com/
 ├── vercel.json              # Vercel deploy config (outputDirectory=dist)
 │
 ├── src/
-│   ├── templates/           # base, home, news, article, vendor, directory
+│   ├── templates/           # base, home, news, article, vendor, directory,
+│   │                        # compare, consultants, consultant
 │   ├── css/style.css        # Single stylesheet (cache-busted by hash)
 │   └── js/                  # Client JS copied to /assets
 │
 ├── content/
 │   ├── articles/*.md        # News items (frontmatter: title, date, tags, …)
-│   └── vendors/*.md         # Vendor profiles (title, category, logo, …)
+│   ├── vendors/*.md         # Vendor profiles (title, category, logo, …)
+│   ├── consultants/*.md     # Consultant/expert profiles
+│   ├── compare/*.md         # `<a>-vs-<b>.md` head-to-head comparisons
+│   ├── best/*.md            # "Best CRM for X" listicles
+│   ├── industry/*.md        # Programmatic /industry/<slug> landing pages
+│   └── integrations/*.md    # Programmatic /integrations/<slug> landing pages
 │
 ├── public/                  # Static assets copied verbatim to dist/
 │   └── logos/               # Vendor logos, auto-resolved by slug
 │
-├── dist/                    # Build output (Vercel serves this)
+├── dist/                    # Build output — Vercel serves this. Contains
+│                            # sitemap.xml, robots.txt, rss.xml.
 │
 ├── scripts/news-pipeline/
 │   ├── run-daily.js         # Fetch → dedupe → rewrite → draft in Notion
 │   ├── publish-approved.js  # Approved rows → content/articles/*.md + git push
 │   ├── rewrite.js           # Claude journalism-style rewrite
 │   ├── notion.js            # Vendors/News DB client
-│   ├── fetchers/            # rss, scrape, sitemap
+│   ├── fetchers/            # rss (live), scrape (live), sitemap (live)
 │   ├── config.js
 │   ├── discover-feeds.js    # Utility: find RSS feeds for a vendor
 │   ├── dedupe-vendors.js    # Utility: clean up Vendor DB dupes
+│   ├── dump-vendors.js      # Utility: dump vendor list to JSON
+│   ├── sync-vendors-from-notion.js  # Pull Notion Vendors DB → content/vendors/
 │   ├── seed-news-db.js      # One-shot: provision Notion News DB schema
-│   └── seed-vendor-sources.js
+│   ├── seed-vendor-sources.js
+│   └── push.sh              # Convenience wrapper for build + commit + push
+│
+├── archive/                 # v1 site cruft (HTML, JS, CSS, blog/, crms/, …)
+│                            # Kept for reference — NOT used by build.js.
 │
 ├── drafts/                  # Local dry-run output (gitignored)
 │
@@ -72,7 +85,10 @@ Plain Node, no framework. `build.js` does it all:
    substitute `{{vars}}` and wrap with `base.html`.
 5. Per-vendor pages auto-link related articles by tag match on vendor slug
    or title.
-6. Emit `rss.xml` with the 20 most-recent articles.
+6. Emit `rss.xml` (20 most-recent articles), `sitemap.xml` (all routes),
+   and `robots.txt`.
+7. Throw if `content/compare/*.md` or `content/best/*.md` reference a
+   vendor slug that doesn't exist in `content/vendors/`.
 
 Vendor logos: `renderLogo()` looks for `public/logos/<slug>.{svg,webp,png,…}`
 and falls back to a deterministic-color monogram tile.
@@ -138,35 +154,38 @@ daily cron on macOS. Not installed yet.
 ## What's working
 
 - Static site generator: builds homepage, `/news` feed, article pages,
-  vendor directory and detail pages, RSS feed. Verified — `dist/` exists and
-  is deployed on Vercel.
-- 8 vendor profiles and 6 seeded articles live in `content/`.
-- News pipeline scaffolding committed (phase 1): fetch → rewrite → draft.
+  vendor directory and detail pages, comparison pages (`/compare/`),
+  best-of listicles (`/best/`), industry/integrations programmatic pages,
+  consultants directory, `rss.xml`, `sitemap.xml`, `robots.txt`. Verified —
+  `dist/` exists and is deployed on Vercel.
+- 160 vendor profiles, 29 consultant profiles, 26 articles, 3 comparison
+  pages, 1 best-of listicle, 6 industry pages, several integration pages
+  live in `content/`.
+- News pipeline: `fetchers/rss.js`, `fetchers/scrape.js` (~280 lines, real
+  implementation), `fetchers/sitemap.js` (~100 lines, real). `run-daily.js`,
+  `publish-approved.js`, `rewrite.js`, `notion.js` all wired up.
 - Dry-run path (`news:dry`) for validating the rewrite prompt offline.
-- Notion client, RSS fetcher, Claude rewrite prompt.
-- `publish-approved.js` exists for the approved → website path.
+- `publish-approved.js` end-to-end: approved → markdown → build → git push.
 - Vendor logos resolved automatically from `public/logos/<slug>.<ext>`.
+- JSON-LD schema on every vendor (`Product` + `AggregateRating` + `Review`),
+  every comparison page (`Article`), every listicle (`ItemList`).
+- Sitemap.xml is auto-generated (~237 URLs) and linked from robots.txt.
+- Build-time validation: comparison pages and listicles **throw** if a
+  referenced vendor slug isn't in `content/vendors/`.
+- Legacy v1 cruft moved to `archive/` — repo root is now clean.
 
 ## What's not working / incomplete
 
-- **Phase 1 only**: `scrape`, `x`, `linkedin`, `newsletter` source types log
-  a warning and skip. Only `rss` actually fetches. `fetchers/scrape.js` and
-  `fetchers/sitemap.js` are stubs.
+- **Phase 1 fetchers**: `rss` and `scrape` are real. `x`, `linkedin`, and
+  `newsletter` source types still log a warning and skip.
 - **Notion schema is manual**. `seed-news-db.js` exists but hasn't been
   verified end-to-end against a fresh workspace.
 - **No full production run has been done yet** — nothing has moved through
   the Notion → approved → published path in anger. The Notion DB IDs in
   `.env.local` need to be filled in.
-- **Legacy HTML sprawl at repo root** — `attio.html`, `breakcold.html`,
-  `close.html`, `folk.html`, `freshdesk.html`, `monday.html`, `index.html`,
-  `faq.html`, `newsletter.html`, `product.html`, `fitness.html`,
-  `app.js`, `blog.js`, `crm-detail.js`, `crm-directory.js`, `styles.css`,
-  `crms/`, `blog/` (a PHP CMS?), `images/`, `logos/` — these are from the
-  v1 site and are **not** used by `build.js`. They should either be deleted
-  or moved into an `archive/` folder. Right now they pollute `git status`
-  and make the repo confusing.
+- **Affiliate coverage is sparse** — only ~15 of 160 vendors have a
+  `referralUrl`. Target is 60%+. See "Loop 3 — Monetize" below.
 - **No tests**, no CI, no linting.
-- **No sitemap.xml**, no `robots.txt` emitted by the build. Only `rss.xml`.
 - **No analytics wired up** (beyond the apitiny ad script in recent
   commits).
 - **Search** — there's no search on the directory or news pages.
@@ -195,9 +214,8 @@ daily cron on macOS. Not installed yet.
 
 ### Site
 
-- Legacy root-level HTML and JS deleted (or moved to `archive/`) so the
-  repo only contains the current build system.
-- Sitemap + robots.txt emitted by `build.js`.
+- ~~Legacy root-level HTML and JS deleted (or moved to `archive/`).~~ ✅ Done.
+- ~~Sitemap + robots.txt emitted by `build.js`.~~ ✅ Done.
 - Client-side filtering and search on the directory page.
 - OG images per article (can be a simple template-rendered SVG→PNG).
 - Vendor pages show the last ~5 news items automatically, not just those

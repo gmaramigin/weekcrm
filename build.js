@@ -202,6 +202,8 @@ function vendorJsonLd(vendor) {
 }
 
 // ── Build ───────────────────────────────────────────────
+const SITE_URL = 'https://weekcrm.com';
+
 function build() {
   const start = Date.now();
   console.log('Building WeekCRM...');
@@ -209,6 +211,21 @@ function build() {
   // Clean & prepare
   if (fs.existsSync(DIST)) fs.rmSync(DIST, { recursive: true });
   ensureDir(DIST);
+
+  // Sitemap routes: { loc, lastmod (ISO date or null), changefreq, priority }
+  const routes = [];
+  const today = new Date().toISOString().slice(0, 10);
+  const toISODate = (d) => {
+    if (!d) return today;
+    if (d instanceof Date) return d.toISOString().slice(0, 10);
+    return String(d).slice(0, 10);
+  };
+  const addRoute = (loc, opts = {}) => routes.push({
+    loc: loc.startsWith('http') ? loc : `${SITE_URL}${loc}`,
+    lastmod: toISODate(opts.lastmod),
+    changefreq: opts.changefreq || 'weekly',
+    priority: opts.priority || '0.5'
+  });
 
   // Copy static assets
   copyDir(PUBLIC, DIST);
@@ -279,6 +296,7 @@ function build() {
     assetVersion: cssHash
   });
   fs.writeFileSync(path.join(DIST, 'index.html'), homePage);
+  addRoute('/', { changefreq: 'daily', priority: '1.0' });
 
   // ── News listing ────────────────────────────────────
   const allArticleCards = articles.map(a => `
@@ -303,6 +321,7 @@ function build() {
   });
   ensureDir(path.join(DIST, 'news'));
   fs.writeFileSync(path.join(DIST, 'news', 'index.html'), newsPage);
+  addRoute('/news', { changefreq: 'daily', priority: '0.9' });
 
   // ── Individual articles ─────────────────────────────
   for (const article of articles) {
@@ -329,6 +348,11 @@ function build() {
     const articleDir = path.join(DIST, 'news', article.slug);
     ensureDir(articleDir);
     fs.writeFileSync(path.join(articleDir, 'index.html'), page);
+    addRoute(`/news/${article.slug}`, {
+      lastmod: article.date,
+      changefreq: 'monthly',
+      priority: '0.7'
+    });
   }
 
   // ── Vendor directory ────────────────────────────────
@@ -360,6 +384,7 @@ function build() {
   });
   ensureDir(path.join(DIST, 'vendors'));
   fs.writeFileSync(path.join(DIST, 'vendors', 'index.html'), directoryPage);
+  addRoute('/vendors', { changefreq: 'weekly', priority: '0.9' });
 
   // ── Individual vendor pages ─────────────────────────
   for (const vendor of vendors) {
@@ -425,6 +450,7 @@ function build() {
     const vendorDir = path.join(DIST, 'vendors', vendor.slug);
     ensureDir(vendorDir);
     fs.writeFileSync(path.join(vendorDir, 'index.html'), page);
+    addRoute(`/vendors/${vendor.slug}`, { changefreq: 'monthly', priority: '0.8' });
   }
 
   // ── Consultants directory ───────────────────────────
@@ -473,6 +499,7 @@ function build() {
   });
   ensureDir(path.join(DIST, 'consultants'));
   fs.writeFileSync(path.join(DIST, 'consultants', 'index.html'), consultantsPage);
+  addRoute('/consultants', { changefreq: 'weekly', priority: '0.8' });
 
   // ── Individual consultant pages ─────────────────────
   for (const consultant of consultants) {
@@ -545,6 +572,7 @@ function build() {
     const consultantDir = path.join(DIST, 'consultants', consultant.slug);
     ensureDir(consultantDir);
     fs.writeFileSync(path.join(consultantDir, 'index.html'), page);
+    addRoute(`/consultants/${consultant.slug}`, { changefreq: 'monthly', priority: '0.6' });
   }
 
   // ── Comparison pages (/compare/<a>-vs-<b>) ──────────
@@ -558,8 +586,11 @@ function build() {
       const a = vendorBySlug[entry.a];
       const b = vendorBySlug[entry.b];
       if (!a || !b) {
-        console.warn(`compare: skipping ${entry.slug} — vendor "${entry.a}" or "${entry.b}" not found`);
-        continue;
+        const missing = [!a && entry.a, !b && entry.b].filter(Boolean).join(', ');
+        throw new Error(
+          `compare/${entry.slug}.md references unknown vendor slug(s): ${missing}. ` +
+          `Add the vendor to content/vendors/ or fix the frontmatter.`
+        );
       }
       const ctaForVendor = (v) => ({
         url: v.referralUrl || v.website || '#',
@@ -610,6 +641,11 @@ function build() {
       const outDir = path.join(DIST, 'compare', entry.slug);
       ensureDir(outDir);
       fs.writeFileSync(path.join(outDir, 'index.html'), page);
+      addRoute(`/compare/${entry.slug}`, {
+        lastmod: entry.date,
+        changefreq: 'monthly',
+        priority: '0.8'
+      });
 
       compareIndexCards.push(`
         <a href="/compare/${entry.slug}" class="card">
@@ -636,6 +672,7 @@ function build() {
       body: compareIndexBody, bodyClass: '', assetVersion: cssHash
     });
     fs.writeFileSync(path.join(DIST, 'compare', 'index.html'), compareIndex);
+    addRoute('/compare', { changefreq: 'weekly', priority: '0.7' });
   }
 
   // ── "Best CRM for X" listicles (/best/<slug>) ───────
@@ -644,12 +681,17 @@ function build() {
     ensureDir(path.join(DIST, 'best'));
     const bestIndexCards = [];
     for (const entry of bestEntries) {
-      const picks = (entry.vendors || [])
-        .map(slug => vendorBySlug[slug])
-        .filter(Boolean);
+      const declared = entry.vendors || [];
+      const missing = declared.filter(slug => !vendorBySlug[slug]);
+      if (missing.length) {
+        throw new Error(
+          `best/${entry.slug}.md references unknown vendor slug(s): ${missing.join(', ')}. ` +
+          `Add the vendor to content/vendors/ or fix the frontmatter.`
+        );
+      }
+      const picks = declared.map(slug => vendorBySlug[slug]);
       if (!picks.length) {
-        console.warn(`best: skipping ${entry.slug} — no valid vendor slugs`);
-        continue;
+        throw new Error(`best/${entry.slug}.md has an empty 'vendors' list — add at least one vendor slug.`);
       }
 
       const pickBlocks = picks.map((v, i) => {
@@ -711,6 +753,11 @@ function build() {
       const outDir = path.join(DIST, 'best', entry.slug);
       ensureDir(outDir);
       fs.writeFileSync(path.join(outDir, 'index.html'), page);
+      addRoute(`/best/${entry.slug}`, {
+        lastmod: entry.date,
+        changefreq: 'monthly',
+        priority: '0.8'
+      });
 
       bestIndexCards.push(`
         <a href="/best/${entry.slug}" class="card">
@@ -736,6 +783,7 @@ function build() {
       body: bestIndexBody, bodyClass: '', assetVersion: cssHash
     });
     fs.writeFileSync(path.join(DIST, 'best', 'index.html'), bestIndex);
+    addRoute('/best', { changefreq: 'weekly', priority: '0.7' });
   }
 
   // ── Programmatic landing pages (/industry/, /integrations/) ──────
@@ -793,6 +841,7 @@ function build() {
       const outDir = path.join(DIST, urlPrefix, entry.slug);
       ensureDir(outDir);
       fs.writeFileSync(path.join(outDir, 'index.html'), page);
+      addRoute(`/${urlPrefix}/${entry.slug}`, { changefreq: 'monthly', priority: '0.7' });
 
       cards.push(`
         <a href="/${urlPrefix}/${entry.slug}" class="card">
@@ -824,6 +873,7 @@ function build() {
       url: 'https://weekcrm.com/industry',
       body: indexBody, bodyClass: '', assetVersion: cssHash
     }));
+    addRoute('/industry', { changefreq: 'weekly', priority: '0.6' });
   }
 
   const integrationCards = renderProgrammatic(
@@ -846,6 +896,7 @@ function build() {
       url: 'https://weekcrm.com/integrations',
       body: indexBody, bodyClass: '', assetVersion: cssHash
     }));
+    addRoute('/integrations', { changefreq: 'weekly', priority: '0.6' });
   }
 
   // ── RSS Feed ────────────────────────────────────────
@@ -871,8 +922,33 @@ function build() {
 </rss>`;
   fs.writeFileSync(path.join(DIST, 'rss.xml'), rss);
 
+  // ── Sitemap & robots.txt ────────────────────────────
+  const seen = new Set();
+  const uniqueRoutes = routes.filter(r => {
+    if (seen.has(r.loc)) return false;
+    seen.add(r.loc);
+    return true;
+  });
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${uniqueRoutes.map(r => `  <url>
+    <loc>${r.loc}</loc>
+    <lastmod>${r.lastmod}</lastmod>
+    <changefreq>${r.changefreq}</changefreq>
+    <priority>${r.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+  fs.writeFileSync(path.join(DIST, 'sitemap.xml'), sitemap);
+
+  const robots = `User-agent: *
+Allow: /
+
+Sitemap: ${SITE_URL}/sitemap.xml
+`;
+  fs.writeFileSync(path.join(DIST, 'robots.txt'), robots);
+
   const elapsed = Date.now() - start;
-  console.log(`Done. ${articles.length} articles, ${vendors.length} vendors, ${consultants.length} consultants. ${elapsed}ms`);
+  console.log(`Done. ${articles.length} articles, ${vendors.length} vendors, ${consultants.length} consultants, ${uniqueRoutes.length} sitemap URLs. ${elapsed}ms`);
 }
 
 // ── Watch mode ──────────────────────────────────────────
