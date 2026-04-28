@@ -6,14 +6,15 @@ description: >-
   communications at scale.
 website: 'https://bird.com'
 category: Customer Engagement
-pricing: 'Consumption-based; contact vendor for current rates'
+pricing: Consumption-based; contact vendor for current rates
 rating: '3.8'
 tags:
   - CRM
   - Omnichannel
   - Messaging
   - Customer Engagement
-date: 2026-04-15
+  - WhatsApp
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Bird?

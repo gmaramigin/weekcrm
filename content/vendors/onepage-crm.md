@@ -6,14 +6,15 @@ description: >-
   salespeople focused on what to do next.
 website: 'https://www.onepagecrm.com'
 category: CRM
-pricing: 'From $9.95/user/mo; Business plan $19.95/user/mo'
+pricing: From $9.95/user/mo; Business plan $19.95/user/mo
 rating: '4.6'
 tags:
   - CRM
   - Sales
   - Small Business
   - Action Management
-date: 2026-04-15
+  - Field Sales
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is OnePageCRM?

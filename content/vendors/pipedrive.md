@@ -6,7 +6,7 @@ description: >-
   automation across its mid-tier plans.
 website: 'https://www.pipedrive.com'
 category: CRM
-pricing: 'From $14/user/mo (annual); five tiers to $99/user/mo'
+pricing: From $14/user/mo (annual); five tiers to $99/user/mo
 rating: '4.3'
 referralUrl: 'https://www.pipedrive.com/taf/TGR3MD'
 tags:
@@ -14,7 +14,8 @@ tags:
   - Sales
   - Pipeline
   - SMB
-date: 2026-04-15
+  - Agencies
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Pipedrive?

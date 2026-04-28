@@ -1,19 +1,20 @@
 ---
 title: Base CRM (Zendesk Sell)
 description: >-
-  Originally Base CRM, now Zendesk Sell after a 2018 acquisition. A
-  mobile-first sales CRM with a clean interface, built-in calling, and tight
-  Zendesk Support integration for teams already in the Zendesk ecosystem.
+  Originally Base CRM, now Zendesk Sell after a 2018 acquisition. A mobile-first
+  sales CRM with a clean interface, built-in calling, and tight Zendesk Support
+  integration for teams already in the Zendesk ecosystem.
 website: 'https://www.zendesk.com/sell/'
 category: Sales CRM
-pricing: 'From $19/user/mo (Sell Team); no free plan'
+pricing: From $19/user/mo (Sell Team); no free plan
 rating: '4.0'
 tags:
   - CRM
   - Sales CRM
   - Mobile CRM
   - Zendesk
-date: 2026-04-15
+  - Field Sales
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Base CRM?

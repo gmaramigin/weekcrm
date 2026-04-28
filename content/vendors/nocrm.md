@@ -7,14 +7,15 @@ description: >-
 website: 'https://www.nocrm.io'
 referralUrl: 'https://nocrm.io?fpr=george54'
 category: CRM
-pricing: 'From €12/user/mo (Starter); Expert from €19/user/mo'
+pricing: From €12/user/mo (Starter); Expert from €19/user/mo
 rating: '4.5'
 tags:
   - CRM
   - Lead Management
   - Sales
   - Small Business
-date: 2026-04-15
+  - Field Sales
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is noCRM.io?

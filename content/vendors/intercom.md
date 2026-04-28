@@ -1,18 +1,22 @@
 ---
 title: Intercom
 description: >-
-  AI-first customer service platform combining live chat, ticketing, and an autonomous AI agent.
-  Built for software companies that want fast, modern support across web, mobile, and messaging channels.
+  AI-first customer service platform combining live chat, ticketing, and an
+  autonomous AI agent. Built for software companies that want fast, modern
+  support across web, mobile, and messaging channels.
 website: 'https://www.intercom.com'
 category: Customer Support
-pricing: 'Essential $29/seat/mo; Advanced $85/seat/mo; Expert $132/seat/mo; Fin AI $0.99/resolved ticket'
+pricing: >-
+  Essential $29/seat/mo; Advanced $85/seat/mo; Expert $132/seat/mo; Fin AI
+  $0.99/resolved ticket
 rating: '4.4'
 tags:
   - Customer Support
   - Live Chat
   - AI
   - SaaS
-date: 2026-04-15
+  - WhatsApp
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Intercom?

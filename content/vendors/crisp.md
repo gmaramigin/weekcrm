@@ -6,7 +6,7 @@ description: >-
   workspace. A cost-effective Intercom alternative for growing teams.
 website: 'https://crisp.chat'
 category: Customer Messaging
-pricing: 'Free plan; paid from $45/workspace/mo'
+pricing: Free plan; paid from $45/workspace/mo
 rating: '4.2'
 tags:
   - Customer Support
@@ -14,7 +14,8 @@ tags:
   - Omnichannel
   - Small Business
   - Chatbot
-date: 2026-04-15
+  - WhatsApp
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Crisp?

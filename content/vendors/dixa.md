@@ -6,7 +6,7 @@ description: >-
   intelligent routing and AI-powered automation.
 website: 'https://dixa.com'
 category: Customer Service Platform
-pricing: 'From $49/agent/mo'
+pricing: From $49/agent/mo
 rating: '4.0'
 tags:
   - Customer Service
@@ -14,7 +14,8 @@ tags:
   - E-commerce
   - AI
   - Call Center
-date: 2026-04-15
+  - WhatsApp
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Dixa?

@@ -5,14 +5,15 @@ description: >-
   scheduling, and Google Workspace tightly together in one lightweight tool.
 website: 'https://solve360.com'
 category: CRM
-pricing: 'From $25/user/mo'
+pricing: From $25/user/mo
 rating: '4.0'
 tags:
   - CRM
   - Small Business
   - Google Workspace
   - Service Industry
-date: 2026-04-15
+  - Consultants
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Solve CRM?

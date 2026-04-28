@@ -5,14 +5,15 @@ description: >-
   messages from Amazon, Shopify, eBay, and 300+ other channels into one inbox.
 website: 'https://edesk.com'
 category: Help Desk
-pricing: 'From $39/agent/mo; AI automation at $0.99/resolution; free trial available'
+pricing: From $39/agent/mo; AI automation at $0.99/resolution; free trial available
 rating: '4.2'
 tags:
   - Help Desk
   - eCommerce
   - AI
   - Customer Support
-date: 2026-04-15
+  - WhatsApp
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is eDesk?

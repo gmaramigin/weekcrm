@@ -5,14 +5,15 @@ description: >-
   and omnichannel support on top of Google Workspace without replacing it.
 website: 'https://hiverhq.com'
 category: Help Desk
-pricing: 'Free plan available; paid from $25/user/mo (Growth)'
+pricing: Free plan available; paid from $25/user/mo (Growth)
 rating: '4.4'
 tags:
   - Help Desk
   - Gmail
   - Google Workspace
   - Customer Support
-date: 2026-04-15
+  - WhatsApp
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Hiver?

@@ -2,10 +2,11 @@
 title: Kylas Sales CRM
 description: >-
   Kylas is a sales CRM built for growing businesses in India and emerging
-  markets, offering unlimited users on a flat subscription with no per-seat pricing.
+  markets, offering unlimited users on a flat subscription with no per-seat
+  pricing.
 website: 'https://kylas.io'
 category: CRM
-pricing: 'Flat monthly plan (unlimited users); 7-day free trial'
+pricing: Flat monthly plan (unlimited users); 7-day free trial
 rating: '4.0'
 tags:
   - CRM
@@ -13,7 +14,8 @@ tags:
   - SMB
   - India
   - Pipeline Management
-date: 2026-04-15
+  - Field Sales
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Kylas Sales CRM?

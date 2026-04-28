@@ -2,18 +2,20 @@
 title: Copper
 description: >-
   The only CRM officially recommended by Google, built natively inside Gmail,
-  Calendar, and Drive. Ideal for teams that live in Google Workspace and want
-  a CRM that feels like a natural extension of it.
+  Calendar, and Drive. Ideal for teams that live in Google Workspace and want a
+  CRM that feels like a natural extension of it.
 website: 'https://copper.com'
 category: CRM
-pricing: 'From $9/user/mo (Starter); most teams from $59/user/mo'
+pricing: From $9/user/mo (Starter); most teams from $59/user/mo
 rating: '4.2'
 tags:
   - CRM
   - Google Workspace
   - Sales
   - AI
-date: 2026-04-15
+  - Agencies
+  - Consultants
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Copper?

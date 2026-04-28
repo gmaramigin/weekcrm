@@ -2,7 +2,8 @@
 title: HoneyBook
 description: >-
   All-in-one clientflow platform built for independent service businesses.
-  Combines CRM, contracts, invoicing, scheduling, and payments in one branded workspace.
+  Combines CRM, contracts, invoicing, scheduling, and payments in one branded
+  workspace.
 website: 'https://www.honeybook.com'
 category: CRM
 pricing: 'From $29/mo (annual), $36/mo monthly'
@@ -12,7 +13,9 @@ tags:
   - Freelancers
   - Small Business
   - Invoicing
-date: 2026-04-15
+  - Agencies
+  - Consultants
+date: 2026-04-15T00:00:00.000Z
 referralUrl: 'https://www.honeybook.com/partnerships/referrals'
 ---
 

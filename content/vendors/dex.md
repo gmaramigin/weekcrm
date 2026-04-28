@@ -2,18 +2,19 @@
 title: Dex
 description: >-
   Personal CRM that syncs LinkedIn, Gmail, and your calendar to help you
-  maintain and strengthen professional relationships. Built for individuals,
-  not sales teams.
+  maintain and strengthen professional relationships. Built for individuals, not
+  sales teams.
 website: 'https://getdex.com'
 category: Personal CRM
-pricing: 'From $12/mo'
+pricing: From $12/mo
 rating: '4.2'
 tags:
   - Personal CRM
   - LinkedIn
   - Relationship Management
   - Networking
-date: 2026-04-15
+  - Consultants
+date: 2026-04-15T00:00:00.000Z
 referralUrl: 'https://getdex.com/?via=weekcrm'
 ---
 

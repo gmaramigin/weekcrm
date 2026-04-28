@@ -6,7 +6,7 @@ description: >-
   offline-capable app built exclusively for the Apple ecosystem.
 website: 'https://daylite.app'
 category: CRM
-pricing: 'From $29/user/mo'
+pricing: From $29/user/mo
 rating: '4.1'
 tags:
   - CRM
@@ -14,7 +14,8 @@ tags:
   - Apple
   - Small Business
   - Project Management
-date: 2026-04-15
+  - Consultants
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Daylite?

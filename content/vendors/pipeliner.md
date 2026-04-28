@@ -6,7 +6,7 @@ description: >-
   it targets mid-market sales teams that want deep visual deal management.
 website: 'https://www.pipelinersales.com'
 category: CRM
-pricing: 'From $65/user/mo; four tiers to $150/user/mo'
+pricing: From $65/user/mo; four tiers to $150/user/mo
 rating: '4.2'
 referralUrl: 'https://www.pipelinersales.com/partner-program/'
 tags:
@@ -14,7 +14,8 @@ tags:
   - Sales
   - Pipeline
   - Mid-market
-date: 2026-04-15
+  - Field Sales
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Pipeliner CRM?

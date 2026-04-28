@@ -2,17 +2,19 @@
 title: Helpshift
 description: >-
   AI-native player engagement and support platform built exclusively for the
-  gaming industry, combining in-game support SDKs with AI automation and community tools.
+  gaming industry, combining in-game support SDKs with AI automation and
+  community tools.
 website: 'https://helpshift.com'
 category: Customer Support
-pricing: 'Contact vendor for pricing'
+pricing: Contact vendor for pricing
 rating: '4.2'
 tags:
   - Customer Support
   - Gaming
   - AI Automation
   - Mobile
-date: 2026-04-15
+  - WhatsApp
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Helpshift?

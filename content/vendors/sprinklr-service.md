@@ -6,14 +6,15 @@ description: >-
   for global brands managing massive support volume.
 website: 'https://www.sprinklr.com/products/customer-service/'
 category: Customer Service
-pricing: 'Self-serve from $249/seat/mo; enterprise custom'
+pricing: Self-serve from $249/seat/mo; enterprise custom
 rating: '4.2'
 tags:
   - Customer Service
   - Enterprise
   - AI
   - Omnichannel
-date: 2026-04-15
+  - WhatsApp
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Sprinklr Service?

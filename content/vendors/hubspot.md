@@ -1,12 +1,20 @@
 ---
 title: HubSpot CRM
-description: All-in-one CRM with marketing, sales, and service tools. Generous free tier, massive ecosystem.
-website: https://hubspot.com
+description: >-
+  All-in-one CRM with marketing, sales, and service tools. Generous free tier,
+  massive ecosystem.
+website: 'https://hubspot.com'
 category: CRM
-pricing: Free plan, paid from $20/mo
-rating: "4.5"
-tags: [CRM, Marketing, Sales, Enterprise]
-date: 2025-04-15
+pricing: 'Free plan, paid from $20/mo'
+rating: '4.5'
+tags:
+  - CRM
+  - Marketing
+  - Sales
+  - Enterprise
+  - Agencies
+  - Field Sales
+date: 2025-04-15T00:00:00.000Z
 ---
 
 ## What is HubSpot CRM?

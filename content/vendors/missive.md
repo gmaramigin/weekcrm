@@ -6,14 +6,15 @@ description: >-
   conversations without leaving the inbox.
 website: 'https://missiveapp.com'
 category: Collaboration
-pricing: 'Free plan available; paid from $18/user/mo'
+pricing: Free plan available; paid from $18/user/mo
 rating: '4.6'
 tags:
   - Email
   - Collaboration
   - Shared Inbox
   - Customer Support
-date: 2026-04-15
+  - WhatsApp
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Missive?

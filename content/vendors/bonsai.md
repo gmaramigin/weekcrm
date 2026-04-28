@@ -6,14 +6,16 @@ description: >-
   the entire client lifecycle in one tool built around independent work.
 website: 'https://www.hellobonsai.com'
 category: Freelancer CRM
-pricing: 'From $9/user/mo (billed annually); 7-day free trial'
+pricing: From $9/user/mo (billed annually); 7-day free trial
 rating: '4.3'
 tags:
   - Freelancer CRM
   - Contracts
   - Invoicing
   - Project Management
-date: 2026-04-15
+  - Agencies
+  - Consultants
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Bonsai?

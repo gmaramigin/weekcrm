@@ -6,14 +6,15 @@ description: >-
   competitors.
 website: 'https://www.sobot.io'
 category: Customer Service
-pricing: 'Custom quote; 15-day free trial available'
+pricing: Custom quote; 15-day free trial available
 rating: '4.1'
 tags:
   - Customer Service
   - Omnichannel
   - AI
   - Contact Center
-date: 2026-04-15
+  - WhatsApp
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Sobot Omnichannel Suite?

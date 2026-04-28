@@ -6,14 +6,15 @@ description: >-
   choice for relationship-driven sales and networking.
 website: 'https://www.nimble.com'
 category: CRM
-pricing: '$24.90/user/mo (billed annually)'
+pricing: $24.90/user/mo (billed annually)
 rating: '4.1'
 tags:
   - CRM
   - Social Selling
   - Contact Management
   - Small Business
-date: 2026-04-15
+  - Consultants
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Nimble?

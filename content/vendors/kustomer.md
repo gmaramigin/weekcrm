@@ -2,10 +2,11 @@
 title: Kustomer
 description: >-
   Kustomer is an AI-powered customer experience platform that unifies
-  omnichannel support, automation, and customer data for high-volume service teams.
+  omnichannel support, automation, and customer data for high-volume service
+  teams.
 website: 'https://www.kustomer.com'
 category: Customer Service CRM
-pricing: 'Contact vendor for pricing (annual contracts)'
+pricing: Contact vendor for pricing (annual contracts)
 rating: '4.2'
 tags:
   - Customer Service
@@ -13,7 +14,8 @@ tags:
   - AI
   - Omnichannel
   - Enterprise
-date: 2026-04-15
+  - WhatsApp
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Kustomer?

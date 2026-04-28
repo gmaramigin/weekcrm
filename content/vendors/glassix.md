@@ -5,14 +5,15 @@ description: >-
   customer service conversations end-to-end across messaging and voice channels.
 website: 'https://glassix.com'
 category: Customer Engagement
-pricing: 'From $49/user/mo (Starter); Growth $65; Enterprise custom; 30-day free trial'
+pricing: From $49/user/mo (Starter); Growth $65; Enterprise custom; 30-day free trial
 rating: '4.1'
 tags:
   - Customer Service
   - AI
   - Omnichannel
   - Contact Center
-date: 2026-04-15
+  - WhatsApp
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Glassix?

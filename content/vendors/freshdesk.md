@@ -12,6 +12,7 @@ tags:
   - Support
   - Ticketing
   - Automation
+  - WhatsApp
 date: 2025-05-20T00:00:00.000Z
 referralUrl: 'https://affiliatepartner.freshdesk.com/a17bofvtu7t5'
 ---

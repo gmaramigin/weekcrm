@@ -5,7 +5,7 @@ description: >-
   other chat channels into a single conversational sales pipeline.
 website: 'https://www.kommo.com'
 category: CRM
-pricing: 'From $15/user/month (6-month minimum); 14-day free trial'
+pricing: From $15/user/month (6-month minimum); 14-day free trial
 rating: '4.2'
 tags:
   - CRM
@@ -13,7 +13,8 @@ tags:
   - Sales Automation
   - SMB
   - Conversational Sales
-date: 2026-04-15
+  - WhatsApp
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Kommo?

@@ -13,7 +13,8 @@ tags:
   - AI
   - Manufacturing
   - Sales
-date: 2026-04-15
+  - Field Sales
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Spiro?

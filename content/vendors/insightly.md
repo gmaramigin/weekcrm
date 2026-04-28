@@ -1,18 +1,22 @@
 ---
 title: Insightly
 description: >-
-  CRM built for SMBs that blends sales pipeline management with native project management.
-  Practical choice for service businesses that need to track deals and then deliver on them.
+  CRM built for SMBs that blends sales pipeline management with native project
+  management. Practical choice for service businesses that need to track deals
+  and then deliver on them.
 website: 'https://www.insightly.com'
 category: CRM
-pricing: 'Free for 2 users; Plus $29/user/mo, Professional $49/user/mo, Enterprise $99/user/mo'
+pricing: >-
+  Free for 2 users; Plus $29/user/mo, Professional $49/user/mo, Enterprise
+  $99/user/mo
 rating: '4.1'
 tags:
   - CRM
   - Project Management
   - Small Business
   - Sales Pipeline
-date: 2026-04-15
+  - Consultants
+date: 2026-04-15T00:00:00.000Z
 ---
 
 ## What is Insightly?
