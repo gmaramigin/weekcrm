@@ -12,6 +12,7 @@ tags:
   - Omnichannel
   - Enterprise
   - Automation
+  - Insurance
 date: 2026-04-15
 ---
 

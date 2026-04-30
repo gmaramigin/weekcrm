@@ -12,6 +12,7 @@ tags:
   - Small Business
   - On-Premise
   - Sales
+  - Insurance
 date: 2026-04-15
 ---
 

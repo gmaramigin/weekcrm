@@ -12,6 +12,7 @@ tags:
   - Enterprise
   - AI
   - Microsoft
+  - Microsoft Teams
 date: 2026-04-15
 ---
 

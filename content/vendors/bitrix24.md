@@ -13,6 +13,8 @@ tags:
   - Project Management
   - Team Collaboration
   - Small Business CRM
+  - Nonprofits
+  - Zapier
 date: 2026-04-15
 ---
 

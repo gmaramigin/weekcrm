@@ -5,7 +5,7 @@ website: https://www.breakcold.com
 category: CRM
 pricing: From $29/mo
 rating: "4"
-tags: [CRM, Outbound, LinkedIn, Cold Email]
+tags: [CRM, Outbound, LinkedIn, Cold Email, Zapier]
 date: 2025-05-01
 ---
 

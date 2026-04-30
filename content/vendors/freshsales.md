@@ -12,6 +12,10 @@ tags:
   - AI
   - Sales Automation
   - Lead Management
+  - Recruiting
+  - Insurance
+  - Microsoft Teams
+  - Zapier
 date: 2026-04-15
 ---
 

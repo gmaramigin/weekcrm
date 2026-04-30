@@ -12,6 +12,7 @@ tags:
   - Sales
   - B2B
   - Automation
+  - Zapier
 date: 2026-04-15
 ---
 

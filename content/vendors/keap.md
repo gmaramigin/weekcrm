@@ -12,6 +12,8 @@ tags:
   - Marketing Automation
   - Small Business
   - Email Marketing
+  - Nonprofits
+  - Zapier
 date: 2026-04-15
 ---
 

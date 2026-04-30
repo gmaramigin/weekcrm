@@ -13,6 +13,10 @@ tags:
   - Sales
   - Automation
   - SMB
+  - Nonprofits
+  - Recruiting
+  - Microsoft Teams
+  - Zapier
 date: 2026-04-15
 ---
 
