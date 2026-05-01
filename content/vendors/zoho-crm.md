@@ -17,6 +17,10 @@ tags:
   - Recruiting
   - Microsoft Teams
   - Zapier
+  - Legal
+  - Healthcare
+  - Stripe
+  - Calendly
 date: 2026-04-15
 ---
 

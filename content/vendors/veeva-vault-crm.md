@@ -12,6 +12,7 @@ tags:
   - Pharma
   - Enterprise CRM
   - Field Sales
+  - Healthcare
 date: 2026-04-15
 ---
 

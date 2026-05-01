@@ -15,6 +15,8 @@ tags:
   - Invoicing
   - Agencies
   - Consultants
+  - Coaching
+  - Stripe
 date: 2026-04-15T00:00:00.000Z
 referralUrl: 'https://www.honeybook.com/partnerships/referrals'
 ---

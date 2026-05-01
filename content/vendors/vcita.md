@@ -12,6 +12,9 @@ tags:
   - Scheduling
   - CRM
   - Payments
+  - Coaching
+  - Stripe
+  - Calendly
 date: 2026-04-15
 ---
 

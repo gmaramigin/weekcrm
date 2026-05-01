@@ -16,6 +16,8 @@ tags:
   - Insurance
   - Microsoft Teams
   - Zapier
+  - Stripe
+  - Calendly
 date: 2026-04-15
 ---
 

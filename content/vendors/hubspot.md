@@ -19,6 +19,12 @@ tags:
   - Recruiting
   - Microsoft Teams
   - Zapier
+  - Legal
+  - Healthcare
+  - Coaching
+  - Stripe
+  - Calendly
+  - Notion
 date: 2025-04-15T00:00:00.000Z
 ---
 

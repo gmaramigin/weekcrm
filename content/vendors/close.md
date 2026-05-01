@@ -13,6 +13,8 @@ tags:
   - Outbound
   - Calling
   - Zapier
+  - Stripe
+  - Calendly
 date: 2025-05-13T00:00:00.000Z
 referralUrl: 'https://refer.close.com/fqkicmjr1y54'
 ---
