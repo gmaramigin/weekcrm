@@ -14,6 +14,7 @@ tags:
   - Enterprise
   - On-Premises
   - Legacy
+  - Education
 date: 2026-04-15
 ---
 

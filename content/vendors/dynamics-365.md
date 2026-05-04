@@ -13,6 +13,9 @@ tags:
   - AI
   - Microsoft
   - Microsoft Teams
+  - Construction
+  - Manufacturing
+  - Education
 date: 2026-04-15
 ---
 

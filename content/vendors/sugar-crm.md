@@ -13,6 +13,7 @@ tags:
   - Sales
   - Marketing Automation
   - Enterprise
+  - Manufacturing
 date: 2026-04-15
 ---
 

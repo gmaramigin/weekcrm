@@ -18,6 +18,9 @@ tags:
   - Zapier
   - Stripe
   - Calendly
+  - Mailchimp
+  - Zoom
+  - SMS
 date: 2026-04-15
 ---
 

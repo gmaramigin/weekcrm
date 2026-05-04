@@ -21,6 +21,11 @@ tags:
   - Healthcare
   - Stripe
   - Calendly
+  - Construction
+  - Education
+  - Mailchimp
+  - Zoom
+  - SMS
 date: 2026-04-15
 ---
 

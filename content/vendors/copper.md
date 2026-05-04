@@ -15,6 +15,7 @@ tags:
   - AI
   - Agencies
   - Consultants
+  - Mailchimp
 date: 2026-04-15T00:00:00.000Z
 ---
 
