@@ -15,6 +15,9 @@ tags:
   - Enterprise
   - Automation
   - Manufacturing
+  - Automotive
+  - Hospitality
+  - Logistics
 date: 2026-04-15
 ---
 

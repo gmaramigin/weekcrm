@@ -14,6 +14,9 @@ tags:
   - Marketing Automation
   - Enterprise
   - Manufacturing
+  - Automotive
+  - Logistics
+  - Hospitality
 date: 2026-04-15
 ---
 

@@ -30,6 +30,12 @@ tags:
   - Mailchimp
   - Zoom
   - SMS
+  - Automotive
+  - Hospitality
+  - Logistics
+  - Airtable
+  - Google Sheets
+  - Typeform
 date: 2026-04-15T00:00:00.000Z
 ---
 

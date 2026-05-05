@@ -16,6 +16,9 @@ tags:
   - Construction
   - Manufacturing
   - Education
+  - Automotive
+  - Hospitality
+  - Logistics
 date: 2026-04-15
 ---
 

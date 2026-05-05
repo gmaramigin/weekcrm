@@ -13,6 +13,7 @@ tags:
   - Shared Inbox
   - Customer Support
   - AI
+  - Logistics
 date: 2026-04-15
 ---
 

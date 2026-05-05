@@ -15,6 +15,8 @@ tags:
   - On-Premises
   - Legacy
   - Education
+  - Automotive
+  - Logistics
 date: 2026-04-15
 ---
 
