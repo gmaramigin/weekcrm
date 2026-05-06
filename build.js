@@ -944,8 +944,67 @@ ${uniqueRoutes.map(r => `  <url>
 Allow: /
 
 Sitemap: ${SITE_URL}/sitemap.xml
+Llms: ${SITE_URL}/llms.txt
 `;
   fs.writeFileSync(path.join(DIST, 'robots.txt'), robots);
+
+  // ── llms.txt (https://llmstxt.org) ──────────────────
+  // Re-read the programmatic directories so each entry gets a title + description.
+  // This runs every build, so adding a new markdown file under content/ auto-updates llms.txt.
+  const compareForLlms = readMarkdownFiles(path.join(CONTENT, 'compare'));
+  const bestForLlms = readMarkdownFiles(path.join(CONTENT, 'best'));
+  const industryForLlms = readMarkdownFiles(path.join(CONTENT, 'industry'));
+  const integrationsForLlms = readMarkdownFiles(path.join(CONTENT, 'integrations'));
+
+  const cleanDesc = (s) => (s || '').replace(/\s+/g, ' ').trim();
+  const llmLine = (title, url, desc) => {
+    const d = cleanDesc(desc);
+    return `- [${title}](${url})${d ? `: ${d}` : ''}`;
+  };
+
+  const llmsSections = [];
+  llmsSections.push(`# WeekCRM
+> WeekCRM is an independent CRM and helpdesk directory covering ${vendors.length} vendors, with side-by-side comparisons, "best of" listicles, industry-specific guides, integration roundups, and daily CRM industry news. Updated continuously from a Notion-driven editorial pipeline.`);
+
+  llmsSections.push(`## Site sections
+${llmLine('Vendor directory', `${SITE_URL}/vendors`, `${vendors.length} CRM and helpdesk products with pricing, ratings, descriptions, and editorial reviews.`)}
+${llmLine('Comparisons', `${SITE_URL}/compare`, `${compareForLlms.length} head-to-head vendor comparisons with editorial picks for who should choose what.`)}
+${llmLine('Best CRM picks', `${SITE_URL}/best`, `${bestForLlms.length} curated "best CRM for X" listicles by use case, industry, team size, and budget.`)}
+${llmLine('Industry guides', `${SITE_URL}/industry`, `${industryForLlms.length} industry-specific landing pages mapping CRM choices to verticals.`)}
+${llmLine('Integration guides', `${SITE_URL}/integrations`, `${integrationsForLlms.length} integration-focused pages listing CRMs that pair with specific tools.`)}
+${llmLine('News', `${SITE_URL}/news`, `Daily-updated CRM industry news rewritten in journalism style from vendor sources.`)}
+${llmLine('Consultants', `${SITE_URL}/consultants`, `${consultants.length} vetted CRM implementation consultants and partners.`)}`);
+
+  if (vendors.length) {
+    const vendorLines = vendors.map(v => llmLine(v.title, `${SITE_URL}/vendors/${v.slug}`, v.description)).join('\n');
+    llmsSections.push(`## Vendors\n${vendorLines}`);
+  }
+  if (compareForLlms.length) {
+    const lines = compareForLlms.map(e => llmLine(e.title, `${SITE_URL}/compare/${e.slug}`, e.description)).join('\n');
+    llmsSections.push(`## Comparisons\n${lines}`);
+  }
+  if (bestForLlms.length) {
+    const lines = bestForLlms.map(e => llmLine(e.title, `${SITE_URL}/best/${e.slug}`, e.description)).join('\n');
+    llmsSections.push(`## Best CRM picks\n${lines}`);
+  }
+  if (industryForLlms.length) {
+    const lines = industryForLlms.map(e => llmLine(e.title, `${SITE_URL}/industry/${e.slug}`, e.description)).join('\n');
+    llmsSections.push(`## Industry guides\n${lines}`);
+  }
+  if (integrationsForLlms.length) {
+    const lines = integrationsForLlms.map(e => llmLine(e.title, `${SITE_URL}/integrations/${e.slug}`, e.description)).join('\n');
+    llmsSections.push(`## Integration guides\n${lines}`);
+  }
+  if (articles.length) {
+    const lines = articles.map(a => llmLine(a.title, `${SITE_URL}/news/${a.slug}`, a.description)).join('\n');
+    llmsSections.push(`## News articles\n${lines}`);
+  }
+  if (consultants.length) {
+    const lines = consultants.map(c => llmLine(c.name || c.title || c.slug, `${SITE_URL}/consultants/${c.slug}`, c.tagline || c.description)).join('\n');
+    llmsSections.push(`## Consultants\n${lines}`);
+  }
+
+  fs.writeFileSync(path.join(DIST, 'llms.txt'), llmsSections.join('\n\n') + '\n');
 
   const elapsed = Date.now() - start;
   console.log(`Done. ${articles.length} articles, ${vendors.length} vendors, ${consultants.length} consultants, ${uniqueRoutes.length} sitemap URLs. ${elapsed}ms`);
