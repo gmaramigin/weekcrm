@@ -12,6 +12,7 @@ tags:
   - Sales
   - Pipeline
   - Analytics
+  - Xero
 date: 2026-04-15
 ---
 

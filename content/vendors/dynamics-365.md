@@ -19,6 +19,7 @@ tags:
   - Automotive
   - Hospitality
   - Logistics
+  - Asana
 date: 2026-04-15
 ---
 

@@ -13,6 +13,7 @@ tags:
   - Marketing Automation
   - Small Business CRM
   - Sales
+  - Xero
 date: 2026-04-15
 ---
 

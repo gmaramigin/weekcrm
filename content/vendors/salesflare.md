@@ -13,6 +13,7 @@ tags:
   - B2B
   - Automation
   - Zapier
+  - Xero
 date: 2026-04-15
 ---
 

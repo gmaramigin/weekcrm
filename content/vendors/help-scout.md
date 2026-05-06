@@ -12,6 +12,7 @@ tags:
   - Shared Inbox
   - Customer Support
   - SMB
+  - Jira
 date: 2026-04-15
 ---
 

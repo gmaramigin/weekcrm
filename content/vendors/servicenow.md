@@ -13,6 +13,7 @@ tags:
   - Enterprise
   - IT Operations
   - Workflow Automation
+  - Jira
 date: 2026-04-15
 ---
 

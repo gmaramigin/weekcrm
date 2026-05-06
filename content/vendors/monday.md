@@ -5,7 +5,7 @@ website: https://monday.com
 category: CRM
 pricing: From $12/seat/mo
 rating: "4"
-tags: [CRM, Project Management, Visual, Teams, Coaching, Calendly, Construction, Education, Zoom]
+tags: [CRM, Project Management, Visual, Teams, Coaching, Calendly, Construction, Education, Zoom, Jira, Asana]
 date: 2025-04-22
 ---
 

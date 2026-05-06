@@ -13,6 +13,7 @@ tags:
   - Small Business CRM
   - Pipeline Management
   - Zoho
+  - Xero
 date: 2026-04-15
 ---
 

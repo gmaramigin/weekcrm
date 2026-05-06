@@ -32,6 +32,8 @@ tags:
   - Airtable
   - Google Sheets
   - Typeform
+  - Asana
+  - Xero
 date: 2026-04-15
 ---
 
