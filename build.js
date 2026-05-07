@@ -206,6 +206,78 @@ function autoLinkVendors(html, vendors, currentSlug = null) {
   return parts.join('');
 }
 
+// Normalize a frontmatter `faq` value into [{q, a}, ...]. Accepts either
+// `{ q, a }` or `{ question, answer }` shapes; trims whitespace; drops empties.
+function normalizeFaq(faq) {
+  if (!Array.isArray(faq)) return [];
+  return faq
+    .map(item => {
+      if (!item || typeof item !== 'object') return null;
+      const q = String(item.q || item.question || '').trim();
+      const a = String(item.a || item.answer || '').trim();
+      if (!q || !a) return null;
+      return { q, a };
+    })
+    .filter(Boolean);
+}
+
+// FAQPage JSON-LD for AI Overviews / SERP rich results. Returns "" if no FAQ.
+// The returned string is a full <script> tag (or empty) so templates can drop
+// it in unconditionally without leaving an empty <script> behind.
+function faqJsonLdTag(faq) {
+  const items = normalizeFaq(faq);
+  if (!items.length) return '';
+  const obj = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a }
+    }))
+  };
+  const json = JSON.stringify(obj).replace(/<\/script/gi, '<\\/script');
+  return `<script type="application/ld+json">${json}</script>`;
+}
+
+// Visible FAQ section. Mirrors the JSON-LD so the on-page text matches what
+// AI crawlers extract — Google's guidance is that FAQ schema must reflect
+// content actually visible on the page.
+function renderFaqHtml(faq, heading = 'Frequently asked questions') {
+  const items = normalizeFaq(faq);
+  if (!items.length) return '';
+  const escapeHtml = (s) => s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  const blocks = items.map(({ q, a }) => `
+    <details class="faq-item">
+      <summary class="faq-q">${escapeHtml(q)}</summary>
+      <div class="faq-a">${marked.parseInline(a)}</div>
+    </details>`).join('');
+  return `
+    <section class="faq-section">
+      <div class="container container-narrow">
+        <h2 class="faq-heading">${escapeHtml(heading)}</h2>
+        <div class="faq-list">${blocks}</div>
+      </div>
+    </section>`;
+}
+
+// "First 50 words" direct-answer block. Renders a TL;DR card above the fold so
+// LLM crawlers (which weight the first 30% of a page heavily for citations) see
+// a complete answer immediately. No-op if `tldr` is empty.
+function renderTldr(tldr) {
+  if (!tldr) return '';
+  const text = String(tldr).trim();
+  if (!text) return '';
+  return `
+    <aside class="tldr" role="note">
+      <span class="tldr-label">TL;DR</span>
+      <p class="tldr-text">${marked.parseInline(text)}</p>
+    </aside>`;
+}
+
 // JSON-LD Product/Review schema for a vendor — gives Google star snippets.
 function vendorJsonLd(vendor) {
   const obj = {
@@ -391,7 +463,10 @@ function build() {
       date: formatDate(article.date),
       dateISO: article.date,
       tags: tagsHtml,
+      tldr: renderTldr(article.tldr),
       content: linkedContent,
+      faqHtml: renderFaqHtml(article.faq),
+      faqJsonLd: faqJsonLdTag(article.faq),
       description: article.description || excerpt(article.html)
     });
 
@@ -480,6 +555,12 @@ function build() {
          </div>`
       : '';
 
+    // Auto-derive a vendor TL;DR from the description if frontmatter doesn't
+    // specify one — gives every vendor page a direct-answer block above the fold
+    // without backfilling all 100+ markdown files.
+    const vendorTldr = vendor.tldr
+      || (vendor.description ? `${vendor.title} is ${vendor.description.charAt(0).toLowerCase()}${vendor.description.slice(1)}` : '');
+
     const vendorHtml = render(vendorTemplate, {
       title: vendor.title,
       description: vendor.description || '',
@@ -490,7 +571,10 @@ function build() {
       visitRel,
       perkBlock,
       tags: tagsHtml,
+      tldr: renderTldr(vendorTldr),
       content: autoLinkVendors(vendor.html, vendors, vendor.slug),
+      faqHtml: renderFaqHtml(vendor.faq),
+      faqJsonLd: faqJsonLdTag(vendor.faq),
       relatedArticles: relatedHtml,
       rating: vendor.rating || '',
       pricing: vendor.pricing || '',
@@ -678,9 +762,14 @@ function build() {
         ]
       }).replace(/<\/script/gi, '<\\/script');
 
+      // Auto-derive a comparison TL;DR from the description if not set, so every
+      // /compare/ page surfaces a 50-word direct answer for AI citations.
+      const compareTldr = entry.tldr || entry.description || '';
+
       const compareHtml = render(compareTemplate, {
         title: entry.title,
         description: entry.description || '',
+        tldr: renderTldr(compareTldr),
         content: autoLinkVendors(entry.html, vendors),
         slugA: a.slug, titleA: a.title, descA: a.description || '',
         pricingA: a.pricing || '—', ratingA: a.rating || '—',
@@ -690,6 +779,8 @@ function build() {
         pricingB: b.pricing || '—', ratingB: b.rating || '—',
         logoB: renderLogo(b, 'vendor-logo-lg'),
         ctaUrlB: ctaB.url, ctaRelB: ctaB.rel, ctaLabelB: ctaB.label,
+        faqHtml: renderFaqHtml(entry.faq),
+        faqJsonLd: faqJsonLdTag(entry.faq),
         jsonLd
       });
 
@@ -793,13 +884,22 @@ function build() {
         }))
       }).replace(/<\/script/gi, '<\\/script');
 
+      // First-50-words direct answer: prefer explicit `tldr`, fall back to a
+      // generated answer naming the top three picks so the page leads with the
+      // exact answer most people are searching for.
+      const tldrFallback = entry.description
+        || `Our top picks for ${entry.title.replace(/^Best\s+/i, '')} are ${picks.slice(0, 3).map(p => p.title).join(', ')}.`;
+      const bestTldr = entry.tldr || tldrFallback;
+
       const bodyHtml = `
+        ${faqJsonLdTag(entry.faq)}
         <script type="application/ld+json">${itemListLd}</script>
         <section class="compare-hero">
           <div class="container container-narrow">
             <span class="compare-eyebrow">CRM Picks</span>
             <h1 class="compare-title">${entry.title}</h1>
             <p class="compare-desc">${entry.description || ''}</p>
+            ${renderTldr(bestTldr)}
           </div>
         </section>
         <section class="section">
@@ -807,7 +907,8 @@ function build() {
             <div class="best-list">${pickBlocks}</div>
             <div class="compare-body">${autoLinkVendors(entry.html, vendors)}</div>
           </div>
-        </section>`;
+        </section>
+        ${renderFaqHtml(entry.faq)}`;
 
       const page = render(baseTemplate, {
         title: `${entry.title} — WeekCRM`,
@@ -884,12 +985,20 @@ function build() {
           <p class="vendor-card-desc">${v.description || ''}</p>
         </a>`).join('');
 
+      // Same first-50-words rule for industry/integrations landings: lead with a
+      // concrete answer (top 3 matching vendors) when no explicit tldr is set.
+      const progTldrFallback = entry.description
+        || `Top picks for ${entry.title}: ${matches.slice(0, 3).map(v => v.title).join(', ')}.`;
+      const progTldr = entry.tldr || progTldrFallback;
+
       const bodyHtml = `
+        ${faqJsonLdTag(entry.faq)}
         <section class="compare-hero">
           <div class="container container-narrow">
             <span class="compare-eyebrow">${entry.eyebrow || fallbackEyebrow}</span>
             <h1 class="compare-title">${entry.title}</h1>
             <p class="compare-desc">${entry.description || ''}</p>
+            ${renderTldr(progTldr)}
           </div>
         </section>
         <section class="section">
@@ -897,7 +1006,8 @@ function build() {
             <div class="compare-body">${autoLinkVendors(entry.html, vendors)}</div>
             <div class="vendor-grid">${grid}</div>
           </div>
-        </section>`;
+        </section>
+        ${renderFaqHtml(entry.faq)}`;
 
       const page = render(baseTemplate, {
         title: `${entry.title} — WeekCRM`,
@@ -1011,9 +1121,36 @@ ${uniqueRoutes.map(r => `  <url>
 </urlset>`;
   fs.writeFileSync(path.join(DIST, 'sitemap.xml'), sitemap);
 
+  // robots.txt — explicitly allow major AI crawlers so they know they're welcome.
+  // `User-agent: *` already permits them, but listing them by name signals intent
+  // and survives any future site-wide tightening.
+  const aiBots = [
+    'GPTBot',           // OpenAI training crawler
+    'OAI-SearchBot',    // ChatGPT search index
+    'ChatGPT-User',     // ChatGPT browse / Atlas user-initiated fetch
+    'ClaudeBot',        // Anthropic training crawler
+    'Claude-Web',       // Anthropic browse fetch
+    'Claude-User',      // Claude user-initiated fetch
+    'anthropic-ai',     // Legacy Anthropic UA
+    'PerplexityBot',    // Perplexity index crawler
+    'Perplexity-User',  // Perplexity user-initiated fetch
+    'Google-Extended',  // Google AI / Bard / Gemini training opt-in
+    'Bytespider',       // ByteDance / Doubao
+    'Applebot-Extended',// Apple Intelligence training opt-in
+    'CCBot',            // Common Crawl (feeds many LLMs)
+    'cohere-ai',        // Cohere
+    'Diffbot',          // Diffbot Knowledge Graph
+    'FacebookBot',      // Meta AI
+    'meta-externalagent',
+    'YouBot',           // You.com / Genie
+    'Amazonbot',        // Alexa+ / Rufus / Q
+    'DuckAssistBot'     // DuckDuckGo AI assist
+  ];
+  const aiBotBlock = aiBots.map(ua => `User-agent: ${ua}\nAllow: /\n`).join('\n');
   const robots = `User-agent: *
 Allow: /
 
+${aiBotBlock}
 Sitemap: ${SITE_URL}/sitemap.xml
 Llms: ${SITE_URL}/llms.txt
 `;

@@ -11,6 +11,18 @@ tags:
   - Attio
   - Pipedrive
   - Comparison
+tldr: "**Pick Attio** if you want a flexible, AI-native data model that adapts to recruiting, fundraising, partnerships, or unusual sales motions — $29–$119/seat. **Pick Pipedrive** if you have a traditional pipeline-driven sales team and want the simplest possible tool — $14–$99/seat. Pipedrive is cheaper at the entry tier; Attio is more powerful."
+faq:
+  - q: "Attio vs Pipedrive — which is better?"
+    a: "Attio is better for teams with non-standard data models — VCs, recruiters, agencies, or sales motions that don't fit a linear pipeline. Pipedrive is better for traditional B2B sales teams that just want a clean visual pipeline. Pipedrive is cheaper at $14/seat; Attio is more flexible at $29/seat."
+  - q: "Is Attio worth paying more than Pipedrive?"
+    a: "If you need custom objects, AI-powered automation, real-time collaboration, or rich data enrichment from email, yes. If you just need a Kanban-style sales pipeline with deal stages and follow-up reminders, Pipedrive is the simpler, cheaper, faster-to-learn answer."
+  - q: "Does Pipedrive have AI features?"
+    a: "Yes — Pipedrive's Sales Assistant suggests next actions, surfaces stalled deals, and predicts win likelihood (all paid plans). Higher tiers add AI email writing and conversation intelligence. It's lighter than Attio's AI but covers the basics for sales-led teams."
+  - q: "Can Pipedrive replace Attio?"
+    a: "For pure pipeline-driven sales, often yes. Pipedrive lacks Attio's flexible data model, advanced custom objects, and email-derived enrichment, so it's a poor fit for relationship-led work like fundraising, recruiting, or partnerships. For deals with stages and reps, Pipedrive is sufficient."
+  - q: "Which deploys faster — Attio or Pipedrive?"
+    a: "Both deploy in 1–7 days for a typical 10–25 rep team. Pipedrive is slightly faster to learn (simpler UI, fewer choices). Attio takes a bit more setup time but rewards it with a more flexible workflow afterward."
 ---
 
 ## TL;DR

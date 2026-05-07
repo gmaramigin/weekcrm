@@ -11,6 +11,18 @@ tags:
   - Attio
   - Salesforce
   - Comparison
+tldr: "**Pick Attio** for sales teams under 200 reps that want AI-native CRM, days-not-months deployment, and 50–70% lower TCO. **Pick Salesforce** for 200+ rep enterprises with regulated data, complex territory routing, or an existing Salesforce admin team. For most mid-market teams, Attio is the right answer."
+faq:
+  - q: "Attio vs Salesforce — which should I choose?"
+    a: "For sales teams under 200 reps, Attio is usually the better choice — it deploys in days, costs a fraction of Salesforce, and includes AI features Salesforce charges $550/user/month for. Salesforce wins for 200+ rep enterprises with complex territories, regulated data, or existing admin teams."
+  - q: "Is Attio really cheaper than Salesforce?"
+    a: "Yes, dramatically. A 25-seat Attio Pro deployment is ~$18K/year all-in. The same 25-seat Salesforce Enterprise deployment is ~$120K Year 1 once you include licenses, implementation, admin headcount, AppExchange, sandboxes, and Premier Support — roughly 6–7x more expensive."
+  - q: "Can Attio replace Salesforce for an enterprise?"
+    a: "For most mid-market enterprises (50–200 reps), yes. Attio handles complex data models, custom objects, automations, and AI natively. For 500+ rep orgs with strict territory rules, complex CPQ, or industry-specific clouds (Health, Financial Services), Salesforce remains the answer."
+  - q: "How long does it take to migrate from Salesforce to Attio?"
+    a: "For a 10–50 rep team, typically 4–8 weeks: 1 week for Salesforce export and field mapping, 2–3 weeks for parallel running with rep training, 1–2 weeks of cutover. Attio ships a native Salesforce importer that handles standard objects automatically."
+  - q: "Does Attio have features Salesforce doesn't?"
+    a: "Yes — Attio's automatic data enrichment from email/calendar, real-time multi-user collaboration on records, and AI agents are native; Salesforce charges $550/user/month (Agentforce 1) for comparable AI. Attio is also dramatically faster to customize without an admin."
 ---
 
 ## TL;DR

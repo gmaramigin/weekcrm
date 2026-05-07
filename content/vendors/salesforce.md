@@ -40,6 +40,18 @@ tags:
   - Asana
   - Xero
 date: 2026-04-15T00:00:00.000Z
+tldr: "Salesforce is the world's largest enterprise CRM. Pricing starts at $25/user/month (Starter Suite) and scales to $550/user/month (Agentforce 1). Best for 200+ rep enterprises with regulated data and a dedicated admin team. Most SMB and mid-market teams overpay 2–3x vs alternatives like Attio, HubSpot, or Pipedrive."
+faq:
+  - q: "How much does Salesforce really cost?"
+    a: "List pricing runs $25–$550/user/month, but real total cost of ownership is 2–3x that once you add implementation (1.5–3x annual license), a $70K–$120K admin, AppExchange add-ons, sandboxes, and Premier Support. A 25-rep Enterprise deployment realistically costs ~$120K Year 1."
+  - q: "Is Salesforce worth it for small businesses?"
+    a: "Generally no. Salesforce Starter ($25/user/month) is competitively priced, but most SMBs are better served by Pipedrive, Attio, or HubSpot — they deploy in days instead of weeks and don't need a certified admin to operate."
+  - q: "What are the best Salesforce alternatives?"
+    a: "**Microsoft Dynamics 365** is the strongest like-for-like enterprise replacement. **Attio** wins for AI-native modern teams. **HubSpot** is best for marketing-led growth. **Pipedrive** and **Zoho CRM** are best for cost-sensitive SMB sales teams."
+  - q: "What is Salesforce Agentforce?"
+    a: "Agentforce is Salesforce's AI agent platform — autonomous bots that handle service tickets, qualify leads, and execute workflows. Agentforce 1 sits at the top of the price ladder ($550/user/month) and bundles all Sales, Service, and platform clouds with unlimited agent actions."
+  - q: "How long does a Salesforce implementation take?"
+    a: "A serious Salesforce deployment takes 4–12 weeks for SMB/mid-market and 6–12+ months for enterprise. Most teams use a partner SI on retainer. By comparison, Attio, Pipedrive, and HubSpot can be live in 1–7 days for the same team size."
 ---
 
 ## What is Salesforce Sales Cloud?
