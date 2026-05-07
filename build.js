@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { spawnSync } = require('child_process');
 const matter = require('gray-matter');
 const { marked } = require('marked');
 
@@ -10,6 +11,49 @@ const CONTENT = path.join(__dirname, 'content');
 const TEMPLATES = path.join(__dirname, 'src', 'templates');
 const PUBLIC = path.join(__dirname, 'public');
 const SRC = path.join(__dirname, 'src');
+
+// ── Analytics ───────────────────────────────────────────
+// Injected into <head> via base.html's {{analytics}} placeholder. Suppressed
+// when a page's source markdown is gitignored, or when frontmatter opts out
+// of indexing (noindex: true, or robots: 'noindex').
+const GTAG_ID = 'G-G5MWJB3HZ9';
+const GTAG_SCRIPT = `<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '${GTAG_ID}');
+</script>`;
+
+// One-shot lookup: which markdown sources under content/ are gitignored?
+// `git check-ignore --stdin` returns matching paths; exit 0 = matches found,
+// 1 = no matches, anything else = abort silently and treat nothing as ignored.
+function computeGitIgnoredSet(absPaths) {
+  if (!absPaths.length) return new Set();
+  const result = spawnSync('git', ['check-ignore', '--stdin'], {
+    input: absPaths.join('\n'),
+    encoding: 'utf8',
+    cwd: __dirname,
+  });
+  if (result.error) return new Set();
+  if (result.status !== 0 && result.status !== 1) return new Set();
+  return new Set(
+    result.stdout.split('\n').filter(Boolean).map(p => path.resolve(__dirname, p))
+  );
+}
+
+let GITIGNORED_SOURCES = new Set();
+
+function pageMeta(frontmatter = {}, sourcePath = null) {
+  const robotsValue = String(frontmatter.robots || '').toLowerCase();
+  const noindex = frontmatter.noindex === true || robotsValue.includes('noindex');
+  const ignored = sourcePath && GITIGNORED_SOURCES.has(path.resolve(sourcePath));
+  return {
+    robotsMeta: noindex ? '<meta name="robots" content="noindex,nofollow">' : '',
+    analytics: noindex || ignored ? '' : GTAG_SCRIPT,
+  };
+}
 
 // ── Helpers ─────────────────────────────────────────────
 function ensureDir(dir) {
@@ -47,10 +91,11 @@ function readMarkdownFiles(dir) {
   return fs.readdirSync(dir)
     .filter(f => f.endsWith('.md'))
     .map(f => {
-      const raw = fs.readFileSync(path.join(dir, f), 'utf8');
+      const sourcePath = path.join(dir, f);
+      const raw = fs.readFileSync(sourcePath, 'utf8');
       const { data, content } = matter(raw);
       const slug = f.replace('.md', '');
-      return { ...data, slug, content, html: marked(content) };
+      return { ...data, slug, sourcePath, content, html: marked(content) };
     })
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 }
@@ -212,6 +257,18 @@ function build() {
   if (fs.existsSync(DIST)) fs.rmSync(DIST, { recursive: true });
   ensureDir(DIST);
 
+  // Resolve which content sources are gitignored — we skip analytics on those.
+  const contentDirs = ['articles', 'vendors', 'consultants', 'compare', 'best', 'industry', 'integrations'];
+  const allSourcePaths = [];
+  for (const d of contentDirs) {
+    const full = path.join(CONTENT, d);
+    if (!fs.existsSync(full)) continue;
+    for (const f of fs.readdirSync(full)) {
+      if (f.endsWith('.md')) allSourcePaths.push(path.join(full, f));
+    }
+  }
+  GITIGNORED_SOURCES = computeGitIgnoredSet(allSourcePaths);
+
   // Sitemap routes: { loc, lastmod (ISO date or null), changefreq, priority }
   const routes = [];
   const today = new Date().toISOString().slice(0, 10);
@@ -293,7 +350,8 @@ function build() {
     url: 'https://weekcrm.com',
     body: homeHtml,
     bodyClass: 'home',
-    assetVersion: cssHash
+    assetVersion: cssHash,
+    ...pageMeta()
   });
   fs.writeFileSync(path.join(DIST, 'index.html'), homePage);
   addRoute('/', { changefreq: 'daily', priority: '1.0' });
@@ -317,7 +375,8 @@ function build() {
     url: 'https://weekcrm.com/news',
     body: newsHtml,
     bodyClass: '',
-    assetVersion: cssHash
+    assetVersion: cssHash,
+    ...pageMeta()
   });
   ensureDir(path.join(DIST, 'news'));
   fs.writeFileSync(path.join(DIST, 'news', 'index.html'), newsPage);
@@ -342,7 +401,8 @@ function build() {
       url: `https://weekcrm.com/news/${article.slug}`,
       body: articleHtml,
       bodyClass: '',
-      assetVersion: cssHash
+      assetVersion: cssHash,
+      ...pageMeta(article, article.sourcePath)
     });
 
     const articleDir = path.join(DIST, 'news', article.slug);
@@ -380,7 +440,8 @@ function build() {
     url: 'https://weekcrm.com/vendors',
     body: directoryHtml,
     bodyClass: '',
-    assetVersion: cssHash
+    assetVersion: cssHash,
+    ...pageMeta()
   });
   ensureDir(path.join(DIST, 'vendors'));
   fs.writeFileSync(path.join(DIST, 'vendors', 'index.html'), directoryPage);
@@ -444,7 +505,8 @@ function build() {
       url: `https://weekcrm.com/vendors/${vendor.slug}`,
       body: vendorHtml,
       bodyClass: '',
-      assetVersion: cssHash
+      assetVersion: cssHash,
+      ...pageMeta(vendor, vendor.sourcePath)
     });
 
     const vendorDir = path.join(DIST, 'vendors', vendor.slug);
@@ -495,7 +557,8 @@ function build() {
     url: 'https://weekcrm.com/consultants',
     body: consultantsHtml,
     bodyClass: '',
-    assetVersion: cssHash
+    assetVersion: cssHash,
+    ...pageMeta()
   });
   ensureDir(path.join(DIST, 'consultants'));
   fs.writeFileSync(path.join(DIST, 'consultants', 'index.html'), consultantsPage);
@@ -566,7 +629,8 @@ function build() {
       url: `https://weekcrm.com/consultants/${consultant.slug}`,
       body: consultantHtml,
       bodyClass: '',
-      assetVersion: cssHash
+      assetVersion: cssHash,
+      ...pageMeta(consultant, consultant.sourcePath)
     });
 
     const consultantDir = path.join(DIST, 'consultants', consultant.slug);
@@ -635,7 +699,8 @@ function build() {
         url: `https://weekcrm.com/compare/${entry.slug}`,
         body: compareHtml,
         bodyClass: '',
-        assetVersion: cssHash
+        assetVersion: cssHash,
+        ...pageMeta(entry, entry.sourcePath)
       });
 
       const outDir = path.join(DIST, 'compare', entry.slug);
@@ -669,7 +734,8 @@ function build() {
       title: 'CRM Comparisons — WeekCRM',
       description: 'Honest, side-by-side comparisons of the most popular CRMs.',
       url: 'https://weekcrm.com/compare',
-      body: compareIndexBody, bodyClass: '', assetVersion: cssHash
+      body: compareIndexBody, bodyClass: '', assetVersion: cssHash,
+      ...pageMeta()
     });
     fs.writeFileSync(path.join(DIST, 'compare', 'index.html'), compareIndex);
     addRoute('/compare', { changefreq: 'weekly', priority: '0.7' });
@@ -747,7 +813,8 @@ function build() {
         title: `${entry.title} — WeekCRM`,
         description: entry.description || entry.title,
         url: `https://weekcrm.com/best/${entry.slug}`,
-        body: bodyHtml, bodyClass: '', assetVersion: cssHash
+        body: bodyHtml, bodyClass: '', assetVersion: cssHash,
+        ...pageMeta(entry, entry.sourcePath)
       });
 
       const outDir = path.join(DIST, 'best', entry.slug);
@@ -780,7 +847,8 @@ function build() {
       title: 'Best CRM Picks — WeekCRM',
       description: 'Curated CRM shortlists for every use case.',
       url: 'https://weekcrm.com/best',
-      body: bestIndexBody, bodyClass: '', assetVersion: cssHash
+      body: bestIndexBody, bodyClass: '', assetVersion: cssHash,
+      ...pageMeta()
     });
     fs.writeFileSync(path.join(DIST, 'best', 'index.html'), bestIndex);
     addRoute('/best', { changefreq: 'weekly', priority: '0.7' });
@@ -835,7 +903,8 @@ function build() {
         title: `${entry.title} — WeekCRM`,
         description: entry.description || entry.title,
         url: `https://weekcrm.com/${urlPrefix}/${entry.slug}`,
-        body: bodyHtml, bodyClass: '', assetVersion: cssHash
+        body: bodyHtml, bodyClass: '', assetVersion: cssHash,
+        ...pageMeta(entry, entry.sourcePath)
       });
 
       const outDir = path.join(DIST, urlPrefix, entry.slug);
@@ -871,7 +940,8 @@ function build() {
       title: 'CRM by Industry — WeekCRM',
       description: 'Find the right CRM for your industry.',
       url: 'https://weekcrm.com/industry',
-      body: indexBody, bodyClass: '', assetVersion: cssHash
+      body: indexBody, bodyClass: '', assetVersion: cssHash,
+      ...pageMeta()
     }));
     addRoute('/industry', { changefreq: 'weekly', priority: '0.6' });
   }
@@ -894,7 +964,8 @@ function build() {
       title: 'CRM Integrations — WeekCRM',
       description: 'Find the right CRM for your stack.',
       url: 'https://weekcrm.com/integrations',
-      body: indexBody, bodyClass: '', assetVersion: cssHash
+      body: indexBody, bodyClass: '', assetVersion: cssHash,
+      ...pageMeta()
     }));
     addRoute('/integrations', { changefreq: 'weekly', priority: '0.6' });
   }
