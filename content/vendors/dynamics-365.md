@@ -20,6 +20,9 @@ tags:
   - Hospitality
   - Logistics
   - Asana
+  - Fintech
+  - Biotech
+  - DocuSign
 date: 2026-04-15
 ---
 

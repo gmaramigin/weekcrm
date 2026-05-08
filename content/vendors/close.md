@@ -20,6 +20,8 @@ tags:
   - Airtable
   - Google Sheets
   - Typeform
+  - PandaDoc
+  - Make
 date: 2025-05-13T00:00:00.000Z
 referralUrl: 'https://refer.close.com/fqkicmjr1y54'
 tldr: "Close is a CRM built for inside sales teams that live on the phone. It includes native calling, SMS, and email sequences out of the box, with pricing from $19/user/month (Base) to $129/user/month (Business). Best for high-volume outbound sales teams of 1–50 reps."

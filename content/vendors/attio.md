@@ -26,6 +26,10 @@ tags:
   - Typeform
   - Jira
   - Asana
+  - Fintech
+  - Biotech
+  - PandaDoc
+  - Make
 date: 2025-05-05T00:00:00.000Z
 referralUrl: 'https://attio.com?r=y3j7Pq3xmq0brxsU'
 referralPerk: 10% discount on any plan

@@ -13,6 +13,7 @@ tags:
   - Enterprise CRM
   - Field Sales
   - Healthcare
+  - Biotech
 date: 2026-04-15
 ---
 

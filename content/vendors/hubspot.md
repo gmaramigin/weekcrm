@@ -40,6 +40,12 @@ tags:
   - Jira
   - Asana
   - Xero
+  - Fintech
+  - Biotech
+  - Gaming
+  - DocuSign
+  - PandaDoc
+  - Make
 date: 2025-04-15T00:00:00.000Z
 tldr: "HubSpot is an all-in-one CRM with sales, marketing, service, and CMS hubs. The free plan is genuinely useful; paid plans start at $20/seat/month (Starter) and jump to $100/seat/month (Professional) plus a $1,500 onboarding fee. Best for marketing-led SMB and mid-market teams."
 faq:

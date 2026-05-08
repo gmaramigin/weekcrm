@@ -5,7 +5,7 @@ website: https://monday.com
 category: CRM
 pricing: From $12/seat/mo
 rating: "4"
-tags: [CRM, Project Management, Visual, Teams, Coaching, Calendly, Construction, Education, Zoom, Jira, Asana]
+tags: [CRM, Project Management, Visual, Teams, Coaching, Calendly, Construction, Education, Zoom, Jira, Asana, Fintech, Biotech, DocuSign, PandaDoc, Make]
 date: 2025-04-22
 tldr: "Monday CRM is a visual, board-based CRM built on Monday.com's work-management platform. Pricing starts at $12/seat/month (Basic) up to $28/seat/month (Pro), with custom Enterprise pricing. Best for SMB teams that want CRM and project management in the same visual tool."
 faq:

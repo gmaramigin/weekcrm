@@ -19,6 +19,7 @@ tags:
   - Google Sheets
   - Typeform
   - Asana
+  - Make
 date: 2025-05-07T00:00:00.000Z
 referralUrl: 'https://try.folk.app/vaua9ntxi4iw'
 tldr: "Folk is a relationship-led CRM for founders, agencies, VCs, and consultants. It pulls contacts from LinkedIn and Gmail in one click, with pricing from $20/user/month (Standard) to $80/user/month (Premium). Best for small relationship-driven teams that hate spreadsheets but find HubSpot overkill."
