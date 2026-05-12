@@ -14,15 +14,20 @@
 const { JSDOM } = require('jsdom');
 const { Readability } = require('@mozilla/readability');
 
-const MAX_ITEMS = 8;
+const MAX_ITEMS = Number(process.env.SCRAPE_MAX_ITEMS) || 8;
 const CONCURRENCY = 4;
 const MIN_CONTENT_LEN = 300;
 const MAX_CONTENT_LEN = 3500;
-const STATIC_TIMEOUT_MS = 15000;
-const DYNAMIC_TIMEOUT_MS = 25000;
+const STATIC_TIMEOUT_MS = 30000;
+const DYNAMIC_TIMEOUT_MS = 45000;
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
-async function fetchHtmlStatic(url) {
+function isTransientHttp(err) {
+  const msg = String(err && err.message || '');
+  return /timeout|aborted|ECONNRESET|socket|network|EAI_AGAIN|ETIMEDOUT|HTTP 5\d\d/i.test(msg);
+}
+
+async function fetchHtmlStaticOnce(url) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), STATIC_TIMEOUT_MS);
   try {
@@ -35,6 +40,16 @@ async function fetchHtmlStatic(url) {
     return await res.text();
   } finally {
     clearTimeout(t);
+  }
+}
+
+async function fetchHtmlStatic(url) {
+  try {
+    return await fetchHtmlStaticOnce(url);
+  } catch (err) {
+    if (!isTransientHttp(err)) throw err;
+    await new Promise(r => setTimeout(r, 1500));
+    return await fetchHtmlStaticOnce(url);
   }
 }
 
@@ -137,7 +152,11 @@ function extractMeta(html) {
   const metaDesc = ogDesc
     || pick(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i);
   const pub = pick(/<meta[^>]+property=["']article:published_time["'][^>]+content=["']([^"']+)["']/i);
-  return { title, summary: metaDesc, publishedAt: pub || null };
+  // Fallback: <time dateTime="..."> in the article header. Many SPAs (Attio
+  // changelog, Linear, Notion) don't emit article:published_time but do render
+  // a <time> element. On entry pages the first <time> is the entry's own date.
+  const timeDt = pick(/<time[^>]+date[Tt]ime=["']([^"']+)["']/i);
+  return { title, summary: metaDesc, publishedAt: pub || timeDt || null };
 }
 
 function decode(s) {
@@ -226,7 +245,22 @@ async function fetchScrape(listingUrl) {
     const context = await browser.newContext({ userAgent: UA });
     const page = await context.newPage();
     try {
-      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: DYNAMIC_TIMEOUT_MS });
+      let lastErr;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          await page.goto(url, { waitUntil: 'domcontentloaded', timeout: DYNAMIC_TIMEOUT_MS });
+          lastErr = null;
+          break;
+        } catch (err) {
+          lastErr = err;
+          if (attempt === 0 && /Timeout|net::|ECONNRESET/i.test(err.message)) {
+            await new Promise(r => setTimeout(r, 1500));
+            continue;
+          }
+          throw err;
+        }
+      }
+      if (lastErr) throw lastErr;
       // Give client-side rendering a beat to populate article bodies.
       await page.waitForTimeout(1200);
       return await page.content();
