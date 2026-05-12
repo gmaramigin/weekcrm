@@ -12,6 +12,7 @@ tags:
   - Ecommerce
   - Shopify
   - AI Automation
+  - Klaviyo
 date: 2026-04-15
 ---
 

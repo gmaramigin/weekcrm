@@ -12,6 +12,7 @@ tags:
   - Ecommerce
   - AI
   - Customer Support
+  - Klaviyo
 date: 2026-04-15
 ---
 

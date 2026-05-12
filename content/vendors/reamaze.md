@@ -13,6 +13,7 @@ tags:
   - Ecommerce
   - Live Chat
   - Shopify
+  - Klaviyo
 date: 2026-04-15
 ---
 

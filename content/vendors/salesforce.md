@@ -44,6 +44,10 @@ tags:
   - DocuSign
   - PandaDoc
   - Make
+  - Government
+  - Professional Services
+  - Klaviyo
+  - Aircall
 date: 2026-04-15T00:00:00.000Z
 tldr: "Salesforce is the world's largest enterprise CRM. Pricing starts at $25/user/month (Starter Suite) and scales to $550/user/month (Agentforce 1). Best for 200+ rep enterprises with regulated data and a dedicated admin team. Most SMB and mid-market teams overpay 2–3x vs alternatives like Attio, HubSpot, or Pipedrive."
 faq:
