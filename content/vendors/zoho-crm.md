@@ -38,6 +38,9 @@ tags:
   - DocuSign
   - PandaDoc
   - Make
+  - Intercom
+  - Travel
+  - Outlook
 date: 2026-04-15
 tldr: "Zoho CRM is one of the cheapest full-featured CRMs on the market. Pricing runs $14/user/month (Standard) to $52/user/month (Ultimate), with a free plan for up to 3 users. Best for cost-sensitive SMB and mid-market teams that want Salesforce-like depth at a fraction of the cost."
 faq:

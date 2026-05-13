@@ -40,6 +40,12 @@ tags:
   - PandaDoc
   - Make
   - Aircall
+  - Intercom
+  - ClickUp
+  - Travel
+  - Dental
+  - Outlook
+  - Microsoft 365
 date: 2026-04-15T00:00:00.000Z
 tldr: "Pipedrive is a sales-focused CRM built around a visual pipeline. Pricing starts at $14/user/month (Essential) and tops out at $99/user/month (Enterprise). Best for SMB sales teams that want a simple pipeline tool without HubSpot's marketing baggage or Salesforce's complexity."
 faq:
