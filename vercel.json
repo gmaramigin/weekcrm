@@ -3,6 +3,13 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/news/2026-05-15-hubspot-alternatives-2026",
+      "destination": "/news/2026-05-06-hubspot-alternatives-2026",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
