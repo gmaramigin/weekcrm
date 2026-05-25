@@ -18,6 +18,9 @@ tags:
   - Zoom
   - SMS
   - Airtable
+  - Cybersecurity
+  - GitHub
+  - Linear
   - Google Sheets
   - Typeform
   - PandaDoc

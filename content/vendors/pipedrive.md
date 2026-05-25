@@ -18,6 +18,11 @@ tags:
   - Microsoft Teams
   - Legal
   - Coaching
+  - Cybersecurity
+  - Food and Beverage
+  - Web Development
+  - GitHub
+  - Webflow
   - Stripe
   - Calendly
   - Notion

@@ -18,6 +18,11 @@ tags:
   - Legal
   - Healthcare
   - Coaching
+  - Cybersecurity
+  - Web Development
+  - GitHub
+  - Linear
+  - Webflow
   - Stripe
   - Calendly
   - Notion

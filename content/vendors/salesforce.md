@@ -18,6 +18,11 @@ tags:
   - Insurance
   - Recruiting
   - Microsoft Teams
+  - Cybersecurity
+  - Food and Beverage
+  - Web Development
+  - GitHub
+  - Webflow
   - Zapier
   - Legal
   - Healthcare
