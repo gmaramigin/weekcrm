@@ -8,6 +8,7 @@ category: CRM
 pricing: 'Free plan for up to 15 users; paid from $12.74/user/mo'
 rating: '4.3'
 tags:
+  - WordPress
   - CRM
   - Marketing Automation
   - Help Desk

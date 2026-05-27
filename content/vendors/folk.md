@@ -8,6 +8,7 @@ category: CRM
 pricing: 'Free plan, paid from $20/mo'
 rating: '4.5'
 tags:
+  - HubSpot
   - CRM
   - Contacts
   - HR

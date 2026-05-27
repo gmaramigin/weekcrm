@@ -8,6 +8,9 @@ category: CRM
 pricing: 'From $249/mo (1,500 contacts, 2 users); mandatory $500 onboarding fee'
 rating: '4.1'
 tags:
+  - Veterinary
+  - Franchise
+  - WordPress
   - CRM
   - Marketing Automation
   - Small Business

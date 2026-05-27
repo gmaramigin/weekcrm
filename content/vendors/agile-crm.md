@@ -9,6 +9,7 @@ category: CRM
 pricing: 'Free plan up to 10 users; paid from $8.99/user/mo'
 rating: '3.7'
 tags:
+  - WordPress
   - CRM
   - Marketing Automation
   - Small Business CRM

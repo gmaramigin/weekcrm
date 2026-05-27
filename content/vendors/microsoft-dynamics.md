@@ -10,6 +10,7 @@ category: CRM
 pricing: 'On-premises licensing; legacy support pricing varies'
 rating: '3.8'
 tags:
+  - Telecom
   - CRM
   - Enterprise
   - On-Premises

@@ -9,6 +9,11 @@ category: CRM
 pricing: 'Free (up to 3 users); from $14/user/mo (Standard) to $52/user/mo (Ultimate), billed annually'
 rating: '4.2'
 tags:
+  - Veterinary
+  - Telecom
+  - Franchise
+  - WordPress
+  - HubSpot
   - CRM
   - Sales
   - Automation

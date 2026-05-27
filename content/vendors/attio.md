@@ -8,6 +8,8 @@ category: CRM
 pricing: 'Free plan available, paid from $29/mo'
 rating: '5'
 tags:
+  - Segment
+  - HubSpot
   - CRM
   - AI
   - Startups

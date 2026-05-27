@@ -9,6 +9,7 @@ category: CRM
 pricing: 'From $29/mo (annual), $36/mo monthly'
 rating: '4.3'
 tags:
+  - Veterinary
   - CRM
   - Freelancers
   - Small Business

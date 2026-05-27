@@ -8,6 +8,7 @@ category: CRM
 pricing: 'From $29/user/mo (Growth); Pro $49, Enterprise $99'
 rating: '4.4'
 tags:
+  - HubSpot
   - CRM
   - Sales
   - B2B

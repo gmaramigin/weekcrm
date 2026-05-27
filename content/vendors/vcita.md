@@ -8,6 +8,7 @@ category: CRM
 pricing: 'From $35/mo (annual); 14-day free trial'
 rating: '4.0'
 tags:
+  - Veterinary
   - Small Business
   - Scheduling
   - CRM

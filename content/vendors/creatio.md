@@ -9,6 +9,7 @@ category: CRM
 pricing: 'From $25/user/mo'
 rating: '4.1'
 tags:
+  - Telecom
   - CRM
   - No-Code
   - BPM

@@ -8,6 +8,11 @@ category: CRM
 pricing: 'Free plan, paid from $20/mo'
 rating: '4.5'
 tags:
+  - Veterinary
+  - Telecom
+  - Franchise
+  - Segment
+  - WordPress
   - CRM
   - Marketing
   - Sales

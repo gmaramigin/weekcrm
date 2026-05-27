@@ -8,6 +8,8 @@ category: CRM
 pricing: From $49/mo
 rating: '4.7'
 tags:
+  - Segment
+  - HubSpot
   - CRM
   - Sales
   - Outbound

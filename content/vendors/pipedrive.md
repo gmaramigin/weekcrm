@@ -10,6 +10,10 @@ pricing: From $14/user/mo (annual); five tiers to $99/user/mo
 rating: '4.3'
 referralUrl: 'https://www.pipedrive.com/taf/TGR3MD'
 tags:
+  - Franchise
+  - Segment
+  - WordPress
+  - HubSpot
   - CRM
   - Sales
   - Pipeline

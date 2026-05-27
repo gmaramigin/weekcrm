@@ -9,6 +9,10 @@ category: CRM
 pricing: 'Starter $25/user/mo; Pro $100, Enterprise $175, Unlimited $350'
 rating: '4.3'
 tags:
+  - Telecom
+  - Franchise
+  - Segment
+  - HubSpot
   - CRM
   - Sales
   - Enterprise
