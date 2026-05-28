@@ -12,6 +12,10 @@ tags:
   - Small Business
   - Marketing
   - Scheduling
+  - Fitness
+  - Event Management
+  - Pet Services
+  - Spa Wellness
 date: 2026-04-15
 ---
 

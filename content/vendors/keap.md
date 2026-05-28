@@ -17,6 +17,8 @@ tags:
   - Email Marketing
   - Nonprofits
   - Zapier
+  - Spa Wellness
+  - Subscription Business
 date: 2026-04-15
 ---
 

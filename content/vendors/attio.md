@@ -45,6 +45,12 @@ tags:
   - Partnerships
   - Custom Objects
   - PLG
+  - Subscription Business
+  - Google Drive
+  - Dropbox
+  - Outreach
+  - Apollo
+  - Gong
 date: 2025-05-05T00:00:00.000Z
 referralUrl: 'https://attio.com?r=y3j7Pq3xmq0brxsU'
 referralPerk: 10% discount on any plan
