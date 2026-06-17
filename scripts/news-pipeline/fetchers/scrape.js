@@ -22,9 +22,21 @@ const STATIC_TIMEOUT_MS = 30000;
 const DYNAMIC_TIMEOUT_MS = 45000;
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
+// Node fetch() nests the real network cause (ENOTFOUND, ECONNRESET, …) on
+// err.cause; err.message is just "fetch failed". Flatten the chain so the
+// retry-once in fetchHtmlStatic actually fires on transient failures.
+function errorText(err) {
+  const parts = [];
+  for (let e = err, depth = 0; e && depth < 5; e = e.cause, depth++) {
+    if (e.code) parts.push(String(e.code));
+    if (e.message) parts.push(String(e.message));
+  }
+  return parts.join(' ');
+}
+
 function isTransientHttp(err) {
-  const msg = String(err && err.message || '');
-  return /timeout|aborted|ECONNRESET|socket|network|EAI_AGAIN|ETIMEDOUT|HTTP 5\d\d/i.test(msg);
+  return /timeout|abort|ECONNRESET|ECONNREFUSED|ENOTFOUND|EAI_AGAIN|ETIMEDOUT|UND_ERR|socket|network|fetch failed|HTTP 5\d\d/i
+    .test(errorText(err));
 }
 
 async function fetchHtmlStaticOnce(url) {
@@ -123,6 +135,13 @@ function inferPublishedAt(url, title) {
   m = url.match(/\/(\d{4})\/(\d{2})\//);
   if (m) return isoDate(m[1], m[2], '01');
 
+  // 3b. URL slug: /<month-name>-YYYY  (e.g. /product-updates/december-2025)
+  m = url.match(/\/([A-Za-z]+)-(20\d{2})(?:[/?#-]|$)/);
+  if (m) {
+    const mon = MONTHS[m[1].toLowerCase()];
+    if (mon !== undefined) return isoDate(m[2], String(mon + 1).padStart(2, '0'), '01');
+  }
+
   // 4. Title: "April 15, 2026" or "April 15th, 2026" (case-insensitive)
   if (title) {
     m = title.match(/([A-Za-z]+)\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(\d{4})/);
@@ -141,6 +160,70 @@ function inferPublishedAt(url, title) {
 function isoDate(y, mo, d) {
   const dt = new Date(Date.UTC(+y, +mo - 1, +d, 12, 0, 0)); // noon UTC — avoid TZ edge
   return isNaN(dt.getTime()) ? null : dt.toISOString();
+}
+
+// Parse the first real date out of a blob of text. Handles "April 29, 2026",
+// "May 19 2026", and "2026-04-29". Returns ISO (noon UTC) or null.
+//
+// Listing markup routinely concatenates rendered text with no separators
+// ("…29, 2026April 23, 2026Automate…"), so the patterns anchor on letter/digit
+// lookarounds rather than \b word boundaries — a trailing \b fails the moment a
+// year is followed directly by a letter, which is exactly the common case here.
+function parseDateFromText(text) {
+  if (!text) return null;
+  const wordRe = /(?<![A-Za-z])([A-Za-z]{3,9})\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(20\d{2})(?!\d)/g;
+  let m;
+  while ((m = wordRe.exec(text))) {
+    const mon = MONTHS[m[1].toLowerCase()];
+    if (mon !== undefined) return isoDate(m[3], String(mon + 1).padStart(2, '0'), m[2].padStart(2, '0'));
+  }
+  const iso = text.match(/(?<!\d)(20\d{2})-(\d{2})-(\d{2})(?!\d)/);
+  if (iso) return isoDate(iso[1], iso[2], iso[3]);
+  return null;
+}
+
+// Read a date off a listing element: a <time datetime> descendant first
+// (most reliable), then any date string in its text.
+function dateFromElement(el) {
+  const timeEl = el.querySelector && el.querySelector('time[datetime], time[dateTime]');
+  if (timeEl) {
+    const dt = timeEl.getAttribute('datetime') || timeEl.getAttribute('dateTime');
+    const parsed = Date.parse(dt || '');
+    if (!Number.isNaN(parsed)) return new Date(parsed).toISOString();
+  }
+  return parseDateFromText(el.textContent || '');
+}
+
+// Many changelog / "what's new" pages show each entry's date on the index but
+// NOT on the entry's own page (SPA changelog tools — Folk, Vendasta, …). The
+// per-article scrape only ever sees the entry page, so that date is lost. This
+// pass reads the listing once and maps each article URL → the date shown beside
+// its link: walk up from the <a> and take the CLOSEST date. Closest-ancestor
+// keeps each link on its own entry's date instead of a neighbour's.
+const LISTING_DATE_MAX_DEPTH = 6;
+
+function extractListingDates(html, listingUrl) {
+  const map = new Map();
+  if (!html) return map;
+  let doc;
+  try { doc = new JSDOM(html, { url: listingUrl }).window.document; }
+  catch { return map; }
+
+  for (const a of doc.querySelectorAll('a[href]')) {
+    const href = a.getAttribute('href');
+    if (!href) continue;
+    let u;
+    try { u = new URL(href, listingUrl); } catch { continue; }
+    u.hash = '';
+    const key = u.toString();
+    if (map.has(key)) continue;
+    let el = a;
+    for (let depth = 0; el && depth <= LISTING_DATE_MAX_DEPTH; depth++, el = el.parentElement) {
+      const date = dateFromElement(el);
+      if (date) { map.set(key, date); break; }
+    }
+  }
+  return map;
 }
 
 function extractMeta(html) {
@@ -203,7 +286,9 @@ async function mapLimit(items, limit, fn) {
 
 // Try static fetch → readability; if body is thin, try a headless-browser
 // fetch through the shared Playwright browser (lazy-initialized per run).
-async function fetchAndExtract(url, getDynamic) {
+// `listingDate` is the date shown beside this URL on the index page — used as
+// a fallback when the entry page itself exposes no date.
+async function fetchAndExtract(url, getDynamic, listingDate) {
   let html = null;
   try { html = await fetchHtmlStatic(url); } catch {}
   let article = html ? extractArticle(html, url) : null;
@@ -229,7 +314,7 @@ async function fetchAndExtract(url, getDynamic) {
     title,
     content: article.content,
     summary: meta.summary || article.excerpt || '',
-    publishedAt: meta.publishedAt || inferPublishedAt(url, title)
+    publishedAt: meta.publishedAt || listingDate || inferPublishedAt(url, title)
   };
 }
 
@@ -294,8 +379,12 @@ async function fetchScrape(listingUrl) {
       return [];
     }
 
+    // Dates shown on the index page, keyed by article URL — recovers changelog
+    // entries whose own pages carry no date.
+    const listingDates = extractListingDates(listingHtml, listingUrl);
+
     const results = await mapLimit(urls, CONCURRENCY, async url => {
-      const full = await fetchAndExtract(url, getDynamicHtml);
+      const full = await fetchAndExtract(url, getDynamicHtml, listingDates.get(url) || null);
       if (!full) return null;
       return {
         title: full.title,
@@ -313,4 +402,4 @@ async function fetchScrape(listingUrl) {
   }
 }
 
-module.exports = { fetchScrape };
+module.exports = { fetchScrape, extractListingDates, inferPublishedAt, isTransientHttp };

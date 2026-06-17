@@ -137,7 +137,15 @@ function slugify(s) {
     .slice(0, 60);
 }
 
-main().catch(err => {
-  console.error('\n✗ Pipeline failed:', err);
-  process.exit(1);
-});
+main()
+  .then(() => {
+    // Force exit: a scrape source may have launched Playwright, whose
+    // chrome-headless-shell children can leave open handles that keep the
+    // event loop alive indefinitely. The work is done once main() resolves,
+    // so exit cleanly rather than hang waiting for the loop to drain.
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error('\n✗ Pipeline failed:', err);
+    process.exit(1);
+  });
