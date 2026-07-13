@@ -8,6 +8,31 @@
       "source": "/news/2026-05-15-hubspot-alternatives-2026",
       "destination": "/news/2026-05-06-hubspot-alternatives-2026",
       "permanent": true
+    },
+    {
+      "source": "/compare/attio-vs-close",
+      "destination": "/compare/close-vs-attio",
+      "permanent": true
+    },
+    {
+      "source": "/compare/folk-vs-close",
+      "destination": "/compare/close-vs-folk",
+      "permanent": true
+    },
+    {
+      "source": "/compare/hubspot-vs-microsoft-dynamics",
+      "destination": "/compare/dynamics-365-vs-hubspot",
+      "permanent": true
+    },
+    {
+      "source": "/compare/intercom-vs-gorgias",
+      "destination": "/compare/gorgias-vs-intercom",
+      "permanent": true
+    },
+    {
+      "source": "/compare/freshsales-vs-pipedrive",
+      "destination": "/compare/pipedrive-vs-freshsales",
+      "permanent": true
     }
   ],
   "headers": [
