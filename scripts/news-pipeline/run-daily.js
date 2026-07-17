@@ -31,7 +31,8 @@ const DRY_RUN_VENDORS = [
     name: 'Attio',
     slug: 'attio',
     website: 'https://attio.com',
-    sources: [{ type: 'rss', value: 'https://attio.com/blog/rss.xml' }]
+    // attio.com/blog/rss.xml is gone (404) — the changelog scrape is the live source.
+    sources: [{ type: 'scrape', value: 'https://attio.com/changelog' }]
   }
 ];
 

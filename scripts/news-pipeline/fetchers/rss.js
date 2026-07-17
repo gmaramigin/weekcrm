@@ -44,7 +44,7 @@ function errorText(err) {
 }
 
 function isTransient(err) {
-  return /timeout|abort|ECONNRESET|ECONNREFUSED|ENOTFOUND|EAI_AGAIN|ETIMEDOUT|UND_ERR|socket|network|fetch failed|HTTP 5\d\d/i
+  return /timeout|abort|ECONNRESET|ECONNREFUSED|ENOTFOUND|EAI_AGAIN|ETIMEDOUT|UND_ERR|socket|network|fetch failed|HTTP 5\d\d|HTTP 429/i
     .test(errorText(err));
 }
 
@@ -94,7 +94,8 @@ async function fetchRss(url) {
     } catch (err) {
       lastErr = err;
       if (attempt === 0 && isTransient(err)) {
-        await new Promise(r => setTimeout(r, 1500));
+        // Rate limits need a real pause; a 1.5s retry just 429s again.
+        await new Promise(r => setTimeout(r, /HTTP 429/.test(errorText(err)) ? 8000 : 1500));
         continue;
       }
       break;

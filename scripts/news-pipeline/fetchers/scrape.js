@@ -35,10 +35,14 @@ function errorText(err) {
 }
 
 function isTransientHttp(err) {
-  return /timeout|abort|ECONNRESET|ECONNREFUSED|ENOTFOUND|EAI_AGAIN|ETIMEDOUT|UND_ERR|socket|network|fetch failed|HTTP 5\d\d/i
+  return /timeout|abort|ECONNRESET|ECONNREFUSED|ENOTFOUND|EAI_AGAIN|ETIMEDOUT|UND_ERR|socket|network|fetch failed|HTTP 5\d\d|HTTP 429/i
     .test(errorText(err));
 }
 
+// Returns { html, finalUrl }. finalUrl is the URL after redirects — listings
+// routinely 301 to another host (goldmine.com → www.goldmine.com,
+// liveagent.com/changelog → changelog.liveagent.com), and link extraction
+// against the pre-redirect host rejects every article as cross-host.
 async function fetchHtmlStaticOnce(url) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), STATIC_TIMEOUT_MS);
@@ -49,7 +53,7 @@ async function fetchHtmlStaticOnce(url) {
       signal: ctrl.signal
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.text();
+    return { html: await res.text(), finalUrl: res.url || url };
   } finally {
     clearTimeout(t);
   }
@@ -60,7 +64,8 @@ async function fetchHtmlStatic(url) {
     return await fetchHtmlStaticOnce(url);
   } catch (err) {
     if (!isTransientHttp(err)) throw err;
-    await new Promise(r => setTimeout(r, 1500));
+    // Rate limits need a real pause; a 1.5s retry just 429s again.
+    await new Promise(r => setTimeout(r, /HTTP 429/.test(errorText(err)) ? 8000 : 1500));
     return await fetchHtmlStaticOnce(url);
   }
 }
@@ -79,12 +84,27 @@ function absolutize(href, baseUrl) {
   try { return new URL(href, baseUrl).toString(); } catch { return null; }
 }
 
+// Listing-path segments that mark a FILTERED VIEW of a blog (category page,
+// tag page, …). Articles on such pages usually live under the parent content
+// root (/blog/category/release/ lists articles at /blog/<slug>), so the strict
+// prefix rule in tier 1 finds nothing on them.
+const FILTER_SEGMENT = /\/(category|categories|tag|tags|topic|topics|label|labels|archive|section)(\/|$)/i;
+
+// Hyphen count of a path's last segment (extension stripped). Real article
+// slugs are multi-word ("mail-in-daylite-enhancements"); nav pages are short
+// ("features", "product-tours").
+function slugHyphens(pathname) {
+  const seg = pathname.replace(/\/$/, '').split('/').pop() || '';
+  return (seg.replace(/\.[a-z0-9]+$/i, '').match(/-/g) || []).length;
+}
+
 function extractArticleLinks(html, listingUrl) {
   const base = new URL(listingUrl);
   const basePath = base.pathname.replace(/\/$/, '');
-  const seen = new Set();
-  const links = [];
 
+  // Collect every same-host candidate once; tiers filter this list.
+  const seen = new Set();
+  const candidates = [];
   const re = /<a\b[^>]*\bhref=["']([^"']+)["'][^>]*>/gi;
   let m;
   while ((m = re.exec(html))) {
@@ -93,24 +113,62 @@ function extractArticleLinks(html, listingUrl) {
     let u;
     try { u = new URL(abs); } catch { continue; }
     if (u.host !== base.host) continue;
-
-    if (!u.pathname.startsWith(basePath + '/')) continue;
-    if (u.pathname === basePath || u.pathname === basePath + '/') continue;
-    // Skip listing loopbacks like /blog/default.aspx, /blog/index.html, /blog/
-    const tail = u.pathname.slice(basePath.length + 1);
-    if (/^(default\.(aspx|htm|html|php)|index\.(htm|html|php|aspx))$/i.test(tail)) continue;
-
     if (/\.(xml|rss|json|pdf|jpg|png|webp|svg|ico)$/i.test(u.pathname)) continue;
     if (/\b(page|tag|category|author|feed|rss|sitemap)\b/i.test(u.pathname)) continue;
     if (u.hash) u.hash = '';
-
     const key = u.toString();
     if (seen.has(key)) continue;
     seen.add(key);
-    links.push(key);
-    if (links.length >= MAX_ITEMS * 3) break;
+    candidates.push(u);
   }
-  return links.slice(0, MAX_ITEMS);
+
+  // Links strictly under `root`, minus listing loopbacks and year-archive nav.
+  function underRoot(root) {
+    const out = [];
+    for (const u of candidates) {
+      if (!u.pathname.startsWith(root + '/')) continue;
+      if (u.pathname === root || u.pathname === root + '/') continue;
+      // Skip listing loopbacks like /blog/default.aspx, /blog/index.html, /blog/
+      const tail = u.pathname.slice(root.length + 1);
+      if (/^(default\.(aspx|htm|html|php)|index\.(htm|html|php|aspx))$/i.test(tail)) continue;
+      // Skip year-archive nav links like /changelog/2025, /changelog/2026/ — a
+      // "browse by year" index page, not an article. These often render ahead
+      // of the actual entries in the DOM, so without this they eat slots out of
+      // the fixed MAX_ITEMS budget and can crowd out real (fresher) articles.
+      if (/^\d{4}\/?$/.test(tail)) continue;
+      out.push(u);
+      if (out.length >= MAX_ITEMS * 3) break;
+    }
+    return out;
+  }
+
+  // Tier 1: articles under the listing path itself (strict — no slug heuristic,
+  // changelog entries often have short slugs). A site-root listing has no path
+  // to scope by — fall through to the tier-3 slug heuristic instead of
+  // treating every nav link as an article.
+  let links = basePath ? underRoot(basePath) : [];
+
+  // Tier 2: filtered-view listing (category/tag/…) → look under the parent
+  // content root, keeping only multi-word slugs so section indexes ("/blog/crm")
+  // don't slip through.
+  if (!links.length) {
+    const filterMatch = basePath.match(FILTER_SEGMENT);
+    if (filterMatch) {
+      const contentRoot = basePath.slice(0, filterMatch.index).replace(/\/$/, '');
+      if (contentRoot) {
+        links = underRoot(contentRoot).filter(u => slugHyphens(u.pathname) >= 1);
+      }
+    }
+  }
+
+  // Tier 3: nothing under any usable root (articles at site root, or a filtered
+  // view whose content root IS the site root). Only long hyphenated slugs
+  // (3+ words) count — short nav paths like /product-tours/ stay excluded.
+  if (!links.length) {
+    links = underRoot('').filter(u => slugHyphens(u.pathname) >= 2);
+  }
+
+  return links.map(u => u.toString()).slice(0, MAX_ITEMS);
 }
 
 // Infer a publishedAt ISO date from the URL path or article title when the
@@ -290,7 +348,7 @@ async function mapLimit(items, limit, fn) {
 // a fallback when the entry page itself exposes no date.
 async function fetchAndExtract(url, getDynamic, listingDate) {
   let html = null;
-  try { html = await fetchHtmlStatic(url); } catch {}
+  try { ({ html } = await fetchHtmlStatic(url)); } catch {}
   let article = html ? extractArticle(html, url) : null;
   let meta = html ? extractMeta(html) : {};
 
@@ -298,7 +356,7 @@ async function fetchAndExtract(url, getDynamic, listingDate) {
     try {
       const dyn = await getDynamic(url);
       if (dyn) {
-        html = dyn;
+        html = dyn.html;
         article = extractArticle(html, url);
         meta = extractMeta(html);
       }
@@ -348,7 +406,7 @@ async function fetchScrape(listingUrl) {
       if (lastErr) throw lastErr;
       // Give client-side rendering a beat to populate article bodies.
       await page.waitForTimeout(1200);
-      return await page.content();
+      return { html: await page.content(), finalUrl: page.url() };
     } finally {
       await page.close().catch(() => {});
       await context.close().catch(() => {});
@@ -357,17 +415,21 @@ async function fetchScrape(listingUrl) {
 
   try {
     let listingHtml = null;
-    try { listingHtml = await fetchHtmlStatic(listingUrl); } catch {}
+    // The listing may redirect (www, trailing slash, a whole rebrand) — links
+    // must be resolved against where we actually LANDED, not the configured URL.
+    let listingBase = listingUrl;
+    try { ({ html: listingHtml, finalUrl: listingBase } = await fetchHtmlStatic(listingUrl)); } catch {}
 
-    let urls = listingHtml ? extractArticleLinks(listingHtml, listingUrl) : [];
+    let urls = listingHtml ? extractArticleLinks(listingHtml, listingBase) : [];
 
     // SPA listing: no crawlable links statically → render with headless browser.
     if (!urls.length) {
       try {
         const dyn = await getDynamicHtml(listingUrl);
         if (dyn) {
-          listingHtml = dyn;
-          urls = extractArticleLinks(listingHtml, listingUrl);
+          listingHtml = dyn.html;
+          listingBase = dyn.finalUrl || listingBase;
+          urls = extractArticleLinks(listingHtml, listingBase);
         }
       } catch (err) {
         console.warn(`  ⚠ scrape listing failed for ${listingUrl}: ${err.message}`);
@@ -381,7 +443,7 @@ async function fetchScrape(listingUrl) {
 
     // Dates shown on the index page, keyed by article URL — recovers changelog
     // entries whose own pages carry no date.
-    const listingDates = extractListingDates(listingHtml, listingUrl);
+    const listingDates = extractListingDates(listingHtml, listingBase);
 
     const results = await mapLimit(urls, CONCURRENCY, async url => {
       const full = await fetchAndExtract(url, getDynamicHtml, listingDates.get(url) || null);
@@ -402,4 +464,4 @@ async function fetchScrape(listingUrl) {
   }
 }
 
-module.exports = { fetchScrape, extractListingDates, inferPublishedAt, isTransientHttp };
+module.exports = { fetchScrape, extractArticleLinks, extractListingDates, inferPublishedAt, isTransientHttp };

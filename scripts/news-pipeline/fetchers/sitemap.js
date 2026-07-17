@@ -5,6 +5,8 @@
 //
 // For each matching URL it fetches the page and extracts og:title / og:description.
 
+const { inferPublishedAt } = require('./scrape');
+
 const MAX_ITEMS = 12;
 const CONCURRENCY = 4;
 const UA = 'Mozilla/5.0 (compatible; WeekCRM-news-bot/1.0; +https://weekcrm.com)';
@@ -18,12 +20,25 @@ async function fetchText(url) {
   return res.text();
 }
 
+// Returns [{ url, lastmod }] — lastmod (ISO string or null) is the sitemap's
+// own <lastmod> for that <url> block, the most reliable date a sitemap offers.
 function parseSitemapUrls(xml) {
-  const urls = [];
+  const entries = [];
+  const blockRe = /<url>([\s\S]*?)<\/url>/gi;
+  let b;
+  while ((b = blockRe.exec(xml))) {
+    const loc = b[1].match(/<loc>\s*([^<\s]+)\s*<\/loc>/i);
+    if (!loc) continue;
+    const lastmod = b[1].match(/<lastmod>\s*([^<\s]+)\s*<\/lastmod>/i);
+    entries.push({ url: loc[1], lastmod: lastmod ? lastmod[1] : null });
+  }
+  if (entries.length) return entries;
+  // Sitemap-index files (and odd generators) may not use <url> blocks — fall
+  // back to bare <loc> scanning so we at least keep the previous behaviour.
   const re = /<loc>\s*([^<\s]+)\s*<\/loc>/gi;
   let m;
-  while ((m = re.exec(xml))) urls.push(m[1]);
-  return urls;
+  while ((m = re.exec(xml))) entries.push({ url: m[1], lastmod: null });
+  return entries;
 }
 
 function extractMeta(html) {
@@ -67,32 +82,41 @@ async function fetchSitemap(value) {
     return [];
   }
 
-  let urls = parseSitemapUrls(xml);
+  let entries = parseSitemapUrls(xml);
   if (prefix) {
-    urls = urls.filter(u => {
-      try { return new URL(u).pathname.startsWith(prefix); }
+    entries = entries.filter(e => {
+      try { return new URL(e.url).pathname.startsWith(prefix); }
       catch { return false; }
     });
   }
   // trim index / empty paths
-  urls = urls.filter(u => {
+  entries = entries.filter(e => {
     try {
-      const p = new URL(u).pathname.replace(/\/$/, '');
+      const p = new URL(e.url).pathname.replace(/\/$/, '');
       return p !== '' && p !== prefix.replace(/\/$/, '');
     } catch { return false; }
   });
 
-  // newest-first heuristic: sitemaps often list newest last; reverse
-  urls = urls.reverse().slice(0, MAX_ITEMS);
+  // newest-first: trust <lastmod> ordering when present, else assume the
+  // sitemap lists newest last and reverse.
+  if (entries.some(e => e.lastmod)) {
+    entries.sort((a, b) => Date.parse(b.lastmod || 0) - Date.parse(a.lastmod || 0));
+    entries = entries.slice(0, MAX_ITEMS);
+  } else {
+    entries = entries.reverse().slice(0, MAX_ITEMS);
+  }
 
-  const results = await mapLimit(urls, CONCURRENCY, async url => {
+  const results = await mapLimit(entries, CONCURRENCY, async ({ url, lastmod }) => {
     const html = await fetchText(url);
     const meta = extractMeta(html);
     return {
       title: meta.title,
       url,
       summary: meta.summary,
-      publishedAt: meta.publishedAt,
+      // Explicit page meta wins; then the sitemap's own <lastmod>; then a date
+      // encoded in the URL or title — so the freshness gate doesn't drop
+      // everything as undated.
+      publishedAt: meta.publishedAt || lastmod || inferPublishedAt(url, meta.title),
       sourceType: 'sitemap'
     };
   });
