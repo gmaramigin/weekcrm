@@ -286,10 +286,10 @@ function vendorJsonLd(vendor) {
     name: vendor.title,
     description: vendor.description || '',
     category: vendor.category || 'CRM Software',
-    url: `https://weekcrm.com/vendors/${vendor.slug}`
+    url: `https://www.weekcrm.com/vendors/${vendor.slug}`
   };
   const logo = vendor.logo || resolveLogo(vendor.slug);
-  if (logo) obj.image = `https://weekcrm.com${logo}`;
+  if (logo) obj.image = `https://www.weekcrm.com${logo}`;
   if (vendor.website) obj.brand = { '@type': 'Brand', name: vendor.title };
   if (vendor.rating) {
     const ratingValue = parseFloat(vendor.rating);
@@ -319,7 +319,7 @@ function vendorJsonLd(vendor) {
 }
 
 // ── Build ───────────────────────────────────────────────
-const SITE_URL = 'https://weekcrm.com';
+const SITE_URL = 'https://www.weekcrm.com';
 
 function build() {
   const start = Date.now();
@@ -419,7 +419,7 @@ function build() {
   const homePage = render(baseTemplate, {
     title: 'WeekCRM — CRM News, Reviews & Vendor Directory',
     description: 'Stay on top of the CRM world. News, honest reviews, pricing updates, and a growing directory of CRM vendors.',
-    url: 'https://weekcrm.com',
+    url: 'https://www.weekcrm.com',
     body: homeHtml,
     bodyClass: 'home',
     assetVersion: cssHash,
@@ -444,7 +444,7 @@ function build() {
   const newsPage = render(baseTemplate, {
     title: 'CRM News & Updates — WeekCRM',
     description: 'Latest news, feature updates, and pricing changes across the CRM industry.',
-    url: 'https://weekcrm.com/news',
+    url: 'https://www.weekcrm.com/news',
     body: newsHtml,
     bodyClass: '',
     assetVersion: cssHash,
@@ -473,7 +473,7 @@ function build() {
     const page = render(baseTemplate, {
       title: `${article.title} — WeekCRM`,
       description: article.description || excerpt(article.html),
-      url: `https://weekcrm.com/news/${article.slug}`,
+      url: `https://www.weekcrm.com/news/${article.slug}`,
       body: articleHtml,
       bodyClass: '',
       assetVersion: cssHash,
@@ -512,7 +512,7 @@ function build() {
   const directoryPage = render(baseTemplate, {
     title: 'CRM Directory — WeekCRM',
     description: 'Compare CRM vendors with honest reviews, real pros and cons, and pricing guidance.',
-    url: 'https://weekcrm.com/vendors',
+    url: 'https://www.weekcrm.com/vendors',
     body: directoryHtml,
     bodyClass: '',
     assetVersion: cssHash,
@@ -586,7 +586,7 @@ function build() {
     const page = render(baseTemplate, {
       title: `${vendor.title} — WeekCRM`,
       description: vendor.description || `Learn about ${vendor.title} — features, pricing, and honest review.`,
-      url: `https://weekcrm.com/vendors/${vendor.slug}`,
+      url: `https://www.weekcrm.com/vendors/${vendor.slug}`,
       body: vendorHtml,
       bodyClass: '',
       assetVersion: cssHash,
@@ -638,7 +638,7 @@ function build() {
   const consultantsPage = render(baseTemplate, {
     title: 'CRM Consultants & Experts — WeekCRM',
     description: 'Find vetted CRM consultants, implementation partners, and migration specialists. Browse Attio Experts and more.',
-    url: 'https://weekcrm.com/consultants',
+    url: 'https://www.weekcrm.com/consultants',
     body: consultantsHtml,
     bodyClass: '',
     assetVersion: cssHash,
@@ -710,7 +710,7 @@ function build() {
     const page = render(baseTemplate, {
       title: `${consultant.name} — ${vendorLabel} Expert — WeekCRM`,
       description: consultant.tagline || `${consultant.name} is a ${vendorLabel} implementation partner.`,
-      url: `https://weekcrm.com/consultants/${consultant.slug}`,
+      url: `https://www.weekcrm.com/consultants/${consultant.slug}`,
       body: consultantHtml,
       bodyClass: '',
       assetVersion: cssHash,
@@ -757,8 +757,8 @@ function build() {
         author: { '@type': 'Organization', name: 'WeekCRM' },
         publisher: { '@type': 'Organization', name: 'WeekCRM' },
         about: [
-          { '@type': 'Product', name: a.title, url: `https://weekcrm.com/vendors/${a.slug}` },
-          { '@type': 'Product', name: b.title, url: `https://weekcrm.com/vendors/${b.slug}` }
+          { '@type': 'Product', name: a.title, url: `https://www.weekcrm.com/vendors/${a.slug}` },
+          { '@type': 'Product', name: b.title, url: `https://www.weekcrm.com/vendors/${b.slug}` }
         ]
       }).replace(/<\/script/gi, '<\\/script');
 
@@ -787,7 +787,7 @@ function build() {
       const page = render(baseTemplate, {
         title: `${entry.title} — WeekCRM`,
         description: entry.description || `${a.title} vs ${b.title} — feature comparison, pricing, and verdict.`,
-        url: `https://weekcrm.com/compare/${entry.slug}`,
+        url: `https://www.weekcrm.com/compare/${entry.slug}`,
         body: compareHtml,
         bodyClass: '',
         assetVersion: cssHash,
@@ -824,7 +824,7 @@ function build() {
     const compareIndex = render(baseTemplate, {
       title: 'CRM Comparisons — WeekCRM',
       description: 'Honest, side-by-side comparisons of the most popular CRMs.',
-      url: 'https://weekcrm.com/compare',
+      url: 'https://www.weekcrm.com/compare',
       body: compareIndexBody, bodyClass: '', assetVersion: cssHash,
       ...pageMeta()
     });
@@ -879,7 +879,7 @@ function build() {
         itemListElement: picks.map((v, i) => ({
           '@type': 'ListItem',
           position: i + 1,
-          url: `https://weekcrm.com/vendors/${v.slug}`,
+          url: `https://www.weekcrm.com/vendors/${v.slug}`,
           name: v.title
         }))
       }).replace(/<\/script/gi, '<\\/script');
@@ -913,7 +913,7 @@ function build() {
       const page = render(baseTemplate, {
         title: `${entry.title} — WeekCRM`,
         description: entry.description || entry.title,
-        url: `https://weekcrm.com/best/${entry.slug}`,
+        url: `https://www.weekcrm.com/best/${entry.slug}`,
         body: bodyHtml, bodyClass: '', assetVersion: cssHash,
         ...pageMeta(entry, entry.sourcePath)
       });
@@ -947,7 +947,7 @@ function build() {
     const bestIndex = render(baseTemplate, {
       title: 'Best CRM Picks — WeekCRM',
       description: 'Curated CRM shortlists for every use case.',
-      url: 'https://weekcrm.com/best',
+      url: 'https://www.weekcrm.com/best',
       body: bestIndexBody, bodyClass: '', assetVersion: cssHash,
       ...pageMeta()
     });
@@ -1012,7 +1012,7 @@ function build() {
       const page = render(baseTemplate, {
         title: `${entry.title} — WeekCRM`,
         description: entry.description || entry.title,
-        url: `https://weekcrm.com/${urlPrefix}/${entry.slug}`,
+        url: `https://www.weekcrm.com/${urlPrefix}/${entry.slug}`,
         body: bodyHtml, bodyClass: '', assetVersion: cssHash,
         ...pageMeta(entry, entry.sourcePath)
       });
@@ -1049,7 +1049,7 @@ function build() {
     fs.writeFileSync(path.join(DIST, 'industry', 'index.html'), render(baseTemplate, {
       title: 'CRM by Industry — WeekCRM',
       description: 'Find the right CRM for your industry.',
-      url: 'https://weekcrm.com/industry',
+      url: 'https://www.weekcrm.com/industry',
       body: indexBody, bodyClass: '', assetVersion: cssHash,
       ...pageMeta()
     }));
@@ -1073,7 +1073,7 @@ function build() {
     fs.writeFileSync(path.join(DIST, 'integrations', 'index.html'), render(baseTemplate, {
       title: 'CRM Integrations — WeekCRM',
       description: 'Find the right CRM for your stack.',
-      url: 'https://weekcrm.com/integrations',
+      url: 'https://www.weekcrm.com/integrations',
       body: indexBody, bodyClass: '', assetVersion: cssHash,
       ...pageMeta()
     }));
@@ -1084,10 +1084,10 @@ function build() {
   const rssItems = articles.slice(0, 20).map(a => `
     <item>
       <title><![CDATA[${a.title}]]></title>
-      <link>https://weekcrm.com/news/${a.slug}</link>
+      <link>https://www.weekcrm.com/news/${a.slug}</link>
       <description><![CDATA[${a.description || excerpt(a.html)}]]></description>
       <pubDate>${new Date(a.date).toUTCString()}</pubDate>
-      <guid>https://weekcrm.com/news/${a.slug}</guid>
+      <guid>https://www.weekcrm.com/news/${a.slug}</guid>
     </item>
   `).join('');
 
@@ -1095,9 +1095,9 @@ function build() {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>WeekCRM</title>
-    <link>https://weekcrm.com</link>
+    <link>https://www.weekcrm.com</link>
     <description>CRM news, reviews, and vendor updates</description>
-    <atom:link href="https://weekcrm.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://www.weekcrm.com/rss.xml" rel="self" type="application/rss+xml"/>
     ${rssItems}
   </channel>
 </rss>`;
