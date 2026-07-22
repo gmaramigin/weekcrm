@@ -330,7 +330,7 @@ function build() {
   ensureDir(DIST);
 
   // Resolve which content sources are gitignored — we skip analytics on those.
-  const contentDirs = ['articles', 'vendors', 'consultants', 'compare', 'best', 'industry', 'integrations'];
+  const contentDirs = ['articles', 'vendors', 'consultants', 'compare', 'best', 'pricing', 'industry', 'integrations'];
   const allSourcePaths = [];
   for (const d of contentDirs) {
     const full = path.join(CONTENT, d);
@@ -955,6 +955,192 @@ function build() {
     addRoute('/best', { changefreq: 'weekly', priority: '0.7' });
   }
 
+  // ── Vendor pricing breakdowns (/pricing/<vendor-slug>) ───────
+  // Each entry is anchored to one vendor and carries its own `tiers` table, so
+  // the unique-content share per page is the tier data + editorial body, not
+  // template boilerplate. Entries whose `vendor` slug isn't in the directory
+  // hard-fail the build, same as compare/best.
+  const pricingEntries = readMarkdownFiles(path.join(CONTENT, 'pricing'));
+  if (pricingEntries.length) {
+    ensureDir(path.join(DIST, 'pricing'));
+    const pricingIndexCards = [];
+    for (const entry of pricingEntries) {
+      const vendor = vendorBySlug[entry.vendor];
+      if (!vendor) {
+        throw new Error(
+          `pricing/${entry.slug}.md references unknown vendor slug: ${entry.vendor}. ` +
+          `Add the vendor to content/vendors/ or fix the frontmatter.`
+        );
+      }
+      const tiers = Array.isArray(entry.tiers) ? entry.tiers : [];
+      if (!tiers.length) {
+        throw new Error(`pricing/${entry.slug}.md has no 'tiers' — a pricing page without tier data is thin content.`);
+      }
+
+      const esc = (s) => String(s ?? '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+      const tierRows = tiers.map(t => `
+        <tr>
+          <th scope="row">${esc(t.name)}</th>
+          <td class="pricing-cell-price">${esc(t.price)}</td>
+          <td>${esc(t.billing || '—')}</td>
+          <td>${esc(t.includes || '')}</td>
+        </tr>`).join('');
+
+      const tierTable = `
+        <div class="pricing-table-wrap">
+          <table class="pricing-table">
+            <caption>${esc(vendor.title)} plans and list pricing</caption>
+            <thead>
+              <tr><th scope="col">Plan</th><th scope="col">Price</th><th scope="col">Billing</th><th scope="col">What you get</th></tr>
+            </thead>
+            <tbody>${tierRows}</tbody>
+          </table>
+        </div>`;
+
+      // "Costs the pricing page doesn't show" — the genuinely additive block.
+      const gotchas = Array.isArray(entry.hiddenCosts) ? entry.hiddenCosts : [];
+      const gotchasHtml = gotchas.length ? `
+        <div class="pricing-gotchas">
+          <h2>What the pricing page doesn't show</h2>
+          <ul>${gotchas.map(g => `<li>${marked.parseInline(String(g))}</li>`).join('')}</ul>
+        </div>` : '';
+
+      // Related links: the vendor profile, its alternatives listicle if one
+      // exists, and up to three comparisons that feature this vendor.
+      const altSlug = `best-${vendor.slug}-alternatives`;
+      const hasAlt = bestEntries.some(b => b.slug === altSlug);
+      const relatedCompares = compareEntries
+        .filter(c => c.a === vendor.slug || c.b === vendor.slug)
+        .slice(0, 3);
+      const relatedLinks = [
+        `<li><a href="/vendors/${vendor.slug}">${esc(vendor.title)} review, features and ratings</a></li>`,
+        hasAlt ? `<li><a href="/best/${altSlug}">${esc(vendor.title)} alternatives worth pricing out</a></li>` : '',
+        ...relatedCompares.map(c => `<li><a href="/compare/${c.slug}">${esc(c.title)}</a></li>`)
+      ].filter(Boolean).join('');
+      const relatedHtml = `
+        <div class="pricing-related">
+          <h2>Keep researching</h2>
+          <ul>${relatedLinks}</ul>
+        </div>`;
+
+      // Product + Offer schema. Real per-tier offers, not a single blurred price.
+      const offers = tiers
+        .filter(t => typeof t.amount === 'number')
+        .map(t => ({
+          '@type': 'Offer',
+          name: t.name,
+          price: String(t.amount),
+          priceCurrency: t.currency || 'USD',
+          ...(t.unit ? { unitText: t.unit } : {}),
+          url: `https://www.weekcrm.com/pricing/${entry.slug}`
+        }));
+      const productLd = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: `${vendor.title} pricing`,
+        description: entry.description || `${vendor.title} plans and pricing.`,
+        brand: { '@type': 'Brand', name: vendor.title },
+        ...(offers.length ? {
+          offers: {
+            '@type': 'AggregateOffer',
+            priceCurrency: offers[0].priceCurrency,
+            lowPrice: String(Math.min(...offers.map(o => Number(o.price)))),
+            highPrice: String(Math.max(...offers.map(o => Number(o.price)))),
+            offerCount: String(offers.length),
+            offers
+          }
+        } : {})
+      }).replace(/<\/script/gi, '<\\/script');
+
+      const breadcrumbLd = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Pricing', item: 'https://www.weekcrm.com/pricing' },
+          { '@type': 'ListItem', position: 2, name: `${vendor.title} pricing`, item: `https://www.weekcrm.com/pricing/${entry.slug}` }
+        ]
+      }).replace(/<\/script/gi, '<\\/script');
+
+      const ctaUrl = vendor.referralUrl || vendor.website || '#';
+      const ctaRel = vendor.referralUrl ? 'noopener sponsored' : 'noopener nofollow';
+
+      const bodyHtml = `
+        ${faqJsonLdTag(entry.faq)}
+        <script type="application/ld+json">${productLd}</script>
+        <script type="application/ld+json">${breadcrumbLd}</script>
+        <section class="compare-hero">
+          <div class="container container-narrow">
+            <span class="compare-eyebrow">Pricing breakdown</span>
+            <h1 class="compare-title">${esc(entry.title)}</h1>
+            <p class="compare-desc">${esc(entry.description || '')}</p>
+            ${renderTldr(entry.tldr || entry.description)}
+          </div>
+        </section>
+        <section class="section">
+          <div class="container container-narrow">
+            <div class="pricing-vendor-head">
+              ${renderLogo(vendor, 'vendor-logo-md')}
+              <div>
+                <h2><a href="/vendors/${vendor.slug}">${esc(vendor.title)}</a></h2>
+                <span class="vendor-card-category">${esc(vendor.category || 'CRM')}</span>
+              </div>
+              <a href="${ctaUrl}" target="_blank" rel="${ctaRel}" class="btn btn-primary">Check current pricing →</a>
+            </div>
+            ${tierTable}
+            <div class="compare-body">${autoLinkVendors(entry.html, vendors, vendor.slug)}</div>
+            ${gotchasHtml}
+            ${relatedHtml}
+          </div>
+        </section>
+        ${renderFaqHtml(entry.faq)}`;
+
+      const page = render(baseTemplate, {
+        title: `${entry.title} — WeekCRM`,
+        description: entry.description || entry.title,
+        url: `https://www.weekcrm.com/pricing/${entry.slug}`,
+        body: bodyHtml, bodyClass: '', assetVersion: cssHash,
+        ...pageMeta(entry, entry.sourcePath)
+      });
+
+      const outDir = path.join(DIST, 'pricing', entry.slug);
+      ensureDir(outDir);
+      fs.writeFileSync(path.join(outDir, 'index.html'), page);
+      addRoute(`/pricing/${entry.slug}`, {
+        lastmod: entry.date,
+        changefreq: 'monthly',
+        priority: '0.8'
+      });
+
+      pricingIndexCards.push(`
+        <a href="/pricing/${entry.slug}" class="card">
+          <div class="card-meta"><time datetime="${entry.date}">${formatDate(entry.date)}</time></div>
+          <h3 class="card-title">${esc(entry.title)}</h3>
+          <p class="card-excerpt">${esc(entry.description || '')}</p>
+        </a>
+      `);
+    }
+
+    const pricingIndexBody = `
+      <section class="section">
+        <div class="container">
+          <h1>CRM &amp; Helpdesk Pricing</h1>
+          <p class="vendor-desc">Plan-by-plan pricing breakdowns, including the costs vendors keep off the pricing page.</p>
+          <div class="card-grid">${pricingIndexCards.join('')}</div>
+        </div>
+      </section>`;
+    const pricingIndex = render(baseTemplate, {
+      title: 'CRM & Helpdesk Pricing — WeekCRM',
+      description: 'Plan-by-plan pricing breakdowns for CRM and helpdesk software, including hidden costs.',
+      url: 'https://www.weekcrm.com/pricing',
+      body: pricingIndexBody, bodyClass: '', assetVersion: cssHash,
+      ...pageMeta()
+    });
+    fs.writeFileSync(path.join(DIST, 'pricing', 'index.html'), pricingIndex);
+    addRoute('/pricing', { changefreq: 'weekly', priority: '0.7' });
+  }
+
   // ── Programmatic landing pages (/industry/, /integrations/) ──────
   // For each entry, frontmatter `tag` selects vendors whose tags include it
   // (case-insensitive). The body Markdown becomes the intro copy.
@@ -1161,6 +1347,7 @@ Llms: ${SITE_URL}/llms.txt
   // This runs every build, so adding a new markdown file under content/ auto-updates llms.txt.
   const compareForLlms = readMarkdownFiles(path.join(CONTENT, 'compare'));
   const bestForLlms = readMarkdownFiles(path.join(CONTENT, 'best'));
+  const pricingForLlms = readMarkdownFiles(path.join(CONTENT, 'pricing'));
   const industryForLlms = readMarkdownFiles(path.join(CONTENT, 'industry'));
   const integrationsForLlms = readMarkdownFiles(path.join(CONTENT, 'integrations'));
 
@@ -1178,6 +1365,7 @@ Llms: ${SITE_URL}/llms.txt
 ${llmLine('Vendor directory', `${SITE_URL}/vendors`, `${vendors.length} CRM and helpdesk products with pricing, ratings, descriptions, and editorial reviews.`)}
 ${llmLine('Comparisons', `${SITE_URL}/compare`, `${compareForLlms.length} head-to-head vendor comparisons with editorial picks for who should choose what.`)}
 ${llmLine('Best CRM picks', `${SITE_URL}/best`, `${bestForLlms.length} curated "best CRM for X" listicles by use case, industry, team size, and budget.`)}
+${llmLine('Pricing breakdowns', `${SITE_URL}/pricing`, `${pricingForLlms.length} plan-by-plan pricing breakdowns with tier tables and the costs vendors keep off their pricing pages.`)}
 ${llmLine('Industry guides', `${SITE_URL}/industry`, `${industryForLlms.length} industry-specific landing pages mapping CRM choices to verticals.`)}
 ${llmLine('Integration guides', `${SITE_URL}/integrations`, `${integrationsForLlms.length} integration-focused pages listing CRMs that pair with specific tools.`)}
 ${llmLine('News', `${SITE_URL}/news`, `Daily-updated CRM industry news rewritten in journalism style from vendor sources.`)}
@@ -1194,6 +1382,10 @@ ${llmLine('Consultants', `${SITE_URL}/consultants`, `${consultants.length} vette
   if (bestForLlms.length) {
     const lines = bestForLlms.map(e => llmLine(e.title, `${SITE_URL}/best/${e.slug}`, e.description)).join('\n');
     llmsSections.push(`## Best CRM picks\n${lines}`);
+  }
+  if (pricingForLlms.length) {
+    const lines = pricingForLlms.map(e => llmLine(e.title, `${SITE_URL}/pricing/${e.slug}`, e.description)).join('\n');
+    llmsSections.push(`## Pricing breakdowns\n${lines}`);
   }
   if (industryForLlms.length) {
     const lines = industryForLlms.map(e => llmLine(e.title, `${SITE_URL}/industry/${e.slug}`, e.description)).join('\n');

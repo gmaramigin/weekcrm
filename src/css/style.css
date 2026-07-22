@@ -846,3 +846,56 @@ p { color: var(--text-secondary); }
 }
 .faq-a a { color: var(--accent, #2563eb); }
 
+
+/* ── Pricing breakdown pages (/pricing/<vendor>) ───────── */
+.pricing-vendor-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+}
+.pricing-vendor-head h2 { margin: 0; font-size: 1.25rem; }
+.pricing-vendor-head h2 a { text-decoration: none; }
+.pricing-vendor-head .btn { margin-left: auto; }
+.pricing-table-wrap { overflow-x: auto; margin: 0 0 2rem; }
+.pricing-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.pricing-table caption {
+  text-align: left;
+  font-weight: 600;
+  padding-bottom: 0.75rem;
+}
+.pricing-table th,
+.pricing-table td {
+  text-align: left;
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+  vertical-align: top;
+}
+.pricing-table thead th {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted, #6b7280);
+  border-bottom-width: 2px;
+}
+.pricing-table tbody th { font-weight: 600; white-space: nowrap; }
+.pricing-cell-price { font-weight: 600; white-space: nowrap; }
+.pricing-gotchas,
+.pricing-related { margin-top: 2.5rem; }
+.pricing-gotchas h2,
+.pricing-related h2 { font-size: 1.15rem; margin-bottom: 0.75rem; }
+.pricing-gotchas ul,
+.pricing-related ul { padding-left: 1.25rem; }
+.pricing-gotchas li,
+.pricing-related li { margin-bottom: 0.5rem; line-height: 1.6; }
+@media (max-width: 640px) {
+  .pricing-vendor-head .btn { margin-left: 0; width: 100%; text-align: center; }
+}
