@@ -6,7 +6,7 @@ description: >-
   agencies and consultancies.
 website: 'https://www.scoro.com'
 category: PSA
-pricing: 'Essential $19.90/user/mo; Standard $32.90, Pro $49.90; Ultimate custom'
+pricing: 'Core $19.90/user/mo; Growth $32.90, Performance $49.90; Enterprise custom (5-seat minimum)'
 rating: '4.3'
 tags:
   - PSA

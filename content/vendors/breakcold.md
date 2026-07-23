@@ -3,7 +3,7 @@ title: Breakcold
 description: Cold outreach CRM for solopreneurs and small teams. Merges email, LinkedIn, and pipeline tracking into one tool.
 website: https://www.breakcold.com
 category: CRM
-pricing: From $29/mo
+pricing: 'Single plan $59/mo (1 seat, 2 accounts); +$10 per extra seat or account'
 rating: "4"
 tags: [CRM, Outbound, LinkedIn, Cold Email, Zapier]
 date: 2025-05-01

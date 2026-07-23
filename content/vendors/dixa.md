@@ -6,7 +6,7 @@ description: >-
   intelligent routing and AI-powered automation.
 website: 'https://dixa.com'
 category: Customer Service Platform
-pricing: From $49/agent/mo
+pricing: 'From €71.20/agent/mo (Growth, annual); Ultimate €111.20, Prime €143.20'
 rating: '4.0'
 tags:
   - Customer Service

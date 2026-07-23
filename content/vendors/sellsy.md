@@ -6,7 +6,7 @@ description: >-
   that prioritize data sovereignty.
 website: 'https://go.sellsy.com'
 category: CRM
-pricing: 'Standard €35/user/mo; Evolution €59, Elite €95 (2-user minimum)'
+pricing: 'Sales from €29/user/mo; Sales & Invoicing bundle from €49/user/mo (2-user minimum)'
 rating: '4.0'
 tags:
   - CRM

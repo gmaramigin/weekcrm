@@ -7,7 +7,7 @@ description: >-
 website: 'https://nethunt.com'
 referralUrl: 'https://nethunt.com?fpr=yza9g1'
 category: CRM
-pricing: 'From $30/user/mo (billed annually)'
+pricing: 'From $24/user/mo (Basic, billed annually); Business $60, Business Plus $84'
 rating: '4.4'
 tags:
   - CRM

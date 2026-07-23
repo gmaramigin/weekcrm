@@ -6,7 +6,7 @@ description: >-
   patching, and billing in one application.
 website: 'https://superops.com'
 category: PSA / RMM
-pricing: 'PSA from $89/tech/mo; PSA + RMM from $149/tech/mo'
+pricing: 'Per-endpoint: Prime from $1.50/endpoint/mo (100 min); Prime Plus from $3.00 (150 min)'
 rating: '4.4'
 tags:
   - PSA

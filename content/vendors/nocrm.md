@@ -7,7 +7,7 @@ description: >-
 website: 'https://www.nocrm.io'
 referralUrl: 'https://nocrm.io?fpr=george54'
 category: CRM
-pricing: From €12/user/mo (Starter); Expert from €19/user/mo
+pricing: 'From €12/user/mo (Starter, annual); Expert €20, Dream Team €32'
 rating: '4.5'
 tags:
   - CRM

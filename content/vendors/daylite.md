@@ -6,7 +6,7 @@ description: >-
   offline-capable app built exclusively for the Apple ecosystem.
 website: 'https://daylite.app'
 category: CRM
-pricing: From $29/user/mo
+pricing: 'From $15/user/mo (Leap, annual); Growth $30, Scale $45'
 rating: '4.1'
 tags:
   - CRM

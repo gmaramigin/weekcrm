@@ -6,7 +6,7 @@ description: >-
   that want one vendor for multiple operational needs.
 website: 'https://apptivo.com'
 category: Small Business CRM
-pricing: 'Free plan available; paid from $10/user/mo'
+pricing: 'Free plan available; Lite $15/user/mo, Premium $25, Ultimate $40 (annual)'
 rating: '4.0'
 tags:
   - CRM
