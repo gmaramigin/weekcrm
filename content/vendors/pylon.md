@@ -6,7 +6,7 @@ description: >-
   ticketing, account health scoring, and AI agents in one tool.
 website: 'https://www.usepylon.com'
 category: Customer Service
-pricing: 'From $59/seat/mo; enterprise custom pricing'
+pricing: "From $59/seat/mo (annual, 3-seat min); AI Assistant ~$50/seat extra"
 rating: '4.5'
 tags:
   - B2B Support

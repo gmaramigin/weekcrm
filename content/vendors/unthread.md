@@ -5,7 +5,7 @@ description: >-
   tickets from Slack channels — built for teams that live in Slack.
 website: 'https://unthread.io'
 category: Help Desk
-pricing: 'From $50/agent/mo; 14-day free trial'
+pricing: "From $50/agent/mo (Basic, 5-seat minimum); Pro $75; 14-day free trial"
 rating: '4.4'
 tags:
   - Slack

@@ -6,7 +6,7 @@ description: >-
   organizations that need deep process customization without developer overhead.
 website: 'https://creatio.com'
 category: CRM
-pricing: 'From $25/user/mo'
+pricing: "From $25/user/mo (Growth); $10,000/yr minimum and 3-year standard contract"
 rating: '4.1'
 tags:
   - Telecom

@@ -5,7 +5,7 @@ description: >-
   that want to close the loop between support and product development.
 website: 'https://gleap.io'
 category: Customer Support & Feedback
-pricing: 'From $119/mo (Team plan, billed annually)'
+pricing: "From $49/mo (Starter, annual); Team $149; Pro $299; AI billed by token usage"
 rating: '4.3'
 tags:
   - Customer Support

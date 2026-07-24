@@ -5,7 +5,7 @@ description: >-
   Trusted by small and mid-sized teams that want a no-nonsense ticket system without per-seat gotchas.
 website: 'https://www.jitbit.com/helpdesk/'
 category: Customer Support
-pricing: 'SaaS from $29/mo (1 agent) to $249/mo (9 agents); self-hosted one-time license available'
+pricing: "SaaS $29–$249/mo by agent band; self-hosted perpetual licence $2,199–$6,499"
 rating: '4.2'
 tags:
   - Helpdesk

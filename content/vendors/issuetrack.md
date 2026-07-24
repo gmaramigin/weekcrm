@@ -5,7 +5,7 @@ description: >-
   Suits internal IT teams and customer-facing support operations that need deep customization without enterprise pricing.
 website: 'https://www.issuetrak.com'
 category: Customer Support
-pricing: 'From $27/agent/mo; cloud and on-premises options'
+pricing: "Cloud $75/agent/mo (annual, 3-agent min); on-premises $1,091/agent one-time + $218/agent/yr"
 rating: '4.0'
 tags:
   - Helpdesk

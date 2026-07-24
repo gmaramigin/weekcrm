@@ -6,7 +6,7 @@ description: >-
   flat per-user price that includes every feature.
 website: 'https://opencrm.co.uk'
 category: CRM
-pricing: '£39/user/mo (all features included, VAT excluded)'
+pricing: "£44/user/mo (all features included, VAT excluded)"
 rating: '4.2'
 tags:
   - CRM

@@ -6,7 +6,7 @@ description: >-
   for global brands managing massive support volume.
 website: 'https://www.sprinklr.com/products/customer-service/'
 category: Customer Service
-pricing: Self-serve from $249/seat/mo; enterprise custom
+pricing: "Enterprise quote only from ~$50,000/yr; self-serve tier discontinued 30 April 2026"
 rating: '4.2'
 tags:
   - Customer Service

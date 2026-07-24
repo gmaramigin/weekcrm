@@ -6,7 +6,7 @@ description: >-
   self-host with an optional paid cloud edition.
 website: 'https://osticket.com'
 category: Help Desk
-pricing: 'Free (open source); cloud from $12/agent/mo'
+pricing: "Free (open source, self-hosted); cloud from ~$11/agent/mo"
 rating: '4.0'
 tags:
   - Open Source

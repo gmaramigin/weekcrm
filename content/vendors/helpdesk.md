@@ -5,7 +5,7 @@ description: >-
   messages into organized, automatable support tickets with built-in AI tools.
 website: 'https://helpdesk.com'
 category: Help Desk
-pricing: 'From $29/user/mo (Team); Business $50/user/mo'
+pricing: "From $19/user/mo (Essential, annual); Growth $79; AI resolution packs $49.50 per 50"
 rating: '4.2'
 tags:
   - Help Desk

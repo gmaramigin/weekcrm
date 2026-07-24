@@ -6,7 +6,7 @@ description: >-
   multi-channel support setup without heavy configuration.
 website: 'https://proprofsdesk.com'
 category: Help Desk
-pricing: 'Free plan available; paid from ~$15/user/mo'
+pricing: "Free single-user plan; Essentials $23.88/user/yr; team plans from $179.97/mo"
 rating: '4.1'
 tags:
   - Help Desk

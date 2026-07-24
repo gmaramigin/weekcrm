@@ -6,7 +6,7 @@ description: >-
   configurable workflows and multi-channel ticketing.
 website: 'https://www.vivantio.com'
 category: Help Desk
-pricing: 'From $59/mo; per-agent pricing, free trial available'
+pricing: "$49–$99/agent/mo billed annually; unlimited end users free"
 rating: '4.2'
 tags:
   - ITSM

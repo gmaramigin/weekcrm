@@ -5,7 +5,7 @@ description: >-
   includes every feature — no tiers, no per-ticket charges, and built-in AI tools.
 website: 'https://helpspot.com'
 category: Help Desk
-pricing: 'From $699/year for 3 agents; all features included'
+pricing: "From $899/year for 3 agents; cloud and self-hosted priced identically"
 rating: '4.1'
 tags:
   - Help Desk

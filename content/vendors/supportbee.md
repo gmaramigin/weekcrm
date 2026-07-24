@@ -6,7 +6,7 @@ description: >-
   deliberately focused.
 website: 'https://supportbee.com'
 category: Help Desk
-pricing: 'Startup $13/user/mo; Enterprise $17/user/mo'
+pricing: "Startup $17/seat/mo; Enterprise $21/seat/mo (annual); $20 and $25 monthly"
 rating: '3.9'
 tags:
   - Help Desk

@@ -5,7 +5,7 @@ description: >-
   portal, asset tracking, and mobile app — no server required.
 website: 'https://www.spiceworks.com/free-help-desk-software/'
 category: Help Desk
-pricing: 'Free (ad-supported); Premium $5–$6/agent/mo'
+pricing: "Free (ad-supported); Premium $6/agent/mo"
 rating: '3.9'
 tags:
   - Help Desk

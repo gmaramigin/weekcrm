@@ -6,7 +6,7 @@ description: >-
   Zendesk and Freshdesk for growing support teams.
 website: 'https://www.bolddesk.com'
 category: Help Desk
-pricing: 'From $25/agent/mo (billed annually); free for nonprofits'
+pricing: "One plan, all features: from $1,188/yr for 5 agents (~$20/agent/mo); $5,988/yr for 50 agents; 15-day free trial"
 rating: '4.2'
 tags:
   - Help Desk

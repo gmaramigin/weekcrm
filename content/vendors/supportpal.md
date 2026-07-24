@@ -6,7 +6,7 @@ description: >-
   licensing fees.
 website: 'https://www.supportpal.com'
 category: Help Desk
-pricing: '$24.95/mo or $249.95/yr (unlimited operators)'
+pricing: "$24.95/mo or $249.95/yr, unlimited operators; rising to $29.95/$299.95 on 1 Sep 2026"
 rating: '4.1'
 tags:
   - Help Desk

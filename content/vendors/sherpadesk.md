@@ -6,7 +6,7 @@ description: >-
   free-agent-for-life entry point.
 website: 'https://sherpadesk.com'
 category: PSA
-pricing: 'First agent free; $39/agent/mo for each additional'
+pricing: "First agent free forever; Base Camp $40/agent/mo annual, High Camp $50"
 rating: '4.1'
 tags:
   - PSA

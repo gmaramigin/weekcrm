@@ -5,7 +5,7 @@ description: >-
   into a unified ticketing system — built for SaaS teams scaling support operations.
 website: 'https://thena.ai'
 category: Customer Support
-pricing: 'From $79/user/mo (annual)'
+pricing: "From $29/user/mo (Starter, annual); Standard $79; Enterprise $119"
 rating: '4.2'
 tags:
   - Customer Support

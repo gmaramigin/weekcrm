@@ -5,7 +5,7 @@ description: >-
   combining a unified helpdesk with a self-service customer portal.
 website: 'https://richpanel.com'
 category: Help Desk
-pricing: 'From $9/mo (3 users); conversation-volume-based tiers'
+pricing: "$0.20 per AI-handled conversation; $99/seat/mo for human agents"
 rating: '4.2'
 tags:
   - Help Desk
