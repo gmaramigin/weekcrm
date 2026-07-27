@@ -6,7 +6,7 @@ description: >-
   hosted or available via managed cloud plans.
 website: 'https://suitecrm.com'
 category: CRM
-pricing: 'Free (self-hosted); hosted plans from ~£130/mo for 10 users'
+pricing: "Free (self-hosted); managed hosting from £50/mo for unlimited users"
 rating: '4.0'
 tags:
   - CRM

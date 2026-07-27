@@ -5,7 +5,7 @@ description: >-
   full contact, deal, and project management system with AI-assisted email tools.
 website: 'https://eway-crm.com'
 category: CRM
-pricing: 'Free plan available; paid from $20/mo per team; Standard plan $27/mo'
+pricing: "Free plan available; Contacts module from $20/user/mo, Standard $27; Sales and Projects modules extra"
 rating: '4.1'
 tags:
   - CRM

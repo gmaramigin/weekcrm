@@ -6,7 +6,7 @@ description: >-
   fraction of enterprise CRM prices.
 website: 'https://commence.com'
 category: CRM
-pricing: 'From $29/user/mo'
+pricing: "From $12/user/mo (billed annually); three-user minimum"
 rating: '3.8'
 tags:
   - CRM

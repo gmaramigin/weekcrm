@@ -5,7 +5,7 @@ description: >-
   ticketing, knowledge base, and omnichannel tools for growing support teams.
 website: 'https://www.livehelpnow.net'
 category: Help Desk
-pricing: 'Contact vendor for pricing; tiered Starter, Professional, and Enterprise plans'
+pricing: "From $39/mo (Essential); Professional $59, Premium $79; AI add-ons priced separately"
 rating: '4.0'
 tags:
   - Live Chat

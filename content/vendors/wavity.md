@@ -6,7 +6,7 @@ description: >-
   custom processes without writing code.
 website: 'https://wavity.ai'
 category: Help Desk
-pricing: 'From $12/agent/mo (Help Desk); from $3/agent/mo (Work Management); custom for workflow automation'
+pricing: "From $25/agent/mo annually (five-agent minimum); Premium $40, Enterprise $55"
 rating: '3.9'
 tags:
   - No-Code

@@ -6,7 +6,7 @@ description: >-
   system designed around technician workflows.
 website: 'https://antmyerp.com'
 category: CRM
-pricing: '$50/user/mo (all modules included); free trial available'
+pricing: "$50/user/mo (all modules included); 10-user minimum; 15-day free trial"
 rating: '4.1'
 tags:
   - CRM

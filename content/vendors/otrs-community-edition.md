@@ -6,7 +6,7 @@ description: >-
   platform following OTRS AG's discontinuation of the open-source line.
 website: 'https://otrscommunityedition.com'
 category: Help Desk
-pricing: 'Free (open source); paid support via third parties'
+pricing: "Free (open source) but end of life — no security fixes; Znuny fork is maintained"
 rating: '3.7'
 tags:
   - Open Source

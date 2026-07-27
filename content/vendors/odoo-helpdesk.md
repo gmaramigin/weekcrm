@@ -6,7 +6,7 @@ description: >-
   integration with Odoo CRM, inventory, and billing.
 website: 'https://www.odoo.com/app/helpdesk'
 category: Help Desk
-pricing: 'Included in Odoo subscription; Odoo One from ~$38/user/mo'
+pricing: "Free for Helpdesk alone (One App Free); all apps from $7.25/user/mo annually"
 rating: '4.1'
 tags:
   - Help Desk

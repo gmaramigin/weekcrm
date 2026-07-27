@@ -5,7 +5,7 @@ description: >-
   sales, support, invoicing, and project management at a low entry price.
 website: 'https://simply-crm.com'
 category: CRM
-pricing: 'From $12/mo; 14-day free trial, no credit card required'
+pricing: "From $15/user/mo (billed annually); 30-day free trial"
 rating: '3.8'
 tags:
   - CRM
