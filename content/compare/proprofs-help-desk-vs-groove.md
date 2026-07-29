@@ -32,11 +32,9 @@ For a solo operator, ProProfs wins on price by an enormous margin. For anyone wi
 
 ## Pricing
 
-ProProfs, annual: Free (1 user, 100 tickets/month), Essentials $23.88/year (1 user, 1,000 tickets), Business $47.88/year (1 user, 6,000 tickets), Business Complete Elite $179.97/month (3 seats, 15,000 tickets), Customer Delight Suite from $499/month (unlimited users, 60,000 tickets, bundling Live Chat, Knowledge Base, Survey Maker, and Qualaroo). Monthly billing on Essentials and Business is $29.99 either way, which is a fairly blunt push toward annual — Essentials for a full year costs less than one month billed monthly.
+ProProfs, annual: Free (1 user, 100 tickets/month), Essentials $23.88/year (1 user, 1,000 tickets), Business $47.88/year (1 user, 6,000 tickets), Business Complete Elite $179.97/month (3 seats, 15,000 tickets), Customer Delight Suite from $499/month (unlimited users, 60,000 tickets, bundling Live Chat, Knowledge Base, Survey Maker, and Qualaroo). Monthly billing on Essentials and Business is $29.99 either way — a blunt push toward annual, since Essentials for a full year costs less than one month billed monthly.
 
-Groove, annual: Standard $12/user (2 shared inboxes, email and live chat, one knowledge base, round-robin assignment, capped at 25 users), Plus $20/user (5 inboxes, 10 free Lite Users, SLA management, business hours, AI assist, premium HubSpot/Jira/Salesforce integrations), Pro $35/user (25 inboxes, 50 Lite Users, data exports, enterprise security, skill-based routing, dedicated account manager). AI Draft credits are $0.25 each on top of any plan.
-
-Fifteen agents a year: $2,160 on Groove Standard, $3,600 on Plus, $6,300 on Pro. ProProfs at that headcount means the Customer Delight Suite at $5,988 — which also includes four other products.
+Groove, annual: Standard $12/user (2 shared inboxes, email and live chat, one knowledge base, round-robin assignment, capped at 25 users), Plus $20/user (5 inboxes, 10 free Lite Users, SLA management, business hours, AI assist, premium HubSpot/Jira/Salesforce integrations), Pro $35/user (25 inboxes, 50 Lite Users, data exports, enterprise security, skill-based routing). Fifteen agents a year: $2,160 Standard, $3,600 Plus, $6,300 Pro. ProProfs at that headcount means the $5,988 Customer Delight Suite — which also includes four other products.
 
 ## What actually pushes you up a tier
 

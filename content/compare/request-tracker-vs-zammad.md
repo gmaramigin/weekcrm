@@ -48,18 +48,18 @@ RT publishes no comparable construct: self-hosted RT is free and unsupported, or
 
 ## What the work looks like day to day
 
-RT is email-native to an unusual degree — staff can triage, respond, and resolve entirely from a mail client without touching the web UI. For infrastructure teams and academic departments where everyone already lives in email, that is a genuine productivity property rather than nostalgia. Customization goes deep: unlimited custom fields, queues, roles, and lifecycle scripts model workflows that would need a consultant elsewhere. Reporting is powerful and distinctly not point-and-click, and the dated interface makes onboarding non-technical users real work.
+RT is email-native to an unusual degree — staff triage, respond, and resolve entirely from a mail client without touching the web UI. For infrastructure teams and academic departments where everyone already lives in email, that is a real productivity property rather than nostalgia. Customization goes deep: unlimited custom fields, queues, roles, and lifecycle scripts model workflows that would need a consultant elsewhere. Reporting is powerful and distinctly not point-and-click, and the dated interface makes onboarding non-technical users real work.
 
-Zammad covers more channels — email, phone, live chat, Twitter/X, Facebook, and web forms into one queue — with strong automation and enterprise authentication. Its UI is also less polished than Zendesk's, but it is a modern web application rather than a decades-old one, and non-technical agents get productive faster. Its AI capabilities are thinner than newer SaaS competitors': neither product competes for deflection work.
+Zammad covers more channels — email, phone, live chat, Twitter/X, Facebook, and web forms into one queue — with strong automation and enterprise authentication. Its UI is also less polished than Zendesk's, but it is a modern web application, and non-technical agents get productive faster. Neither product's AI competes for deflection work.
 
 ## Who should pick what
 
-- **Universities, research computing, government IT** → RT, self-hosted, and claim the 20% academic discount if you take cloud instead. This is its native habitat and the asset management is a real bonus.
-- **European teams with data sovereignty requirements** → Zammad. AGPLv3, self-hostable, and the vendor's commitment to staying open source is part of the pitch.
+- **Universities, research computing, government IT** → RT, self-hosted; claim the 20% academic discount if you take cloud instead. Native habitat, and the asset management is a real bonus.
+- **European teams with data sovereignty requirements** → Zammad. AGPLv3, self-hostable, with a stated commitment to staying open source.
 - **Support desks needing social, chat, and phone in one queue** → Zammad. RT does not go there.
-- **Teams that work primarily out of email and want ticketing to disappear into it** → RT, comfortably.
-- **20+ agents wanting supported open source** → Zammad's flat self-hosted subscriptions, which get better per agent as you grow.
-- **Small teams with high ticket volume and no sysadmin** → neither cloud offering fits well. Cloud RT's 250-ticket Starter cap and Zammad's five-agent Starter ceiling both bite early; price Freshdesk and Zendesk on merit before assuming open-source lineage means cheaper.
+- **Teams that work out of email and want ticketing to disappear into it** → RT.
+- **20+ agents wanting supported open source** → Zammad's flat self-hosted subscriptions, which improve per agent as you grow.
+- **Small teams with high ticket volume and no sysadmin** → neither cloud fits. RT's 250-ticket Starter cap and Zammad's five-agent ceiling both bite early; price Freshdesk and Zendesk on merit first.
 
 ## Bottom line
 

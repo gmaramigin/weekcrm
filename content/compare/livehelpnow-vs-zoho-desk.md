@@ -49,11 +49,9 @@ LiveHelpNow has no comparable ecosystem play. What it offers instead is multi-br
 
 ## Transparency and evaluation friction
 
-This matters more than it sounds. You can build a Zoho Desk budget in a spreadsheet in five minutes: agents times tier, annual or monthly, done. Twenty agents on Standard is $3,360 a year, and nothing about that number is negotiable or surprising.
+You can build a Zoho Desk budget in a spreadsheet in five minutes: agents times tier, annual or monthly, done. Twenty agents on Standard is $3,360 a year and nothing about that number is surprising. LiveHelpNow cannot be evaluated that way — every figure is a starting point, so any comparison against per-agent competitors requires a written quote for your actual agent count first. That is a procurement cost, not just an inconvenience.
 
-LiveHelpNow cannot be evaluated that way. Every figure is a starting point, so any comparison against per-agent competitors requires a written quote for your actual agent count first. That is a procurement cost, not just an inconvenience — it slows shortlisting and it makes side-by-side board-level comparisons awkward.
-
-One more transparency wrinkle on the LiveHelpNow side: removing its branding from the chat widget requires the $79 Premium plan. Consumer brands and agencies presenting to clients often find that single item decides the tier regardless of features.
+One more wrinkle on the LiveHelpNow side: removing its branding from the chat widget requires the $79 Premium plan. Consumer brands and agencies presenting to clients often find that single item decides the tier regardless of features.
 
 ## Who should pick what
 

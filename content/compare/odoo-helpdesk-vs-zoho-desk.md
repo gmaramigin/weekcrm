@@ -51,11 +51,11 @@ If your support questions are "where is my shipment" and "why does this invoice 
 
 ## Customization, hosting, and the bill nobody plans for
 
-Odoo's flexibility is real but it is gated. Odoo Studio, the tool for modifying models and workflows without a developer, requires the Custom tier — a 50% per-user uplift across every employee. External API access sits there too, so any programmatic integration with a non-Odoo system forces the same jump. And Standard is Odoo Online only, meaning a preference for on-premise hosting alone lands you at $10.90. Teams that buy Standard expecting to run stock configuration usually discover, a quarter in, that they need one thing changed.
+Odoo's flexibility is real but gated. Odoo Studio, the tool for modifying models and workflows without a developer, requires the Custom tier — a 50% per-user uplift across every employee. External API access sits there too, so any programmatic integration with a non-Odoo system forces the same jump, and Standard is Odoo Online only, meaning an on-premise preference alone lands you at $10.90. Teams that buy Standard expecting stock configuration usually discover a quarter in that they need one thing changed.
 
-Then implementation. Success Packs and certified partner engagements are quoted separately at every Odoo tier and routinely exceed the first year of licensing for anything beyond a single-app setup. The subscription is the smallest line in a serious Odoo budget.
+Then implementation. Success Packs and certified partner engagements are quoted separately at every tier and routinely exceed the first year of licensing for anything beyond a single-app setup. The subscription is the smallest line in a serious Odoo budget.
 
-Zoho Desk's configuration surface is dense but self-serve. Small teams sometimes find it heavier than the problem warrants, and buyer reviews repeatedly flag renewal increases after promotional pricing lapses — get the year-two rate in writing. But there is no implied partner engagement, and nobody needs a consultant to launch it.
+Zoho Desk's configuration surface is dense but self-serve. Small teams sometimes find it heavier than the problem warrants, and buyer reviews repeatedly flag renewal increases after promotional pricing lapses — get the year-two rate in writing. But nobody needs a consultant to launch it.
 
 ## Who should pick what
 
