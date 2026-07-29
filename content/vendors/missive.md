@@ -6,7 +6,7 @@ description: >-
   conversations without leaving the inbox.
 website: 'https://missiveapp.com'
 category: Collaboration
-pricing: Free plan available; paid from $18/user/mo
+pricing: 'From $14/user/mo; 30-day trial, no free plan'
 rating: '4.6'
 tags:
   - Email

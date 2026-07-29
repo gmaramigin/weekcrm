@@ -5,7 +5,7 @@ description: >-
   shared inboxes, smart automation, and clean analytics without enterprise complexity.
 website: 'https://groovehq.com'
 category: Help Desk
-pricing: 'Contact vendor for current pricing'
+pricing: 'From $12/user/mo (Standard); Plus $20, Pro $35'
 rating: '4.3'
 tags:
   - Help Desk

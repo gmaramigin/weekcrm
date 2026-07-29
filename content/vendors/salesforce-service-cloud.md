@@ -6,7 +6,7 @@ description: >-
   Salesforce ecosystem.
 website: 'https://www.salesforce.com/service/'
 category: Help Desk
-pricing: 'Starter $25/user/mo; Professional $80, Enterprise $165, Unlimited $330'
+pricing: 'Starter Suite $25/user/mo; Pro Suite $100, Enterprise $175, Unlimited $350'
 rating: '4.2'
 tags:
   - Help Desk

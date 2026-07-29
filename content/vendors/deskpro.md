@@ -6,7 +6,7 @@ description: >-
   and strict data governance.
 website: 'https://deskpro.com'
 category: Help Desk
-pricing: 'From $49/agent/mo (cloud); self-hosted available'
+pricing: 'From $39/agent/mo (Team); Professional $59, Enterprise $99; self-hosted available'
 rating: '4.1'
 tags:
   - Help Desk

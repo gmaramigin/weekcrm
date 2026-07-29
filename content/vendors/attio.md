@@ -5,7 +5,7 @@ description: >-
   automatic data enrichment, and deep customization.
 website: 'https://attio.com'
 category: CRM
-pricing: 'Free plan available, paid from $29/mo'
+pricing: 'Free plan available; paid from $35/user/mo'
 rating: '5'
 tags:
   - Segment

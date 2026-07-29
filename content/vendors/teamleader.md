@@ -5,7 +5,7 @@ description: >-
   product — built for agencies, consultants, and service businesses.
 website: 'https://www.teamleader.eu'
 category: CRM
-pricing: 'From €37/mo'
+pricing: 'From €37.50/mo (SMART); GROW €49.50, FLOW €67.50'
 rating: '4.0'
 tags:
   - CRM

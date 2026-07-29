@@ -5,7 +5,7 @@ description: >-
   Combines contact management, email/SMS campaigns, pipeline, payments, and automation in a single tool.
 website: 'https://keap.com'
 category: CRM
-pricing: 'From $249/mo (1,500 contacts, 2 users); mandatory $500 onboarding fee'
+pricing: 'From $299/mo (2 users); extra seats $39/mo; implementation required, quoted per account'
 rating: '4.1'
 tags:
   - Veterinary

@@ -6,7 +6,7 @@ description: >-
   high-volume support operations.
 website: 'https://www.oracle.com/cx/service/'
 category: Customer Service
-pricing: 'From ~$50/user/mo (enterprise quoting required)'
+pricing: 'From ~$90/user/mo (Standard); enterprise quoting required'
 rating: '3.8'
 tags:
   - Enterprise

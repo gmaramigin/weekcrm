@@ -6,7 +6,7 @@ description: >-
   stack (with Propertybase GO rebranded as Lone Wolf Front Office).
 website: 'https://get.lwolf.com/propertybase/'
 category: Real Estate CRM
-pricing: 'From $69/user/mo; enterprise tiers via sales'
+pricing: 'From $79/user/mo (Essential); Professional $159; enterprise via sales'
 rating: '4.0'
 tags:
   - CRM

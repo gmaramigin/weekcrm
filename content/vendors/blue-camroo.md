@@ -6,7 +6,7 @@ description: >-
   pays only for the features their job requires.
 website: 'https://www.bluecamroo.com'
 category: Small Business CRM
-pricing: 'Free CRM for up to 2 users; paid roles from ~$19/user/mo'
+pricing: 'Free CRM user roles; paid editions from ~$41/user/mo'
 rating: '3.9'
 tags:
   - CRM

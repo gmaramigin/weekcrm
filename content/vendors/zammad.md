@@ -6,7 +6,7 @@ description: >-
   SSO, and API support for technical teams.
 website: 'https://zammad.com'
 category: Help Desk
-pricing: 'Self-hosted free (open source); cloud from €5/agent/mo; Plus at €24/agent/mo'
+pricing: 'Self-hosted free (open source); cloud from €7/agent/mo; Plus at €25/agent/mo'
 rating: '4.1'
 tags:
   - Open Source

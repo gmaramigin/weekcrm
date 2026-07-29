@@ -40,4 +40,4 @@ Solve is a strong fit for small to mid-size service companies that run heavily o
 
 ## Bottom line
 
-Solve CRM earns its place for service businesses already living inside Google Workspace. It won't win a feature count-off against the big platforms, but for a team that values simplicity and tight Google integration over configurability, the $25/user price tag makes it easy to justify.
+Solve CRM earns its place for service businesses already living inside Google Workspace. It won't win a feature count-off against the big platforms, but for a team that values simplicity and tight Google integration over configurability, the $39/user price tag makes it easy to justify.

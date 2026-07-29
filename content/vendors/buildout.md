@@ -6,7 +6,7 @@ description: >-
   pipelines, stacking plans, and brochure-grade marketing documents.
 website: 'https://buildout.com'
 category: Commercial Real Estate CRM
-pricing: 'From ~$120/user/mo; enterprise via sales'
+pricing: 'From ~$125/user/mo plus $275/mo platform fee; enterprise via sales'
 rating: '4.1'
 tags:
   - CRM

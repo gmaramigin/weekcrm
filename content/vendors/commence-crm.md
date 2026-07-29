@@ -27,7 +27,7 @@ Commence is a good fit for SMBs with dedicated sales and customer service teams 
 ## Strengths
 
 - **All-in-one scope** — CRM, marketing automation, help desk, and project management under one login.
-- **Affordable pricing** — starts at $29/user/month, well below comparable enterprise platforms.
+- **Affordable pricing** — starts at $12/user/month, well below comparable enterprise platforms.
 - **Lead-to-close tracking** — full visibility from initial contact through deal closure with task assignment.
 - **Email marketing built in** — drip campaigns, bulk email, and campaign tracking without a separate tool.
 - **Customer segmentation** — filter contacts by demographics, behavior, or purchase history for targeted outreach.
