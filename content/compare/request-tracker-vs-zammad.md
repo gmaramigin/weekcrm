@@ -24,11 +24,11 @@ tags:
 
 ## The free editions, and what each demands
 
-RT has been running in university IT departments, research labs, non-profits, and government agencies since the late 1990s. Self-hosted it is complete: unlimited users, unlimited tickets, nothing held back, plus 400-plus community extensions and built-in asset management that tracks tangible and intangible assets alongside the tickets. It is a Perl application, configuration lives closer to text files than to admin panels, and running it properly means owning the mail gateway, the database, the upgrade path, and the patching.
+RT has run in university IT departments, research labs, non-profits, and government agencies since the late 1990s. Self-hosted it is complete: unlimited users, unlimited tickets, nothing held back, plus 400-plus community extensions and built-in asset management that tracks tangible and intangible assets alongside tickets. It is a Perl application, configuration lives closer to text files than admin panels, and running it means owning the mail gateway, the database, the upgrade path, and the patching.
 
-Zammad's community edition is AGPLv3 with no agent limit and no feature crippling — full channel coverage, LDAP, Active Directory, SAML, OAuth and SSO out of the box, and a complete REST API. The operational load is different in texture rather than degree: you are sizing a server, keeping Elasticsearch healthy, testing backups, and taking a maintenance window each release.
+Zammad's community edition is AGPLv3 with no agent limit and no feature crippling — full channel coverage, LDAP, Active Directory, SAML, OAuth and SSO out of the box, and a complete REST API. The operational load differs in texture rather than degree: sizing a server, keeping Elasticsearch healthy, testing backups, taking a maintenance window each release.
 
-Neither is free once you price staff time honestly. The relevant question is which kind of administrator you already employ. Shops with long-standing Unix habits tend to find RT unremarkable to run. Shops that think in terms of container images and search clusters tend to find Zammad more familiar.
+Neither is free once you price staff time honestly. The question is which administrator you already employ — Unix-habit shops find RT unremarkable to run; shops thinking in container images and search clusters find Zammad more familiar.
 
 ## Two paid paths that fail in opposite ways
 
@@ -40,11 +40,11 @@ Zammad's cloud fails differently. No seat minimum, no ticket meter; instead the 
 
 ## The flat-fee option only one of them offers
 
-This is Zammad's most interesting commercial feature and it deserves its own consideration. Support subscriptions on a self-hosted install are flat annual fees — €2,999 Business (email, six-hour response), €5,999 Enterprise (email and phone, four-hour), €9,999 Corporation — with no per-agent component at all. A six-agent shop and a two-hundred-agent shop pay the same number.
+Zammad's support subscriptions on a self-hosted install are flat annual fees — €2,999 Business (email, six-hour response), €5,999 Enterprise (email and phone, four-hour), €9,999 Corporation — with no per-agent component. A six-agent shop and a two-hundred-agent shop pay the same number.
 
-That inverts the usual math at scale. Fifty agents on Zammad cloud Plus is €15,000 a year; the Corporation subscription covering unlimited agents costs €9,999 and comes with a faster response target. Below roughly ten agents the flat fee works against you; above twenty to thirty, self-hosting with paid support becomes a budget argument rather than a philosophical one.
+That inverts the usual math at scale. Fifty agents on Zammad cloud Plus is €15,000 a year; the Corporation subscription covers unlimited agents at €9,999 with a faster response target. Below roughly ten agents the flat fee works against you; above twenty to thirty, self-hosting with paid support becomes a budget argument rather than a philosophical one.
 
-RT offers no comparable published construct. Self-hosted RT is free and unsupported, or you buy Cloud RT with per-user pricing and its own SLA ladder.
+RT publishes no comparable construct: self-hosted RT is free and unsupported, or you buy Cloud RT with per-user pricing and its own SLA ladder.
 
 ## What the work looks like day to day
 

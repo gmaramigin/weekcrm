@@ -31,11 +31,11 @@ HappyFox counts either people or work, and lets you choose. The standard model i
 
 ## Pricing
 
-There is only one published number in this matchup and it belongs to monday. Standard runs $31 per seat and Pro $45, both annual with an 18% saving against monthly and a three-seat floor — so the true entry cost is $93 a month, not $31. Ten seats works out to $3,720 a year on Standard or $5,400 on Pro. Both tiers include AI credits as an allowance rather than an entitlement, so heavy auto-response usage draws down a budget that tracks conversation volume rather than headcount.
+Only one published number exists in this matchup and it belongs to monday. Standard runs $31 per seat and Pro $45, both annual with an 18% saving against monthly and a three-seat floor — so the true entry cost is $93 a month, not $31. Ten seats works out to $3,720 a year on Standard or $5,400 on Pro. Both tiers meter AI as a credit allowance rather than an entitlement, so heavy auto-response usage draws down a budget tracking conversation volume rather than headcount.
 
-HappyFox produces a quote and nothing else. Annual billing saves 20%, a two-year prepay reduces it further by an unpublished and negotiable amount, and there is a 14-day trial with no card required. Third-party sites do publish per-agent figures, but they contradict each other badly enough that treating them as real would be a mistake.
+HappyFox produces a quote and nothing else. Annual billing saves 20%, a two-year prepay reduces it further by an unpublished and negotiable amount, and there is a 14-day trial with no card required. Third-party sites publish per-agent figures, but they contradict each other badly enough that treating them as real would be a mistake.
 
-The practical consequence: you can budget monday service in a spreadsheet this afternoon. HappyFox requires a sales conversation before it can enter a shortlist at all — which is fine for a mid-market buyer with procurement, and fatal for a five-person team comparing four tools on a Friday.
+The practical consequence: you can budget monday service in a spreadsheet this afternoon. HappyFox requires a sales conversation before it can enter a shortlist at all — fine for a mid-market buyer with procurement, fatal for a five-person team comparing four tools on a Friday.
 
 ## Scope: one product versus nine
 
@@ -43,17 +43,9 @@ HappyFox is a portfolio. Help Desk, Service Desk, AI Contact Center, CRM, Autopi
 
 ## Platform gravity versus ITSM depth
 
-monday service's honest argument is adjacency. If projects, operations, or CRM already live on monday.com, the service desk inherits the same boards, automation builder, permission model, and dashboards. Nobody learns a second system, and a support ticket that spawns an engineering task never crosses a tool boundary. For an existing monday shop, that alone justifies the premium, and configuration is meaningfully faster than starting fresh.
+monday service's honest argument is adjacency. If projects, operations, or CRM already live on monday.com, the service desk inherits the same boards, automation builder, permission model, and dashboards. Nobody learns a second system, and a support ticket that spawns an engineering task never crosses a tool boundary. Bought cold, the case thins: monday's ticketing is younger than the incumbents', its ITSM depth and integration catalog smaller, and $45 a seat does not undercut Freshservice enough to compensate.
 
-Bought cold, the case thins. monday's ticketing is younger than the incumbents', its ITSM depth and integration catalog are smaller, and $45 a seat does not undercut Freshservice or a dedicated help desk enough to compensate.
-
-HappyFox carries the opposite profile: no platform pull, but a wide dual-purpose feature set spanning customer support and internal IT service management from a single product, across education, healthcare, telecom, ecommerce, and government deployments. Unlimited agents on its live chat plans is a real structural advantage for teams that scale chat coverage. The tradeoff is setup time — the surface area is broad, and small teams routinely underestimate the configuration effort.
-
-## What breaks each budget
-
-For monday service, it is queue count and portal size, not growth in tickets or people. Four service queues or a customer base larger than 100 portal users lands you in an unpriced Enterprise conversation. HIPAA compliance and multiple inbound email servers do the same.
-
-For HappyFox on the per-agent model, it is the sixth hire on Basic — the five-agent cap is hard, and crossing it reprices the whole team onto Team. On the flat annual model, it is ticket volume, since exceeding the yearly allowance reopens the commercial conversation. Either way the risk is a renegotiation rather than a line-item overage.
+HappyFox carries the opposite profile — no platform pull, but a wide dual-purpose feature set spanning customer support and internal IT service management from one product, across education, healthcare, telecom, ecommerce, and government deployments. Unlimited agents on its live chat plans is a real structural advantage. The tradeoff is setup time; the surface area is broad and small teams underestimate the configuration effort.
 
 ## Who should pick what
 

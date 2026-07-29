@@ -24,9 +24,9 @@ tags:
 
 ## Why anyone runs this comparison
 
-Rarely as a greenfield choice. Oracle Service Cloud descends directly from RightNow CX, acquired in 2012 and folded into the Oracle CX portfolio, and a lot of what is running in production today carries a decade or more of RightNow-era customization. The people comparing it to Kustomer are usually sitting on one of those deployments, staring at a renewal, and asking whether a modern platform would cost less and annoy their agents less.
+Rarely as a greenfield choice. Oracle Service Cloud descends directly from RightNow CX, acquired in 2012 and folded into the Oracle CX portfolio, and much of what runs in production today carries a decade or more of RightNow-era customization. The people comparing it to Kustomer are usually sitting on one of those deployments, staring at a renewal, asking whether a modern platform would cost less and annoy their agents less.
 
-That framing matters because it changes what the comparison is about. It is not really feature-versus-feature. It is accumulated configuration versus a fresh start, and the honest answer depends on how much of that configuration still earns its keep.
+That framing changes what the comparison is about. Not feature-versus-feature, but accumulated configuration versus a fresh start — and the honest answer depends on how much of that configuration still earns its keep.
 
 ## Pricing
 
@@ -40,11 +40,11 @@ Twenty Kustomer seats with rep AI and 5,000 AI-engaged conversations a month wor
 
 The architectural difference is real and it shapes daily work.
 
-Oracle Service Cloud is case-centric: an incident arrives, gets routed, gets worked, gets closed, with an AI-assisted knowledge base recommending content and guiding resolution along the way. That model suits high-volume operations where each contact is a discrete matter with an audit trail — regulated industries, government service delivery, complex multi-channel escalation paths. Oracle also carries native connectors to Oracle ERP, Commerce Cloud, and Field Service, which is a genuine advantage nobody else can replicate for an Oracle-heavy enterprise.
+Oracle Service Cloud is case-centric: an incident arrives, gets routed, worked, and closed, with an AI-assisted knowledge base recommending content and guiding resolution. That suits high-volume operations where each contact is a discrete matter with an audit trail — regulated industries, government service delivery, complex escalation paths. Native connectors to Oracle ERP, Commerce Cloud, and Field Service are an advantage nobody else can replicate for an Oracle-heavy enterprise.
 
-Kustomer is timeline-centric: one permanent record per customer holding every purchase, message, and issue, across chat, email, voice, SMS, Facebook, Instagram, and WhatsApp. Agents read a relationship rather than a case file. For retail, travel, and consumer brands — Turo, SKIMS, Everlane, and Sweetgreen are named customers — that context is the product, and custom objects plus API access let teams model unusual order structures.
+Kustomer is timeline-centric: one permanent record per customer holding every purchase, message, and issue across chat, email, voice, SMS, Facebook, Instagram, and WhatsApp. Agents read a relationship rather than a case file. For retail, travel, and consumer brands — Turo, SKIMS, Everlane, and Sweetgreen are named customers — that context is the product, and custom objects plus API access let teams model unusual order structures.
 
-Neither model is superior in the abstract. If your service work is discrete incidents against strict SLAs, cases fit. If it is an ongoing relationship where the last four interactions explain the current one, timelines fit.
+If your service work is discrete incidents against strict SLAs, cases fit. If it is an ongoing relationship where the last four interactions explain the current one, timelines fit.
 
 ## AI, and which meter it runs on
 
@@ -54,18 +54,16 @@ Kustomer deliberately unbundles it, on the theory that deflection value scales w
 
 ## Lock-in cuts both ways
 
-Long-running Oracle deployments are hard to leave, which is exactly why renewal negotiations go badly for the customer. A vendor who knows migration would take you eighteen months prices accordingly. The only real counter is a genuine migration assessment in hand, not a threat you cannot execute — precisely what a Kustomer evaluation can serve as, whether or not you switch.
-
-Kustomer's lock-in is milder but not zero. Annual-only billing means you cannot pilot in production for a quarter and walk away, and at five agents the eight-seat floor makes the effective rate $222, not $139.
+Long-running Oracle deployments are hard to leave, which is why renewal negotiations go badly for the customer: a vendor who knows migration would take you eighteen months prices accordingly. The only real counter is a genuine migration assessment in hand — precisely what a Kustomer evaluation can serve as, whether or not you switch. Kustomer's own lock-in is milder but not zero. Annual-only billing means you cannot pilot in production for a quarter and walk away, and at five agents the eight-seat floor makes the effective rate $222, not $139.
 
 ## Who should pick what
 
-- **Large enterprises already running Oracle ERP, Commerce, or Field Service** → Oracle Service Cloud. The native connectors and portfolio negotiating leverage are not available anywhere else.
-- **Government and heavily regulated service organizations** → Oracle, for the logging, role-based access, and audit trails built for that scrutiny.
-- **Consumer brands in retail, travel, or DTC with high message volume** → Kustomer. The unified timeline and WhatsApp/Instagram coverage match how those customers actually arrive.
-- **Support teams under eight agents** → neither. Kustomer's minimum makes it structurally overpriced; Oracle is not sold at that size at all.
-- **Mid-sized service teams paying $130–$200 per Oracle user** → get quotes elsewhere. At that rate you are buying enterprise platform capability a lighter product would deliver for a fraction of the implementation.
-- **Healthcare** → price Kustomer's HIPAA add-on at $25/user from the first call, not during security review; it changes the comparison.
+- **Large enterprises on Oracle ERP, Commerce, or Field Service** → Oracle Service Cloud, for the native connectors and portfolio negotiating leverage.
+- **Government and heavily regulated service organizations** → Oracle, for logging, role-based access, and audit trails built for that scrutiny.
+- **Consumer brands in retail, travel, or DTC with high message volume** → Kustomer. The unified timeline and WhatsApp/Instagram coverage match how those customers arrive.
+- **Support teams under eight agents** → neither. Kustomer's minimum makes it structurally overpriced; Oracle is not sold at that size.
+- **Mid-sized teams paying $130–$200 per Oracle user** → get quotes elsewhere; a lighter product delivers that capability for a fraction of the implementation.
+- **Healthcare** → price Kustomer's HIPAA add-on at $25/user from the first call, not during security review.
 
 ## Bottom line
 

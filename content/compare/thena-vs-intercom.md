@@ -59,11 +59,10 @@ Thena tracks at the account level, grouping tickets by company so a lean team su
 - **B2B SaaS supporting customers in Slack Connect channels** → Thena. Nothing in Intercom addresses this.
 - **Product-led software with in-app support and high self-serve volume** → Intercom, with Fin turned on.
 - **Teams that need firm budget numbers twelve months out** → Thena. Bundled AI means the invoice is seats times price.
-- **Teams whose inbound is mostly repetitive how-do-I questions** → Intercom. Per-resolution pricing is the cheaper shape here.
-- **Companies whose customers live in Microsoft Teams** → check Thena Enterprise pricing carefully before assuming it is affordable; Intercom does not serve this pattern either.
+- **Companies whose customers live in Microsoft Teams** → check Thena Enterprise pricing before assuming it is affordable; Intercom does not serve this pattern either.
 - **Qualifying early-stage startups** → Intercom's Early Stage program advertises up to 93% off plus a year of Fin, which distorts the comparison for year one only.
 - **Low-volume, high-complexity support** → Thena. Intercom's AI meter returns nothing when every ticket needs a human.
 
 ## Bottom line
 
-This is not a close feature fight, because the two products barely overlap. Thena is a Slack-first B2B desk with predictable bundled-AI pricing, an annual-only commitment, and a Starter tier whose ticket ceiling deserves checking against your last three months of volume. Intercom is a mature omnichannel platform whose messenger and AI agent are among the best available, sold with a variable meter that rewards deflection and punishes low-volume complexity. Pick by where your customers already talk to you, then price the tier that actually holds the features you need — Standard for Thena if you want the automation layer, Advanced for Intercom if you route to more than one team.
+Not a close feature fight, because the two barely overlap. Thena is a Slack-first B2B desk with predictable bundled-AI pricing, an annual-only commitment, and a Starter tier whose ticket ceiling deserves checking against your last three months of volume. Intercom is a mature omnichannel platform whose messenger and AI agent are among the best available, sold with a variable meter that rewards deflection and punishes low-volume complexity. Pick by where your customers already talk to you, then price the tier that actually holds what you need — Standard for Thena if you want the automation layer, Advanced for Intercom if you route to more than one team.

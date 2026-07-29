@@ -57,8 +57,8 @@ Zoho Desk's awkwardness is interface density and renewal behavior. Small teams s
 
 ## Who should pick what
 
-- **Agencies and services firms already on Teamwork.com** → Teamwork Desk, no contest. Ticket-to-task continuity is worth more than any feature Zoho lists.
-- **Support teams under three agents with no budget** → Zoho Desk Free. It is a working desk, not a trial.
+- **Agencies and services firms already on Teamwork.com** → Teamwork Desk, no contest. Ticket-to-task continuity beats any feature Zoho lists.
+- **Support teams under three agents with no budget** → Zoho Desk Free. A working desk, not a trial.
 - **Teams that owe customers documented SLAs on a tight budget** → Zoho Desk Standard at $14 includes what Teamwork charges $33 for.
 - **Small teams that need live chat cheaply** → Teamwork Desk Pro at $17 beats Zoho's Enterprise-gated chat at $40.
 - **Anyone running Zoho CRM** → Zoho Desk, for the shared customer record alone.
@@ -66,4 +66,4 @@ Zoho Desk's awkwardness is interface density and renewal behavior. Small teams s
 
 ## Bottom line
 
-Model your own tier before you compare headlines. Teamwork Desk's $9.50 is real but only for ten agents doing email; the price you will actually pay depends on whether you need chat ($17) or SLAs ($33). Zoho Desk's $14 is real and generous, but live chat pushes you to $40, which changes the math entirely. The clean version of this decision: if your support work becomes project work, buy Teamwork Desk and accept the narrower channel set. If support is a standalone function — especially one sitting next to Zoho CRM — buy Zoho Desk and take Standard until multi-department or chat forces your hand.
+Model your own tier before comparing headlines. Teamwork Desk's $9.50 is real but only for ten agents doing email; what you actually pay depends on whether you need chat ($17) or SLAs ($33). Zoho Desk's $14 is real and generous, but live chat pushes you to $40 and changes the math entirely. The clean version: if your support work becomes project work, buy Teamwork Desk and accept the narrower channel set. If support is a standalone function — especially one sitting next to Zoho CRM — buy Zoho Desk and take Standard until multi-department or chat forces your hand.

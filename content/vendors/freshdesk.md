@@ -5,7 +5,7 @@ description: >-
   self-service tools. Built for support teams that scale.
 website: 'https://freshdesk.com'
 category: Helpdesk
-pricing: 'Free plan, paid from $15/agent/mo'
+pricing: 'From $19/agent/mo (Growth); Pro $55, Enterprise $89; 14-day trial, no free plan'
 rating: '4.2'
 tags:
   - Helpdesk

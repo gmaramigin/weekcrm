@@ -7,8 +7,8 @@ description: >-
 website: 'https://www.insightly.com'
 category: CRM
 pricing: >-
-  Free for 2 users; Plus $29/user/mo, Professional $49/user/mo, Enterprise
-  $99/user/mo
+  Plus $29/user/mo, Professional $49/user/mo, Enterprise $99/user/mo; 14-day
+  trial, no free plan
 rating: '4.1'
 tags:
   - CRM

@@ -22,11 +22,11 @@ tags:
 
 ## The free plans are not comparable
 
-Teamgate Starter is free for two users with one pipeline, 500 contacts, and core deal, contact, task, and calendar management. There is no time limit. But 500 contacts is a few weeks of list-building for any B2B team doing outbound, so Starter functions as an indefinite trial for a two-person consultancy working a warm network — not a plan a startup grows on.
+Teamgate Starter is free for two users with one pipeline, 500 contacts, and core deal, contact, task, and calendar management, with no time limit. But 500 contacts is a few weeks of list-building for any B2B team doing outbound, so Starter functions as an indefinite trial for a two-person consultancy working a warm network — not a plan a startup grows on.
 
-HubSpot's free CRM covers contact and deal management, forms, and basic ticketing with contact capacity that no small business will exhaust. Its constraint is functional rather than numerical: no sequences, no custom reporting, and HubSpot branding stays on your forms and emails. Plenty of teams run on it for a year.
+HubSpot's free CRM covers contacts, deals, forms, and basic ticketing with capacity no small business will exhaust. Its constraint is functional: no sequences, no custom reporting, and HubSpot branding stays on your forms and emails. Plenty of teams run on it for a year.
 
-If the free tier is the deciding factor, this comparison is already over.
+If the free tier decides it for you, this comparison is already over.
 
 ## Pricing
 
@@ -65,4 +65,4 @@ HubSpot's Marketing Hub does not bill on seats at all — it bills on marketing 
 
 ## Bottom line
 
-These products compete for maybe one buyer in five. Teamgate makes sense for a self-contained sales team that wants forecasting, automation, dialing, and a human at the vendor who knows their setup, at roughly a third of HubSpot Professional's price — provided the integration and multi-currency requirements are listed honestly before choosing between its two tiers. HubSpot makes sense when marketing and sales genuinely share a database and the campaign engine earns its keep. Start with the free tiers on both if you can, but recognize that Teamgate's is a two-person courtesy and HubSpot's is a real operating plan.
+These products compete for maybe one buyer in five. Teamgate makes sense for a self-contained sales team that wants forecasting, automation, dialing, and a human at the vendor who knows their setup, at roughly a third of HubSpot Professional's price — provided the integration and multi-currency requirements are listed honestly before choosing between its tiers. HubSpot makes sense when marketing and sales genuinely share a database and the campaign engine earns its keep. Start free on both if you can, but recognize that Teamgate's free plan is a two-person courtesy and HubSpot's is a real operating plan.

@@ -56,12 +56,11 @@ Front covers email, chat, SMS, WhatsApp, social, and voice, with the caveat that
 
 - **Internal IT, HR, or RevOps queues in a Slack-first company** → Unthread. Zero-friction intake is the entire value and Front cannot match it.
 - **Logistics, freight, financial services, or wholesale operations** → Front Professional. Cross-team context survival is what the price buys.
-- **Support teams of two or three people** → neither cleanly; Unthread bills you for five seats and Front's cheap tier is single-channel. Negotiate Unthread's minimum or look outside this pair.
+- **Support teams of two or three people** → neither cleanly. Unthread bills you for five seats; Front's cheap tier is single-channel.
 - **Teams needing tight two-way sync with an engineering issue tracker** → Unthread Pro, which builds bi-directional ticket sync into the tier.
 - **Consumer brands answering SMS, WhatsApp, and Instagram** → Front, and budget the WhatsApp surcharge honestly.
-- **Slack Enterprise Grid organizations** → Unthread, but start the sales conversation early; the published rates will not apply to you.
-- **Teams wanting more than one Front AI product** → skip Professional add-ons and price Enterprise directly.
+- **Slack Enterprise Grid organizations** → Unthread, but start the sales conversation early; published rates will not apply to you.
 
 ## Bottom line
 
-The comparison resolves on where a request is born and how many people have to touch it. Unthread is the most polished Slack-native desk available, and if your team and customers already work there, the removal of a portal is worth more than any feature list — just verify that conversation auto-detection matches your definition of a ticket during the trial, and negotiate the five-seat floor before you negotiate the rate. Front is the better instrument for messy, multi-department, multi-channel operations, but its published $25 is a single-channel plan and its AI is a menu, not a feature. Price Front at Professional-plus-add-ons or Enterprise, and price Unthread at Pro. Those are the numbers you will actually sign.
+The comparison resolves on where a request is born and how many people have to touch it. Unthread is the most polished Slack-native desk available, and if your team and customers already work there, removing the portal is worth more than any feature list — just verify during the trial that conversation auto-detection matches your definition of a ticket, and negotiate the five-seat floor before you negotiate the rate. Front is the better instrument for messy, multi-department, multi-channel operations, but its published $25 is a single-channel plan and its AI is a menu, not a feature. Price Front at Professional-plus-add-ons or Enterprise, and price Unthread at Pro. Those are the numbers you will actually sign.

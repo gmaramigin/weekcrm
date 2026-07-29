@@ -25,21 +25,21 @@ tags:
 
 Start here or the pricing comparison misleads you.
 
-OTRS Community Edition was built for IT service management. Its natural home is an internal service desk with multiple queues, defined SLAs, escalation chains, and a customer portal where staff raise and track requests — European IT departments, universities, managed service providers, public sector. It supports MySQL, PostgreSQL, Oracle, and MSSQL as backing databases and ships a GenericInterface web-service layer that exposes ticket creation, updates, and searches over REST and SOAP without writing integration code. That is enterprise plumbing, and it is genuinely mature.
+OTRS Community Edition was built for IT service management. Its natural home is an internal service desk with multiple queues, defined SLAs, escalation chains, and a portal where staff raise and track requests — European IT departments, universities, managed service providers, public sector. It supports MySQL, PostgreSQL, Oracle, and MSSQL as backing databases and ships a GenericInterface web-service layer exposing ticket creation, updates, and searches over REST and SOAP without custom integration code. Mature enterprise plumbing.
 
-FreeScout is a shared inbox. A team outgrows support@company.com, needs assignment, threading, notes, saved replies, and collision awareness, and wants it without paying per seat. The interface, terminology, and mental model deliberately echo Help Scout, which is exactly who its converts are leaving. Modules extend it toward CRM, live chat, knowledge base, WhatsApp, Slack, Telegram, and Jira, and there are native iOS and Android apps for agents, plus support for 30-plus languages.
+FreeScout is a shared inbox. A team outgrows support@company.com, needs assignment, threading, notes, saved replies, and collision awareness, and wants it without paying per seat. The interface and mental model deliberately echo Help Scout, which is exactly who its converts are leaving. Modules extend it toward CRM, live chat, knowledge base, WhatsApp, Slack, Telegram, and Jira, with native iOS and Android apps and 30-plus languages.
 
 If your work looks like incident queues with escalation policies, FreeScout will feel thin. If it looks like customer email that needs to stop falling through the cracks, OTRS will feel like an ITIL costume you didn't ask for.
 
 ## Cost: zero versus roughly fifty dollars, once
 
-Neither charges per agent. That is a substantial thing they share, and against commercial help desks at $50-plus a seat it is the entire reason either is on your list.
+Neither charges per agent — the shared trait that puts both on your list against commercial desks at $50-plus a seat.
 
-FreeScout's model is unusual and worth spelling out. The core application is free with unlimited agents and unlimited mailboxes. Everything beyond it is a one-time module purchase — Workflows $14.99, End-User Portal $12.99, Knowledge Base $12.00, Tags $6.99, plus $2 to $3 utilities like Ticket Number and Global Mailbox. A build with all of those runs about $52, paid once, with lifetime updates. Modules license per installation rather than per user, so a thirty-agent team pays exactly what a two-agent team pays. Hosting is bring-your-own, roughly $2.30 to $13 a month on the providers FreeScout's own docs point at.
+FreeScout's model is worth spelling out. The core is free with unlimited agents and unlimited mailboxes; everything beyond it is a one-time module purchase — Workflows $14.99, End-User Portal $12.99, Knowledge Base $12.00, Tags $6.99, plus $2 to $3 utilities like Ticket Number and Global Mailbox. All of those together run about $52, paid once, with lifetime updates. Modules license per installation rather than per user, so a thirty-agent team pays what a two-agent team pays. Hosting is bring-your-own, roughly $2.30 to $13 a month.
 
-OTRS Community Edition has no module storefront and no purchase at all — it is AGPL and complete as shipped. The commercial OTRS platform exists as the vendor's upgrade path, but publishes no pricing at any level, so you cannot benchmark it against anything without running a full sales cycle first.
+OTRS Community Edition has no storefront and no purchase at all — AGPL, complete as shipped. The commercial OTRS platform is the vendor's upgrade path but publishes no pricing at any level, so benchmarking it means running a sales cycle first.
 
-So on paper OTRS is cheaper by about fifty dollars. In practice that is the least significant number in this comparison.
+On paper OTRS is cheaper by about fifty dollars. In practice that is the least significant number here.
 
 ## One of them still gets patched
 

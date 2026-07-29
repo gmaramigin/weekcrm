@@ -5,7 +5,7 @@ description: >-
   relationships — hiring, fundraising, partnerships.
 website: 'https://folk.app'
 category: CRM
-pricing: 'Free plan, paid from $20/mo'
+pricing: 'From $24/member/mo (annual); Premium $48; 2-week trial, no free plan'
 rating: '4.5'
 tags:
   - HubSpot
