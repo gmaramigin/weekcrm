@@ -43,15 +43,11 @@ osTicket also offers an exit from operations entirely. SupportSystem, its manage
 
 Note the scaling inversion on the osTicket side: self-hosted, the hundredth agent costs the same as the first, which is zero. On cloud there is no published volume discount, so fifty agents is roughly $6,600 a year. Somewhere around fifteen to twenty-five agents the decision tips back toward self-hosting.
 
-## Staffing the stack
-
-Perl developers are a smaller pool than PHP developers, and OTRS deployments are frequently inherited rather than chosen — a system somebody set up years ago that nobody currently understands. When the person who configured your escalation rules leaves, replacing that knowledge is harder on the OTRS side. osTicket's PHP/MySQL stack is unremarkable in the best sense: most IT departments already have someone who can read it.
-
 ## Depth versus straightforwardness
 
-OTRS Community Edition is the more capable system on paper, and its user base reflects that: European IT departments, universities, managed service providers, and public-sector service desks running structured ITSM. Queues, SLA tracking, escalations, and a customer portal are all mature, and the GenericInterface web-service layer allows ticket creation, updates, and searches over REST or SOAP without writing custom integration code. Multi-database support matters in shops that standardized on Oracle or MSSQL years ago and will not run MySQL.
+OTRS Community Edition is the more capable system on paper, and its user base reflects that: European IT departments, universities, managed service providers, and public-sector desks running structured ITSM. Queues, SLA tracking, escalations, and a customer portal are all mature, and the GenericInterface web-service layer allows ticket creation, updates, and searches over REST or SOAP without custom integration code. Multi-database support matters in shops that standardized on Oracle or MSSQL and will not run MySQL. The staffing catch: Perl developers are a smaller pool, and OTRS instances are frequently inherited rather than chosen — when whoever configured your escalation rules leaves, that knowledge is harder to replace.
 
-osTicket is narrower and cleaner. Email piping, web forms, and API submission feed one queue; help topics drive auto-assignment to departments or agents; SLA plans trigger escalation alerts; a knowledge base serves both customers and agents; custom fields and forms, ticket filters, canned responses, and agent collision avoidance round it out. Reporting is basic — complex analytics mean exporting data elsewhere — and there is no AI layer, no bundled live chat, no social channels.
+osTicket is narrower and cleaner, on a PHP/MySQL stack most IT departments can already read. Email piping, web forms, and API submission feed one queue; help topics drive auto-assignment; SLA plans trigger escalation alerts; a knowledge base serves customers and agents; custom fields and forms, ticket filters, canned responses, and collision avoidance round it out. Reporting is basic, and there is no AI layer, no bundled live chat, no social channels.
 
 Both interfaces look their age. Neither is trying to win on design.
 

@@ -55,18 +55,16 @@ FreeScout is PHP and Laravel on MySQL — a stack any competent web host or juni
 
 OTRS is Perl, and this is where inherited deployments get uncomfortable. The developer pool is smaller, the administrative surface is larger — mail gateway configuration, database tuning across four possible engines, upgrades that are their own project — and a great many production OTRS instances were configured by someone who has since left. When the escalation rules need changing and nobody on staff reads Perl, the free license stops feeling free.
 
-## Where each runs out of road
-
-Neither has an AI layer worth discussing, so if your business case is resolving a large share of tickets without a human, look elsewhere entirely and stop comparing license fees. FreeScout additionally has no official SLA or enterprise support — community forums and paid installation services only — which is disqualifying for a regulated organization that needs a support contract with a name on it. OTRS runs out of road at the security review, and the exit is Znuny.
+Two limits worth stating plainly before you choose either: neither has an AI layer worth discussing, so a deflection business case rules both out; and FreeScout has no official SLA or enterprise support, only community forums and paid installation services, which is disqualifying for a regulated organization that needs a contract with a name on it.
 
 ## Who should pick what
 
-- **Teams leaving Help Scout, Front, or a shared Gmail account** → FreeScout. The model matches, the payback is immediate, and the seat count never costs anything.
+- **Teams leaving Help Scout, Front, or a shared Gmail account** → FreeScout. The model matches, payback is immediate, and seat count never costs anything.
 - **Internal IT service desks needing queues, escalation policies, and a request portal** → the OTRS lineage, but take Znuny rather than Community Edition.
-- **Anyone currently running OTRS CE** → plan a Znuny migration as scheduled work. Shared codebase lineage keeps the move direct; retraining on FreeScout would mean changing products, not just versions.
-- **Shops that need Oracle or MSSQL behind the ticketing system, or SOAP integration** → OTRS lineage. FreeScout does not go there.
-- **Privacy-conscious or bootstrapped teams with a server and no budget** → FreeScout, comfortably. Roughly $52 once plus hosting.
-- **Organizations with no technical staff at all** → neither. Both hand you an internet-facing PHP or Perl application and full responsibility for it.
+- **Anyone currently running OTRS CE** → plan a Znuny migration as scheduled work; shared codebase lineage keeps the move direct.
+- **Shops needing Oracle or MSSQL behind the ticketing system, or SOAP integration** → OTRS lineage. FreeScout does not go there.
+- **Privacy-conscious or bootstrapped teams with a server and no budget** → FreeScout. Roughly $52 once plus hosting.
+- **Organizations with no technical staff** → neither. Both hand you an internet-facing application and full responsibility for it.
 
 ## Bottom line
 

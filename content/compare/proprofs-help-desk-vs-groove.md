@@ -48,9 +48,7 @@ Groove's quieter lever is Lite Users: people who read and comment on conversatio
 
 ## AI on both sides, assistive in both cases
 
-Neither does autonomous resolution, so judge both on agent productivity rather than deflection. ProProfs ramps AI through its tiers: 50 response drafts a month plus categorization and grammar checking on Essentials, a first-response generator and tone rewriting on Business, emotion detection and data redaction at Business Complete Elite. At $47.88 a year that is remarkable value for one person.
-
-Groove splits its AI by pricing model instead. Summarization, sentiment, auto-tagging, and writing assist come bundled from Plus upward; AI Drafts are metered at $0.25 per credit. A five-agent Plus team paying $100 a month in seats that generates 400 drafts adds another $100, taking the effective seat cost above Pro's list rate.
+Neither does autonomous resolution, so judge both on agent productivity rather than deflection. ProProfs ramps AI through its tiers — 50 response drafts a month plus categorization and grammar checking on Essentials, a first-response generator and tone rewriting on Business, emotion detection and data redaction at Business Complete Elite. Groove splits its AI by pricing model instead: summarization, sentiment, auto-tagging, and writing assist come bundled from Plus upward, while AI Drafts are metered at $0.25 per credit. A five-agent Plus team paying $100 a month in seats that generates 400 drafts adds another $100, pushing the effective seat cost above Pro's list rate.
 
 ## Suite bundle versus focused inbox
 
