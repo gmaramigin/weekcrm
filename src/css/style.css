@@ -899,3 +899,84 @@ p { color: var(--text-secondary); }
 @media (max-width: 640px) {
   .pricing-vendor-head .btn { margin-left: 0; width: 100%; text-align: center; }
 }
+
+
+/* ── Migration guides (/migrate/<from>-to-<to>) ───────── */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+.migrate-route {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+}
+.migrate-endpoint {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease;
+}
+.migrate-endpoint:hover { border-color: var(--accent, #2563eb); }
+.migrate-endpoint-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted, #6b7280);
+}
+.migrate-endpoint strong { font-size: 1.05rem; }
+.migrate-arrow {
+  align-self: center;
+  font-size: 1.5rem;
+  color: var(--text-muted, #6b7280);
+}
+.migrate-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  margin: 0 0 2rem;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  background: var(--bg-alt, #f7f7f5);
+}
+.migrate-fact dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted, #6b7280);
+  margin-bottom: 0.2rem;
+}
+.migrate-fact dd { margin: 0; font-weight: 600; font-size: 0.95rem; }
+.migrate-map tbody th { white-space: normal; }
+.migrate-cell-arrow {
+  color: var(--text-muted, #6b7280);
+  width: 1.5rem;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.migrate-transfers,
+.migrate-steps { margin-top: 2.5rem; }
+.migrate-transfers h2,
+.migrate-steps h2 { font-size: 1.15rem; margin-bottom: 0.75rem; }
+.migrate-transfers ul,
+.migrate-steps ol { padding-left: 1.25rem; }
+.migrate-transfers li,
+.migrate-steps li { margin-bottom: 0.5rem; line-height: 1.6; }
+@media (max-width: 640px) {
+  .migrate-arrow { transform: rotate(90deg); }
+  .migrate-facts { gap: 1.1rem; }
+}

@@ -192,16 +192,24 @@ function autoLinkVendors(html, vendors, currentSlug = null) {
     const part = parts[i];
     if (SKIP_RE.test(part)) continue; // Skip blocks
     let segment = part;
+    // Each anchor is parked as a NUL-delimited index placeholder while we keep
+    // scanning, so a later, shorter vendor title can't match inside an <a> we just
+    // inserted — "Kayako" would otherwise match inside the href of
+    // /vendors/kayako-classic and emit a nested anchor. NUL never survives Markdown
+    // rendering, so the placeholder cannot collide with real content.
+    const inserted = [];
     for (const t of targets) {
       if (linked.has(t.slug)) continue;
       // Word-bounded, case-insensitive, only the FIRST match in the whole article.
       const re = new RegExp(`\\b(${escapeRegex(t.label)})\\b`, 'i');
-      if (re.test(segment)) {
-        segment = segment.replace(re, `<a href="/vendors/${t.slug}">$1</a>`);
+      const match = segment.match(re);
+      if (match) {
+        segment = segment.replace(re, ` ${inserted.length} `);
+        inserted.push(`<a href="/vendors/${t.slug}">${match[1]}</a>`);
         linked.add(t.slug);
       }
     }
-    parts[i] = segment;
+    parts[i] = segment.replace(/ (\d+) /g, (_, n) => inserted[Number(n)]);
   }
   return parts.join('');
 }
@@ -330,7 +338,7 @@ function build() {
   ensureDir(DIST);
 
   // Resolve which content sources are gitignored — we skip analytics on those.
-  const contentDirs = ['articles', 'vendors', 'consultants', 'compare', 'best', 'pricing', 'industry', 'integrations'];
+  const contentDirs = ['articles', 'vendors', 'consultants', 'compare', 'best', 'pricing', 'migrate', 'industry', 'integrations'];
   const allSourcePaths = [];
   for (const d of contentDirs) {
     const full = path.join(CONTENT, d);
@@ -1141,6 +1149,226 @@ function build() {
     addRoute('/pricing', { changefreq: 'weekly', priority: '0.7' });
   }
 
+  // ── Migration guides (/migrate/<from>-to-<to>) ───────
+  // Distinct search intent from /compare/: the buyer has already decided and
+  // now needs the switching mechanics. The unique-content share per page is
+  // the object map + blockers + step order, all pair-specific frontmatter —
+  // a page without an `objectMap` is thin by definition and hard-fails.
+  const migrateEntries = readMarkdownFiles(path.join(CONTENT, 'migrate'));
+  if (migrateEntries.length) {
+    ensureDir(path.join(DIST, 'migrate'));
+    const migrateIndexCards = [];
+    const esc = (s) => String(s ?? '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    for (const entry of migrateEntries) {
+      const from = vendorBySlug[entry.from];
+      const to = vendorBySlug[entry.to];
+      if (!from || !to) {
+        const missing = [!from && entry.from, !to && entry.to].filter(Boolean).join(', ');
+        throw new Error(
+          `migrate/${entry.slug}.md references unknown vendor slug(s): ${missing}. ` +
+          `Add the vendor to content/vendors/ or fix the frontmatter.`
+        );
+      }
+      const objectMap = Array.isArray(entry.objectMap) ? entry.objectMap : [];
+      if (!objectMap.length) {
+        throw new Error(`migrate/${entry.slug}.md has no 'objectMap' — a migration guide without a field map is thin content.`);
+      }
+      const steps = Array.isArray(entry.steps) ? entry.steps : [];
+      if (steps.length < 3) {
+        throw new Error(`migrate/${entry.slug}.md needs at least 3 'steps' — got ${steps.length}.`);
+      }
+
+      const mapRows = objectMap.map(r => `
+        <tr>
+          <th scope="row">${esc(r.from)}</th>
+          <td class="migrate-cell-arrow" aria-hidden="true">→</td>
+          <td>${esc(r.to)}</td>
+          <td>${marked.parseInline(String(r.notes || ''))}</td>
+        </tr>`).join('');
+
+      const mapTable = `
+        <div class="pricing-table-wrap">
+          <table class="pricing-table migrate-map">
+            <caption>How ${esc(from.title)} records land in ${esc(to.title)}</caption>
+            <thead>
+              <tr>
+                <th scope="col">${esc(from.title)}</th>
+                <th scope="col"><span class="visually-hidden">maps to</span></th>
+                <th scope="col">${esc(to.title)}</th>
+                <th scope="col">What to watch</th>
+              </tr>
+            </thead>
+            <tbody>${mapRows}</tbody>
+          </table>
+        </div>`;
+
+      const listBlock = (items, heading, cls) => {
+        const arr = Array.isArray(items) ? items : [];
+        if (!arr.length) return '';
+        return `
+          <div class="${cls}">
+            <h2>${esc(heading)}</h2>
+            <ul>${arr.map(i => `<li>${marked.parseInline(String(i))}</li>`).join('')}</ul>
+          </div>`;
+      };
+
+      const stepsHtml = `
+        <div class="migrate-steps">
+          <h2>Migration order that works</h2>
+          <ol>${steps.map(s => `<li>${marked.parseInline(String(s))}</li>`).join('')}</ol>
+        </div>`;
+
+      const facts = [
+        entry.difficulty && ['Difficulty', entry.difficulty],
+        entry.duration && ['Typical duration', entry.duration],
+        entry.downtime && ['Downtime', entry.downtime],
+        entry.nativeImport && ['Native importer', entry.nativeImport]
+      ].filter(Boolean);
+      const factsHtml = facts.length ? `
+        <dl class="migrate-facts">
+          ${facts.map(([k, v]) => `<div class="migrate-fact"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}
+        </dl>` : '';
+
+      // Route pairs into the rest of the corpus: both vendor profiles, the
+      // head-to-head if we have one, the destination's pricing page, and the
+      // source's alternatives listicle.
+      const pairCompare = compareEntries.find(c =>
+        (c.a === from.slug && c.b === to.slug) || (c.a === to.slug && c.b === from.slug));
+      const toPricing = pricingEntries.find(p => p.vendor === to.slug);
+      const fromAlt = `best-${from.slug}-alternatives`;
+      const hasFromAlt = bestEntries.some(b => b.slug === fromAlt);
+      const relatedLinks = [
+        `<li><a href="/vendors/${to.slug}">${esc(to.title)} review, features and ratings</a></li>`,
+        `<li><a href="/vendors/${from.slug}">What you're leaving behind in ${esc(from.title)}</a></li>`,
+        pairCompare ? `<li><a href="/compare/${pairCompare.slug}">${esc(pairCompare.title)}</a></li>` : '',
+        toPricing ? `<li><a href="/pricing/${toPricing.slug}">${esc(to.title)} pricing, plan by plan</a></li>` : '',
+        hasFromAlt ? `<li><a href="/best/${fromAlt}">Other ${esc(from.title)} alternatives worth a look</a></li>` : ''
+      ].filter(Boolean).join('');
+      const relatedHtml = `
+        <div class="pricing-related">
+          <h2>Before you commit</h2>
+          <ul>${relatedLinks}</ul>
+        </div>`;
+
+      const howToLd = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: entry.title,
+        description: entry.description || `How to migrate from ${from.title} to ${to.title}.`,
+        ...(entry.duration ? { totalTime: entry.duration } : {}),
+        tool: [
+          { '@type': 'HowToTool', name: from.title },
+          { '@type': 'HowToTool', name: to.title }
+        ],
+        step: steps.map((s, i) => ({
+          '@type': 'HowToStep',
+          position: i + 1,
+          name: String(s).replace(/[*_`\[\]]/g, '').split(/[.—–:]/)[0].trim().slice(0, 110),
+          text: String(s).replace(/[*_`]/g, '')
+        }))
+      }).replace(/<\/script/gi, '<\\/script');
+
+      const breadcrumbLd = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Migration guides', item: 'https://www.weekcrm.com/migrate' },
+          { '@type': 'ListItem', position: 2, name: entry.title, item: `https://www.weekcrm.com/migrate/${entry.slug}` }
+        ]
+      }).replace(/<\/script/gi, '<\\/script');
+
+      const ctaUrl = to.referralUrl || to.website || '#';
+      const ctaRel = to.referralUrl ? 'noopener sponsored' : 'noopener nofollow';
+      const ctaLabel = to.referralUrl ? `Try ${to.title}` : `Visit ${to.title}`;
+
+      const bodyHtml = `
+        ${faqJsonLdTag(entry.faq)}
+        <script type="application/ld+json">${howToLd}</script>
+        <script type="application/ld+json">${breadcrumbLd}</script>
+        <section class="compare-hero">
+          <div class="container container-narrow">
+            <span class="compare-eyebrow">Migration guide</span>
+            <h1 class="compare-title">${esc(entry.title)}</h1>
+            <p class="compare-desc">${esc(entry.description || '')}</p>
+            ${renderTldr(entry.tldr || entry.description)}
+          </div>
+        </section>
+        <section class="section">
+          <div class="container container-narrow">
+            <div class="migrate-route">
+              <a href="/vendors/${from.slug}" class="migrate-endpoint">
+                ${renderLogo(from, 'vendor-logo-md')}
+                <span class="migrate-endpoint-label">From</span>
+                <strong>${esc(from.title)}</strong>
+              </a>
+              <span class="migrate-arrow" aria-hidden="true">→</span>
+              <a href="/vendors/${to.slug}" class="migrate-endpoint">
+                ${renderLogo(to, 'vendor-logo-md')}
+                <span class="migrate-endpoint-label">To</span>
+                <strong>${esc(to.title)}</strong>
+              </a>
+            </div>
+            ${factsHtml}
+            ${mapTable}
+            ${listBlock(entry.transfers, 'What transfers cleanly', 'migrate-transfers')}
+            ${listBlock(entry.blockers, "What doesn't come across", 'pricing-gotchas')}
+            ${stepsHtml}
+            <div class="compare-body">${autoLinkVendors(entry.html, vendors)}</div>
+            ${relatedHtml}
+            <div class="compare-cta-row">
+              <a href="${ctaUrl}" target="_blank" rel="${ctaRel}" class="btn btn-primary">${esc(ctaLabel)} →</a>
+            </div>
+          </div>
+        </section>
+        ${renderFaqHtml(entry.faq)}`;
+
+      const page = render(baseTemplate, {
+        title: `${entry.title} — WeekCRM`,
+        description: entry.description || `Migrating from ${from.title} to ${to.title}: field mapping, what breaks, and the order to do it in.`,
+        url: `https://www.weekcrm.com/migrate/${entry.slug}`,
+        body: bodyHtml, bodyClass: '', assetVersion: cssHash,
+        ...pageMeta(entry, entry.sourcePath)
+      });
+
+      const outDir = path.join(DIST, 'migrate', entry.slug);
+      ensureDir(outDir);
+      fs.writeFileSync(path.join(outDir, 'index.html'), page);
+      addRoute(`/migrate/${entry.slug}`, {
+        lastmod: entry.date,
+        changefreq: 'monthly',
+        priority: '0.8'
+      });
+
+      migrateIndexCards.push(`
+        <a href="/migrate/${entry.slug}" class="card">
+          <div class="card-meta"><time datetime="${entry.date}">${formatDate(entry.date)}</time></div>
+          <h3 class="card-title">${esc(entry.title)}</h3>
+          <p class="card-excerpt">${esc(entry.description || '')}</p>
+        </a>
+      `);
+    }
+
+    const migrateIndexBody = `
+      <section class="section">
+        <div class="container">
+          <h1>CRM &amp; Helpdesk Migration Guides</h1>
+          <p class="vendor-desc">You've picked the new tool. These are the field maps, the things that quietly don't survive the export, and the order to move in.</p>
+          <div class="card-grid">${migrateIndexCards.join('')}</div>
+        </div>
+      </section>`;
+    const migrateIndex = render(baseTemplate, {
+      title: 'CRM & Helpdesk Migration Guides — WeekCRM',
+      description: 'Step-by-step migration guides between CRM and helpdesk platforms: field mapping, what does not transfer, and how long it takes.',
+      url: 'https://www.weekcrm.com/migrate',
+      body: migrateIndexBody, bodyClass: '', assetVersion: cssHash,
+      ...pageMeta()
+    });
+    fs.writeFileSync(path.join(DIST, 'migrate', 'index.html'), migrateIndex);
+    addRoute('/migrate', { changefreq: 'weekly', priority: '0.7' });
+  }
+
   // ── Programmatic landing pages (/industry/, /integrations/) ──────
   // For each entry, frontmatter `tag` selects vendors whose tags include it
   // (case-insensitive). The body Markdown becomes the intro copy.
@@ -1348,6 +1576,7 @@ Llms: ${SITE_URL}/llms.txt
   const compareForLlms = readMarkdownFiles(path.join(CONTENT, 'compare'));
   const bestForLlms = readMarkdownFiles(path.join(CONTENT, 'best'));
   const pricingForLlms = readMarkdownFiles(path.join(CONTENT, 'pricing'));
+  const migrateForLlms = readMarkdownFiles(path.join(CONTENT, 'migrate'));
   const industryForLlms = readMarkdownFiles(path.join(CONTENT, 'industry'));
   const integrationsForLlms = readMarkdownFiles(path.join(CONTENT, 'integrations'));
 
@@ -1366,6 +1595,7 @@ ${llmLine('Vendor directory', `${SITE_URL}/vendors`, `${vendors.length} CRM and 
 ${llmLine('Comparisons', `${SITE_URL}/compare`, `${compareForLlms.length} head-to-head vendor comparisons with editorial picks for who should choose what.`)}
 ${llmLine('Best CRM picks', `${SITE_URL}/best`, `${bestForLlms.length} curated "best CRM for X" listicles by use case, industry, team size, and budget.`)}
 ${llmLine('Pricing breakdowns', `${SITE_URL}/pricing`, `${pricingForLlms.length} plan-by-plan pricing breakdowns with tier tables and the costs vendors keep off their pricing pages.`)}
+${llmLine('Migration guides', `${SITE_URL}/migrate`, `${migrateForLlms.length} platform-to-platform migration guides with object/field maps, what fails to transfer, and step order.`)}
 ${llmLine('Industry guides', `${SITE_URL}/industry`, `${industryForLlms.length} industry-specific landing pages mapping CRM choices to verticals.`)}
 ${llmLine('Integration guides', `${SITE_URL}/integrations`, `${integrationsForLlms.length} integration-focused pages listing CRMs that pair with specific tools.`)}
 ${llmLine('News', `${SITE_URL}/news`, `Daily-updated CRM industry news rewritten in journalism style from vendor sources.`)}
@@ -1386,6 +1616,10 @@ ${llmLine('Consultants', `${SITE_URL}/consultants`, `${consultants.length} vette
   if (pricingForLlms.length) {
     const lines = pricingForLlms.map(e => llmLine(e.title, `${SITE_URL}/pricing/${e.slug}`, e.description)).join('\n');
     llmsSections.push(`## Pricing breakdowns\n${lines}`);
+  }
+  if (migrateForLlms.length) {
+    const lines = migrateForLlms.map(e => llmLine(e.title, `${SITE_URL}/migrate/${e.slug}`, e.description)).join('\n');
+    llmsSections.push(`## Migration guides\n${lines}`);
   }
   if (industryForLlms.length) {
     const lines = industryForLlms.map(e => llmLine(e.title, `${SITE_URL}/industry/${e.slug}`, e.description)).join('\n');
