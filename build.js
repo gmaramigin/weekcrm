@@ -338,7 +338,7 @@ function build() {
   ensureDir(DIST);
 
   // Resolve which content sources are gitignored — we skip analytics on those.
-  const contentDirs = ['articles', 'vendors', 'consultants', 'compare', 'best', 'pricing', 'migrate', 'industry', 'integrations'];
+  const contentDirs = ['articles', 'vendors', 'consultants', 'compare', 'best', 'pricing', 'migrate', 'connect', 'industry', 'integrations'];
   const allSourcePaths = [];
   for (const d of contentDirs) {
     const full = path.join(CONTENT, d);
@@ -390,6 +390,9 @@ function build() {
   const articles = readMarkdownFiles(path.join(CONTENT, 'articles'));
   const vendors = readMarkdownFiles(path.join(CONTENT, 'vendors'));
   const consultants = readMarkdownFiles(path.join(CONTENT, 'consultants'));
+  // Read early: vendor pages and the /integrations/ tag landings both link into
+  // the connect guides, and both render before the guides themselves.
+  const connectEntries = readMarkdownFiles(path.join(CONTENT, 'connect'));
 
   // ── Homepage ────────────────────────────────────────
   const latestArticles = articles.slice(0, 6);
@@ -549,6 +552,21 @@ function build() {
 
     const tagsHtml = (vendor.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
 
+    // Spokes back to this vendor's /connect/ integration guides. Empty string
+    // when there are none, so the section disappears rather than sitting bare.
+    const vendorConnects = connectEntries.filter(c => c.vendor === vendor.slug);
+    const integrationGuides = vendorConnects.length ? `
+      <section class="section">
+        <div class="container container-narrow">
+          <div class="pricing-related">
+            <h2>${vendor.title} integration guides</h2>
+            <ul>${vendorConnects.map(c =>
+              `<li><a href="/connect/${c.slug}">${vendor.title} + ${c.platform}: what syncs and how to set it up</a></li>`
+            ).join('')}</ul>
+          </div>
+        </div>
+      </section>` : '';
+
     // Referral-aware CTA: referralUrl (if set) replaces the "Visit website" link.
     // When a referralPerk is also set, we render a highlighted callout above the body.
     const hasReferral = !!vendor.referralUrl;
@@ -584,6 +602,7 @@ function build() {
       faqHtml: renderFaqHtml(vendor.faq),
       faqJsonLd: faqJsonLdTag(vendor.faq),
       relatedArticles: relatedHtml,
+      integrationGuides,
       rating: vendor.rating || '',
       pricing: vendor.pricing || '',
       category: vendor.category || 'CRM',
@@ -1369,6 +1388,220 @@ function build() {
     addRoute('/migrate', { changefreq: 'weekly', priority: '0.7' });
   }
 
+  // ── Integration guides (/connect/<vendor>-<platform>) ───────
+  // Distinct intent again: the buyer already owns both tools and wants to know
+  // what the connector actually moves between them. /integrations/<tag> answers
+  // "which CRMs work with Slack"; this answers "what does HubSpot's Slack app
+  // actually sync, and where does it stop". The unique-content share is the
+  // `syncs` table plus the limits — both pair-specific, so a page missing
+  // either is thin by definition and hard-fails the build.
+  const integrationEntries = readMarkdownFiles(path.join(CONTENT, 'integrations'));
+  if (connectEntries.length) {
+    ensureDir(path.join(DIST, 'connect'));
+    const connectIndexCards = [];
+    const esc = (s) => String(s ?? '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    for (const entry of connectEntries) {
+      const vendor = vendorBySlug[entry.vendor];
+      if (!vendor) {
+        throw new Error(
+          `connect/${entry.slug}.md references unknown vendor slug: ${entry.vendor}. ` +
+          `Add the vendor to content/vendors/ or fix the frontmatter.`
+        );
+      }
+      if (!entry.platform) {
+        throw new Error(`connect/${entry.slug}.md has no 'platform'.`);
+      }
+      const syncs = Array.isArray(entry.syncs) ? entry.syncs : [];
+      if (syncs.length < 5) {
+        throw new Error(`connect/${entry.slug}.md needs at least 5 'syncs' rows — got ${syncs.length}. Without them the page is thin.`);
+      }
+      const limits = Array.isArray(entry.limits) ? entry.limits : [];
+      if (limits.length < 3) {
+        throw new Error(`connect/${entry.slug}.md needs at least 3 'limits' — got ${limits.length}.`);
+      }
+      const steps = Array.isArray(entry.steps) ? entry.steps : [];
+      if (steps.length < 3) {
+        throw new Error(`connect/${entry.slug}.md needs at least 3 'steps' — got ${steps.length}.`);
+      }
+
+      const syncRows = syncs.map(r => `
+        <tr>
+          <th scope="row">${esc(r.what)}</th>
+          <td>${esc(r.direction || '—')}</td>
+          <td>${marked.parseInline(String(r.notes || ''))}</td>
+        </tr>`).join('');
+
+      const syncTable = `
+        <div class="pricing-table-wrap">
+          <table class="pricing-table">
+            <caption>What moves between ${esc(vendor.title)} and ${esc(entry.platform)}</caption>
+            <thead>
+              <tr>
+                <th scope="col">What</th>
+                <th scope="col">Direction</th>
+                <th scope="col">Detail</th>
+              </tr>
+            </thead>
+            <tbody>${syncRows}</tbody>
+          </table>
+        </div>`;
+
+      const limitsHtml = `
+        <div class="pricing-gotchas">
+          <h2>Where the integration stops</h2>
+          <ul>${limits.map(i => `<li>${marked.parseInline(String(i))}</li>`).join('')}</ul>
+        </div>`;
+
+      const stepsHtml = `
+        <div class="migrate-steps">
+          <h2>Setting it up</h2>
+          <ol>${steps.map(s => `<li>${marked.parseInline(String(s))}</li>`).join('')}</ol>
+        </div>`;
+
+      const facts = [
+        entry.method && ['Connector', entry.method],
+        entry.direction && ['Sync direction', entry.direction],
+        entry.setupTime && ['Setup time', entry.setupTime],
+        entry.availability && ['Availability', entry.availability]
+      ].filter(Boolean);
+      const factsHtml = facts.length ? `
+        <dl class="migrate-facts">
+          ${facts.map(([k, v]) => `<div class="migrate-fact"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}
+        </dl>` : '';
+
+      // Route into the rest of the corpus: the vendor profile, the platform's
+      // own tag landing, this vendor's pricing breakdown, sibling guides for
+      // the same vendor, and — where the platform is itself a vendor we cover —
+      // the head-to-head, because "integrate or replace" is the same decision.
+      const platformTag = entry.platformSlug
+        ? integrationEntries.find(i => i.slug === entry.platformSlug)
+        : null;
+      const vendorPricing = pricingEntries.find(p => p.vendor === entry.vendor);
+      const siblings = connectEntries
+        .filter(c => c.vendor === entry.vendor && c.slug !== entry.slug)
+        .slice(0, 3);
+      const platformVendor = entry.platformVendor ? vendorBySlug[entry.platformVendor] : null;
+      const pairCompare = platformVendor && compareEntries.find(c =>
+        (c.a === vendor.slug && c.b === platformVendor.slug) ||
+        (c.a === platformVendor.slug && c.b === vendor.slug));
+      const relatedLinks = [
+        `<li><a href="/vendors/${vendor.slug}">${esc(vendor.title)} review, features and ratings</a></li>`,
+        platformTag ? `<li><a href="/integrations/${platformTag.slug}">Other CRMs that work with ${esc(entry.platform)}</a></li>` : '',
+        vendorPricing ? `<li><a href="/pricing/${vendorPricing.slug}">${esc(vendor.title)} pricing, plan by plan</a></li>` : '',
+        pairCompare ? `<li><a href="/compare/${pairCompare.slug}">${esc(pairCompare.title)}</a></li>` : '',
+        ...siblings.map(s => `<li><a href="/connect/${s.slug}">${esc(vendor.title)} + ${esc(s.platform)}</a></li>`)
+      ].filter(Boolean).join('');
+      const relatedHtml = `
+        <div class="pricing-related">
+          <h2>Related</h2>
+          <ul>${relatedLinks}</ul>
+        </div>`;
+
+      const howToLd = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: entry.title,
+        description: entry.description || `How to connect ${vendor.title} and ${entry.platform}.`,
+        ...(entry.setupTime ? { totalTime: entry.setupTime } : {}),
+        tool: [
+          { '@type': 'HowToTool', name: vendor.title },
+          { '@type': 'HowToTool', name: entry.platform }
+        ],
+        step: steps.map((s, i) => ({
+          '@type': 'HowToStep',
+          position: i + 1,
+          name: String(s).replace(/[*_`\[\]]/g, '').split(/[.—–:]/)[0].trim().slice(0, 110),
+          text: String(s).replace(/[*_`]/g, '')
+        }))
+      }).replace(/<\/script/gi, '<\\/script');
+
+      const breadcrumbLd = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Integration guides', item: 'https://www.weekcrm.com/connect' },
+          { '@type': 'ListItem', position: 2, name: entry.title, item: `https://www.weekcrm.com/connect/${entry.slug}` }
+        ]
+      }).replace(/<\/script/gi, '<\\/script');
+
+      const ctaUrl = vendor.referralUrl || vendor.website || '#';
+      const ctaRel = vendor.referralUrl ? 'noopener sponsored' : 'noopener nofollow';
+      const ctaLabel = vendor.referralUrl ? `Try ${vendor.title}` : `Visit ${vendor.title}`;
+
+      const bodyHtml = `
+        ${faqJsonLdTag(entry.faq)}
+        <script type="application/ld+json">${howToLd}</script>
+        <script type="application/ld+json">${breadcrumbLd}</script>
+        <section class="compare-hero">
+          <div class="container container-narrow">
+            <span class="compare-eyebrow">Integration guide</span>
+            <h1 class="compare-title">${esc(entry.title)}</h1>
+            <p class="compare-desc">${esc(entry.description || '')}</p>
+            ${renderTldr(entry.tldr || entry.description)}
+          </div>
+        </section>
+        <section class="section">
+          <div class="container container-narrow">
+            ${factsHtml}
+            ${syncTable}
+            ${stepsHtml}
+            ${limitsHtml}
+            <div class="compare-body">${autoLinkVendors(entry.html, vendors, vendor.slug)}</div>
+            ${relatedHtml}
+            <div class="compare-cta-row">
+              <a href="${ctaUrl}" target="_blank" rel="${ctaRel}" class="btn btn-primary">${esc(ctaLabel)} →</a>
+            </div>
+          </div>
+        </section>
+        ${renderFaqHtml(entry.faq)}`;
+
+      const page = render(baseTemplate, {
+        title: `${entry.title} — WeekCRM`,
+        description: entry.description || `Connecting ${vendor.title} and ${entry.platform}: what syncs, how to set it up, and what the connector won't do.`,
+        url: `https://www.weekcrm.com/connect/${entry.slug}`,
+        body: bodyHtml, bodyClass: '', assetVersion: cssHash,
+        ...pageMeta(entry, entry.sourcePath)
+      });
+
+      const outDir = path.join(DIST, 'connect', entry.slug);
+      ensureDir(outDir);
+      fs.writeFileSync(path.join(outDir, 'index.html'), page);
+      addRoute(`/connect/${entry.slug}`, {
+        lastmod: entry.date,
+        changefreq: 'monthly',
+        priority: '0.8'
+      });
+
+      connectIndexCards.push(`
+        <a href="/connect/${entry.slug}" class="card">
+          <div class="card-meta"><span class="tag">${esc(entry.platform)}</span></div>
+          <h3 class="card-title">${esc(entry.title)}</h3>
+          <p class="card-excerpt">${esc(entry.description || '')}</p>
+        </a>
+      `);
+    }
+
+    const connectIndexBody = `
+      <section class="section">
+        <div class="container">
+          <h1>CRM &amp; Helpdesk Integration Guides</h1>
+          <p class="vendor-desc">You already own both tools. These guides cover what the connector actually moves, which direction it moves it, and the part the marketing page leaves out.</p>
+          <div class="card-grid">${connectIndexCards.join('')}</div>
+        </div>
+      </section>`;
+    const connectIndex = render(baseTemplate, {
+      title: 'CRM & Helpdesk Integration Guides — WeekCRM',
+      description: 'What each CRM and helpdesk integration actually syncs, how to set it up, and where it stops.',
+      url: 'https://www.weekcrm.com/connect',
+      body: connectIndexBody, bodyClass: '', assetVersion: cssHash,
+      ...pageMeta()
+    });
+    fs.writeFileSync(path.join(DIST, 'connect', 'index.html'), connectIndex);
+    addRoute('/connect', { changefreq: 'weekly', priority: '0.7' });
+  }
+
   // ── Programmatic landing pages (/industry/, /integrations/) ──────
   // For each entry, frontmatter `tag` selects vendors whose tags include it
   // (case-insensitive). The body Markdown becomes the intro copy.
@@ -1405,6 +1638,19 @@ function build() {
         || `Top picks for ${entry.title}: ${matches.slice(0, 3).map(v => v.title).join(', ')}.`;
       const progTldr = entry.tldr || progTldrFallback;
 
+      // Tag landing → per-vendor setup guides for the same platform. Only fires
+      // on /integrations/, where entry.slug is the platform the guides point at.
+      const tagConnects = urlPrefix === 'integrations'
+        ? connectEntries.filter(c => c.platformSlug === entry.slug)
+        : [];
+      const tagConnectHtml = tagConnects.length ? `
+        <div class="pricing-related">
+          <h2>Setup guides for ${entry.tag || entry.title}</h2>
+          <ul>${tagConnects.map(c =>
+            `<li><a href="/connect/${c.slug}">${vendorBySlug[c.vendor]?.title || c.vendor} + ${c.platform}: what syncs</a></li>`
+          ).join('')}</ul>
+        </div>` : '';
+
       const bodyHtml = `
         ${faqJsonLdTag(entry.faq)}
         <section class="compare-hero">
@@ -1419,6 +1665,7 @@ function build() {
           <div class="container">
             <div class="compare-body">${autoLinkVendors(entry.html, vendors)}</div>
             <div class="vendor-grid">${grid}</div>
+            ${tagConnectHtml}
           </div>
         </section>
         ${renderFaqHtml(entry.faq)}`;
@@ -1471,7 +1718,7 @@ function build() {
   }
 
   const integrationCards = renderProgrammatic(
-    readMarkdownFiles(path.join(CONTENT, 'integrations')),
+    integrationEntries,
     'integrations',
     'CRM Integrations'
   );
